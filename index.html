@@ -1,2037 +1,1691 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-  <title>DBH Bâtiment · Artisans du bâti</title>
-
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V62SVHWV1P"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-V62SVHWV1P');
-  </script>
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-  <style>
-    /* DESIGN SYSTEM - THEME BÂTIMENT PREMIUM */
-    :root {
-      --primary: #0f172a; /* Bleu ardoise très sombre */
-      --primary-light: #1e293b;
-      --accent: #d97706; /* Ambre / Orange chantier premium */
-      --accent-hover: #b45309;
-      --bg-cream: #f8fafc; /* Gris perle très clair */
-      --bg-light: #f1f5f9;
-      --text-dark: #1e293b;
-      --text-muted: #475569;
-      --white: #ffffff;
-      
-      /* Ombres architecturales */
-      --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.1);
-      --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.1), 0 2px 4px -1px rgba(15, 23, 42, 0.06);
-      --shadow-lg: 0 10px 15px -3px rgba(15, 23, 42, 0.1), 0 4px 6px -2px rgba(15, 23, 42, 0.05);
-      --shadow-gold: 0 10px 25px rgba(217, 119, 6, 0.3);
-      
-      /* Rayons structurés (plus pro, moins ronds) */
-      --radius-sm: 4px;
-      --radius-md: 8px;
-      --radius-lg: 12px;
-      
-      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: 'Open Sans', sans-serif;
-      background-color: var(--bg-cream);
-      color: var(--text-dark);
-      line-height: 1.7;
-      font-size: 16px;
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
-    }
-
-    h1, h2, h3, h4, h5, h6 {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      line-height: 1.3;
-      color: var(--primary);
-    }
-
-    /* ===== HEADER & NAVIGATION ===== */
-    header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-      background: rgba(15, 23, 42, 0.95);
-      backdrop-filter: blur(10px);
-      border-bottom: 2px solid var(--accent);
-      transition: var(--transition);
-      padding: 1rem 0;
-    }
-
-    header.scrolled {
-      padding: 0.5rem 0;
-      box-shadow: var(--shadow-md);
-    }
-
-    .container {
-      width: 100%;
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 1.5rem;
-    }
-
-    .header-flex {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1.5rem;
-    }
-
-    .logo-area {
-      display: flex;
-      align-items: center;
-      gap: 1.2rem;
-      text-decoration: none;
-    }
-
-    .logo-img {
-      width: 55px;
-      height: 55px;
-      object-fit: contain;
-      border-radius: var(--radius-sm);
-      border: 2px solid var(--accent);
-      padding: 2px;
-      background: var(--white);
-      transition: var(--transition);
-    }
-
-    .logo-area:hover .logo-img {
-      transform: scale(1.05);
-      border-color: var(--white);
-    }
-
-    .logo-text h1 {
-      font-size: 1.5rem;
-      font-weight: 800;
-      color: var(--white);
-      letter-spacing: -0.5px;
-      margin-bottom: 0.1rem;
-    }
-
-    .logo-text span {
-      font-size: 0.75rem;
-      color: var(--accent);
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 3px;
-    }
-
-    /* Navigation */
-    nav ul {
-      display: flex;
-      gap: 1rem;
-      list-style: none;
-      align-items: center;
-    }
-
-    nav ul li a {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: rgba(255,255,255,0.8);
-      text-decoration: none;
-      padding: 0.5rem 1rem;
-      border-radius: var(--radius-sm);
-      transition: var(--transition);
-      position: relative;
-    }
-
-    nav ul li a::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 1rem;
-      right: 1rem;
-      height: 2px;
-      background: var(--accent);
-      transform: scaleX(0);
-      transition: transform 0.3s ease;
-    }
-
-    nav ul li a:hover,
-    nav ul li a.active {
-      color: var(--white);
-    }
-
-    nav ul li a:hover::after,
-    nav ul li a.active::after {
-      transform: scaleX(1);
-    }
-
-    nav ul li a[style*="background"] {
-      background: var(--accent) !important;
-      color: var(--white) !important;
-      border-radius: var(--radius-sm);
-      padding: 0.7rem 1.5rem;
-      box-shadow: var(--shadow-sm);
-    }
-
-    nav ul li a[style*="background"]:hover {
-      background: var(--accent-hover) !important;
-      transform: translateY(-2px);
-    }
-
-    nav ul li a[style*="background"]::after {
-      display: none;
-    }
-
-    .mobile-menu-btn {
-      display: none;
-      background: none;
-      border: none;
-      color: var(--white);
-      font-size: 1.5rem;
-      cursor: pointer;
-      padding: 0.5rem;
-    }
-
-    /* ===== HERO SECTION ===== */
-    .hero {
-      margin-top: 80px;
-      position: relative;
-      height: 90vh;
-      min-height: 650px;
-      display: flex;
-      align-items: center;
-      overflow: hidden;
-      background: var(--primary);
-    }
-
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      background-image: url('https://ik.imagekit.io/fwmsbpxje/images/renovation/img36.jpg');
-      background-size: cover;
-      background-position: center;
-      opacity: 0.35;
-      transform: scale(1.05);
-      animation: heroZoom 25s ease-in-out infinite alternate;
-    }
-
-    @keyframes heroZoom {
-      to { transform: scale(1.15); }
-    }
-
-    .hero-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(90deg, rgba(15,23,42,0.95) 0%, rgba(15,23,42,0.6) 60%, transparent 100%);
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 800px;
-      color: var(--white);
-      padding: 2rem 0;
-    }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: rgba(217, 119, 6, 0.15);
-      border-left: 3px solid var(--accent);
-      color: var(--accent);
-      padding: 0.5rem 1rem;
-      font-size: 0.85rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      margin-bottom: 2rem;
-      animation: fadeInDown 0.8s ease;
-    }
-
-    .hero h2 {
-      font-size: clamp(2.5rem, 5vw, 4.5rem);
-      font-weight: 800;
-      color: var(--white);
-      margin-bottom: 1.5rem;
-      line-height: 1.1;
-      animation: fadeInUp 0.8s ease 0.2s both;
-    }
-
-    .hero h2 span {
-      color: var(--accent);
-    }
-
-    .hero p {
-      font-size: 1.25rem;
-      color: rgba(255,255,255,0.85);
-      margin-bottom: 3rem;
-      max-width: 600px;
-      border-left: 2px solid rgba(255,255,255,0.2);
-      padding-left: 1.5rem;
-      animation: fadeInUp 0.8s ease 0.4s both;
-    }
-
-    .hero-cta {
-      display: flex;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-      animation: fadeInUp 0.8s ease 0.6s both;
-    }
-
-    .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.8rem;
-      background: var(--accent);
-      color: var(--white);
-      padding: 1rem 2.5rem;
-      border-radius: var(--radius-sm);
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      font-size: 1rem;
-      text-decoration: none;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      transition: var(--transition);
-      box-shadow: var(--shadow-gold);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 15px 30px rgba(217,119,6,0.4);
-      background: var(--accent-hover);
-    }
-
-    .btn-secondary {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.8rem;
-      background: transparent;
-      color: var(--white);
-      padding: 1rem 2.5rem;
-      border-radius: var(--radius-sm);
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 600;
-      font-size: 1rem;
-      text-decoration: none;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      border: 2px solid rgba(255,255,255,0.3);
-      transition: var(--transition);
-    }
-
-    .btn-secondary:hover {
-      background: var(--white);
-      color: var(--primary);
-      border-color: var(--white);
-    }
-
-    /* Stats Bar (Redesigned as floating card) */
-    .stats-bar {
-      position: relative;
-      margin-top: -60px;
-      z-index: 10;
-      padding: 0 1.5rem;
-    }
-
-    .stats-bar .container {
-      background: var(--white);
-      border-radius: var(--radius-md);
-      box-shadow: var(--shadow-lg);
-      padding: 2.5rem;
-      border-top: 4px solid var(--accent);
-    }
-
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 2rem;
-      text-align: center;
-      position: relative;
-    }
-
-    .stats-grid::before {
-      display: none; /* Removed for cleaner look */
-    }
-
-    .stat-item {
-      position: relative;
-    }
-
-    .stat-item:not(:last-child)::after {
-      content: '';
-      position: absolute;
-      right: -1rem;
-      top: 10%;
-      height: 80%;
-      width: 1px;
-      background: var(--bg-light);
-    }
-
-    .stat-number {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 2.5rem;
-      font-weight: 800;
-      color: var(--primary);
-      display: block;
-      line-height: 1;
-      margin-bottom: 0.5rem;
-    }
-
-    .stat-label {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    /* ===== SECTIONS COMMON ===== */
-    section {
-      padding: 6rem 0;
-      position: relative;
-    }
-
-    .section-header {
-      text-align: center;
-      max-width: 700px;
-      margin: 0 auto 4rem;
-    }
-
-    .section-tag {
-      display: inline-block;
-      color: var(--accent);
-      font-size: 0.85rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      margin-bottom: 1rem;
-      position: relative;
-    }
-    
-    .section-tag::before, .section-tag::after {
-      content: '';
-      display: inline-block;
-      width: 30px;
-      height: 2px;
-      background: var(--accent);
-      vertical-align: middle;
-      margin: 0 10px;
-    }
-
-    .section-tag[style*="background"] {
-      background: transparent !important;
-      border: none !important;
-    }
-
-    .section-title {
-      font-size: clamp(2rem, 4vw, 2.5rem);
-      color: var(--primary);
-      margin-bottom: 1.5rem;
-      font-weight: 800;
-    }
-
-    .section-subtitle {
-      font-size: 1.1rem;
-      color: var(--text-muted);
-      font-weight: 400;
-      line-height: 1.8;
-    }
-
-    /* ===== SERVICES SECTION ===== */
-    .services-section {
-      background: var(--bg-cream);
-    }
-
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 2.5rem;
-    }
-
-    .service-card {
-      background: var(--white);
-      border-radius: var(--radius-sm);
-      overflow: hidden;
-      box-shadow: var(--shadow-md);
-      transition: var(--transition);
-      position: relative;
-      border: 1px solid rgba(0,0,0,0.03);
-    }
-
-    .service-card::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0;
-      height: 3px;
-      background: var(--accent);
-      transition: var(--transition);
-    }
-
-    .service-card:hover {
-      transform: translateY(-8px);
-      box-shadow: var(--shadow-lg);
-    }
-
-    .service-card:hover::after {
-      width: 100%;
-    }
-
-    .service-img {
-      width: 100%;
-      height: 240px;
-      object-fit: cover;
-      transition: transform 0.7s ease;
-    }
-
-    .service-card:hover .service-img {
-      transform: scale(1.05);
-    }
-
-    .service-content {
-      padding: 2.5rem 2rem;
-      position: relative;
-    }
-
-    .service-icon {
-      width: 60px;
-      height: 60px;
-      background: var(--white);
-      border: 2px solid var(--bg-light);
-      border-radius: var(--radius-sm);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      color: var(--accent);
-      position: absolute;
-      top: -30px;
-      left: 2rem;
-      box-shadow: var(--shadow-sm);
-      transition: var(--transition);
-    }
-
-    .service-card:hover .service-icon {
-      background: var(--accent);
-      color: var(--white);
-      border-color: var(--accent);
-    }
-
-    .service-content h3 {
-      font-size: 1.3rem;
-      margin-top: 1rem;
-      margin-bottom: 1rem;
-    }
-
-    .service-content p {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      line-height: 1.6;
-      margin-bottom: 1.5rem;
-    }
-
-    .service-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: var(--primary);
-      font-weight: 700;
-      text-decoration: none;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      transition: var(--transition);
-    }
-
-    .service-link:hover {
-      color: var(--accent);
-      gap: 1rem;
-    }
-
-    /* ===== PROJECTS SECTION ===== */
-    .projects-section {
-      background: var(--bg-light);
-      border-top: 1px solid rgba(0,0,0,0.05);
-    }
-
-    .projects-carousel {
-      position: relative;
-      overflow: hidden;
-      padding: 2rem 0;
-    }
-
-    .projects-track {
-      display: flex;
-      gap: 2rem;
-      animation: scrollProjects 40s linear infinite;
-      width: fit-content;
-    }
-
-    .projects-carousel:hover .projects-track {
-      animation-play-state: paused;
-    }
-
-    @keyframes scrollProjects {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-
-    .project-card {
-      width: 420px;
-      flex-shrink: 0;
-      background: var(--white);
-      border-radius: var(--radius-sm);
-      overflow: hidden;
-      box-shadow: var(--shadow-md);
-      transition: var(--transition);
-    }
-
-    .project-card:hover {
-      box-shadow: var(--shadow-lg);
-    }
-
-    .project-img {
-      width: 100%;
-      height: 300px;
-      object-fit: cover;
-    }
-
-    .project-badge {
-      position: absolute;
-      top: 1.5rem;
-      right: 1.5rem;
-      background: var(--primary);
-      color: var(--white);
-      padding: 0.5rem 1rem;
-      border-radius: var(--radius-sm);
-      font-size: 0.75rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .project-content {
-      padding: 2rem;
-      border-top: 3px solid var(--bg-light);
-    }
-
-    .project-content h3 {
-      font-size: 1.25rem;
-      margin-bottom: 0.8rem;
-    }
-
-    .project-content p {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      line-height: 1.6;
-    }
-
-    /* ===== ABOUT SECTION ===== */
-    .about-section {
-      background: var(--white);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 5rem;
-      align-items: center;
-    }
-
-    .about-content h2 {
-      font-size: 2.5rem;
-      margin-bottom: 1.5rem;
-      color: var(--primary);
-    }
-
-    .about-content h2 span {
-      color: var(--accent);
-    }
-
-    .about-content p {
-      font-size: 1.05rem;
-      color: var(--text-muted);
-      margin-bottom: 1.5rem;
-    }
-
-    .features-list {
-      list-style: none;
-      margin: 2.5rem 0;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-    }
-
-    .features-list li {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--primary);
-    }
-
-    .features-list i {
-      color: var(--accent);
-      font-size: 1.2rem;
-    }
-
-    .about-image {
-      position: relative;
-      border-radius: var(--radius-sm);
-      z-index: 1;
-    }
-
-    .about-image::before {
-      content: '';
-      position: absolute;
-      top: 2rem;
-      right: -2rem;
-      bottom: -2rem;
-      left: 2rem;
-      background: var(--bg-light);
-      border: 2px solid var(--accent);
-      z-index: -1;
-      border-radius: var(--radius-sm);
-    }
-
-    .about-image img {
-      width: 100%;
-      height: auto;
-      object-fit: cover;
-      display: block;
-      border-radius: var(--radius-sm);
-      box-shadow: var(--shadow-lg);
-    }
-
-    .experience-badge {
-      position: absolute;
-      bottom: 2rem;
-      left: -3rem;
-      background: var(--primary);
-      color: var(--white);
-      padding: 1.5rem 2.5rem;
-      border-radius: var(--radius-sm);
-      text-align: center;
-      box-shadow: var(--shadow-lg);
-      border-left: 4px solid var(--accent);
-    }
-
-    .experience-badge .years {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 3rem;
-      font-weight: 800;
-      color: var(--accent);
-      display: block;
-      line-height: 1;
-      margin-bottom: 0.2rem;
-    }
-
-    .experience-badge .text {
-      font-size: 0.85rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-    }
-
-    /* ===== WHY US SECTION ===== */
-    .why-us-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 2rem;
-      margin-top: 3rem;
-    }
-
-    .why-card {
-      text-align: center;
-      padding: 3rem 2rem;
-      background: var(--white);
-      border-radius: var(--radius-sm);
-      border: 1px solid var(--bg-light);
-      box-shadow: var(--shadow-sm);
-      transition: var(--transition);
-      position: relative;
-    }
-
-    .why-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 40px;
-      height: 3px;
-      background: var(--accent);
-      transition: var(--transition);
-    }
-
-    .why-card:hover {
-      transform: translateY(-5px);
-      box-shadow: var(--shadow-md);
-    }
-
-    .why-card:hover::before {
-      width: 100%;
-    }
-
-    .why-icon {
-      width: 70px;
-      height: 70px;
-      background: var(--bg-light);
-      border-radius: var(--radius-sm);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 1.5rem;
-      font-size: 2rem;
-      color: var(--primary);
-      transition: var(--transition);
-    }
-
-    .why-card:hover .why-icon {
-      background: var(--primary);
-      color: var(--white);
-    }
-
-    .why-card h3 {
-      font-size: 1.2rem;
-      margin-bottom: 1rem;
-    }
-
-    .why-card p {
-      font-size: 0.95rem;
-      color: var(--text-muted);
-    }
-
-    /* ===== CONTACT SECTION ===== */
-    .contact-section {
-      background: var(--bg-cream);
-    }
-
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 3fr 2fr;
-      gap: 0;
-      background: var(--white);
-      border-radius: var(--radius-sm);
-      overflow: hidden;
-      box-shadow: var(--shadow-lg);
-    }
-
-    .contact-form-wrapper {
-      padding: 4rem;
-    }
-
-    .form-group {
-      margin-bottom: 1.5rem;
-    }
-
-    .form-group label {
-      display: block;
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 600;
-      color: var(--primary);
-      margin-bottom: 0.8rem;
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .form-group input,
-    .form-group textarea,
-    .form-group select {
-      width: 100%;
-      padding: 1.2rem;
-      border: 1px solid #cbd5e1;
-      border-radius: var(--radius-sm);
-      font-family: 'Open Sans', sans-serif;
-      font-size: 1rem;
-      transition: var(--transition);
-      background: var(--bg-cream);
-    }
-
-    .form-group input:focus,
-    .form-group textarea:focus,
-    .form-group select:focus {
-      outline: none;
-      border-color: var(--accent);
-      background: var(--white);
-      box-shadow: 0 0 0 3px rgba(217,119,6,0.1);
-    }
-
-    .form-group textarea {
-      min-height: 160px;
-      resize: vertical;
-    }
-
-    .submit-btn {
-      width: 100%;
-      background: var(--primary);
-      color: var(--white);
-      border: none;
-      padding: 1.2rem;
-      border-radius: var(--radius-sm);
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      font-size: 1rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      cursor: pointer;
-      transition: var(--transition);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.8rem;
-    }
-
-    .submit-btn:hover {
-      background: var(--accent);
-    }
-
-    .contact-info {
-      background: var(--primary);
-      color: var(--white);
-      padding: 4rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      position: relative;
-    }
-
-    .contact-info::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 4px;
-      height: 100%;
-      background: var(--accent);
-    }
-
-    .contact-info h3 {
-      font-size: 2rem;
-      margin-bottom: 2.5rem;
-      color: var(--white);
-    }
-
-    .contact-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 1.5rem;
-      margin-bottom: 2rem;
-    }
-
-    .contact-item i {
-      width: 45px;
-      height: 45px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: var(--radius-sm);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--accent);
-      font-size: 1.2rem;
-      flex-shrink: 0;
-    }
-
-    .contact-item div strong {
-      display: block;
-      margin-bottom: 0.5rem;
-      color: var(--white);
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .contact-item div span,
-    .contact-item div a {
-      color: rgba(255,255,255,0.7);
-      text-decoration: none;
-      font-size: 1rem;
-      line-height: 1.5;
-      transition: color 0.3s;
-    }
-
-    .contact-item div a:hover {
-      color: var(--accent);
-    }
-
-    .social-links {
-      display: flex;
-      gap: 1rem;
-    }
-
-    .social-links a {
-      width: 40px;
-      height: 40px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: var(--radius-sm);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--white);
-      font-size: 1rem;
-      transition: var(--transition);
-      text-decoration: none;
-    }
-
-    .social-links a:hover {
-      background: var(--accent);
-      border-color: var(--accent);
-      transform: translateY(-3px);
-    }
-
-    /* ===== FLOATING BUTTONS ===== */
-    .whatsapp-float {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      width: 60px;
-      height: 60px;
-      background: #25D366;
-      color: white;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      box-shadow: 0 4px 15px rgba(37,211,102,0.3);
-      z-index: 999;
-      transition: var(--transition);
-      text-decoration: none;
-    }
-
-    .whatsapp-float:hover {
-      transform: scale(1.1);
-      box-shadow: 0 6px 20px rgba(37,211,102,0.4);
-    }
-
-    .scroll-top {
-      position: fixed;
-      bottom: 30px;
-      right: 105px;
-      width: 50px;
-      height: 50px;
-      background: var(--white);
-      color: var(--primary);
-      border-radius: var(--radius-sm);
-      border: 1px solid var(--bg-light);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-      cursor: pointer;
-      opacity: 0;
-      visibility: hidden;
-      transition: var(--transition);
-      z-index: 998;
-      box-shadow: var(--shadow-md);
-    }
-
-    .scroll-top.visible {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .scroll-top:hover {
-      background: var(--primary);
-      color: var(--white);
-    }
-
-    /* ===== FOOTER ===== */
-    footer {
-      background: var(--primary);
-      color: rgba(255,255,255,0.7);
-      padding: 5rem 0 2rem;
-      border-top: 5px solid var(--accent);
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 4rem;
-      margin-bottom: 4rem;
-    }
-
-    .footer-brand h3 {
-      color: var(--white);
-      font-size: 1.5rem;
-      margin-bottom: 1.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-    }
-
-    .footer-brand p {
-      line-height: 1.8;
-      margin-bottom: 2rem;
-      max-width: 400px;
-    }
-
-    .footer-links h4 {
-      color: var(--white);
-      font-size: 1.1rem;
-      margin-bottom: 1.5rem;
-      position: relative;
-      padding-bottom: 0.8rem;
-    }
-
-    .footer-links h4::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 30px;
-      height: 2px;
-      background: var(--accent);
-    }
-
-    .footer-links ul {
-      list-style: none;
-    }
-
-    .footer-links li {
-      margin-bottom: 1rem;
-    }
-
-    .footer-links a {
-      color: rgba(255,255,255,0.7);
-      text-decoration: none;
-      transition: color 0.3s;
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-    }
-
-    .footer-links a i {
-      color: var(--accent);
-      font-size: 0.8rem;
-    }
-
-    .footer-links a:hover {
-      color: var(--white);
-      transform: translateX(5px);
-    }
-
-    .footer-bottom {
-      border-top: 1px solid rgba(255,255,255,0.1);
-      padding-top: 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.9rem;
-    }
-
-    /* ===== ANIMATIONS ===== */
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .fade-in {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* ===== RESPONSIVE ===== */
-    @media (max-width: 1024px) {
-      .about-grid { gap: 3rem; }
-      .contact-grid { grid-template-columns: 1fr; }
-      .contact-info { padding: 3rem; }
-      .contact-info::before { width: 100%; height: 4px; }
-      .why-us-grid { grid-template-columns: repeat(2, 1fr); }
-      .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
-      .stat-item:nth-child(2)::after { display: none; }
-      .footer-grid { grid-template-columns: repeat(2, 1fr); gap: 3rem; }
-    }
-
-    @media (max-width: 768px) {
-      .mobile-menu-btn { display: block; }
-      nav {
-        position: absolute; top: 100%; left: 0; right: 0;
-        background: var(--primary); padding: 1.5rem;
-        transform: translateY(-150%); opacity: 0; visibility: hidden;
-        transition: var(--transition);
-        border-top: 1px solid rgba(255,255,255,0.1);
-        box-shadow: var(--shadow-md);
-      }
-      nav.active { transform: translateY(0); opacity: 1; visibility: visible; }
-      nav ul { flex-direction: column; gap: 1rem; }
-      nav ul li { width: 100%; }
-      nav ul li a { display: block; text-align: center; }
-      
-      .hero { height: auto; min-height: 100vh; padding: 120px 0 140px; text-align: center; }
-      .hero h2 { font-size: 2.2rem; }
-      .hero p { border-left: none; padding-left: 0; margin-left: auto; margin-right: auto; }
-      .hero-cta { justify-content: center; }
-      
-      .stats-bar { margin-top: -80px; }
-      .about-grid { grid-template-columns: 1fr; }
-      .about-image { margin-top: 2rem; }
-      .about-image::before { display: none; }
-      .experience-badge { left: 50%; transform: translateX(-50%); bottom: -2rem; width: 80%; }
-      
-      .why-us-grid { grid-template-columns: 1fr; }
-      .footer-grid { grid-template-columns: 1fr; gap: 2rem; text-align: center; }
-      .footer-brand p { margin: 0 auto 1.5rem; }
-      .footer-links h4::after { left: 50%; transform: translateX(-50%); }
-      .footer-links a { justify-content: center; }
-      .social-links { justify-content: center; }
-      .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
-      
-      .contact-form-wrapper { padding: 2rem; }
-      .scroll-top { right: 30px; bottom: 100px; }
-    }
-
-    @media (max-width: 480px) {
-      .hero-cta { flex-direction: column; width: 100%; }
-      .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
-      .stats-grid { grid-template-columns: 1fr; }
-      .stat-item::after { display: none; }
-      .project-card { width: 300px; }
-      .features-list { grid-template-columns: 1fr; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<title>DBH Bâtiment · Artisans du bâti</title>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V62SVHWV1P"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-V62SVHWV1P');
+</script>
+<!-- Font Awesome 6 (Free) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+/* ===== STYLES ===== */
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-family: 'Segoe UI', Roboto, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+body {
+background-color: #fbfaf8;
+color: #2f3e46;
+line-height: 1.5;
+font-size: 16px;
+-webkit-font-smoothing: antialiased;
+-webkit-tap-highlight-color: transparent;
+}
+.container {
+width: 100%;
+max-width: 1400px;
+margin: 0 auto;
+padding: 0 2rem;
+}
+header {
+background-image: url('https://ik.imagekit.io/fwmsbpxje/images/renovation/img36.jpg');
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+color: white;
+padding: 1.5rem 0;
+box-shadow: 0 6px 15px rgba(0, 20, 10, 0.2);
+position: sticky;
+top: 0;
+z-index: 1000;
+width: 100%;
+position: relative;
+}
+header::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background: rgba(0, 0, 0, 0.5);
+z-index: 1;
+}
+header .container {
+position: relative;
+z-index: 2;
+}
+.header-flex {
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+gap: 1rem 2rem;
+}
+.logo-area {
+display: flex;
+align-items: center;
+gap: 1rem;
+flex-wrap: wrap;
+justify-content: center;
+}
+.logo-img {
+width: 70px;
+height: 70px;
+object-fit: contain;
+transition: transform 0.3s ease;
+}
+.logo-img:hover {
+transform: scale(1.05);
+}
+.logo-text {
+text-align: center;
+}
+.logo-text h1 {
+font-size: 2rem;
+font-weight: 600;
+letter-spacing: -0.5px;
+line-height: 1.2;
+white-space: normal;
+word-break: keep-all;
+}
+.logo-text span {
+font-size: 1rem;
+color: #cfd7d4;
+font-weight: 400;
+display: block;
+}
+nav {
+width: 100%;
+overflow-x: auto;
+overflow-y: hidden;
+-webkit-overflow-scrolling: touch;
+scrollbar-width: none;
+-ms-overflow-style: none;
+padding: 0.3rem 0 0.5rem;
+border-top: 1px solid rgba(255,255,255,0.2);
+margin-top: 0.3rem;
+}
+nav::-webkit-scrollbar {
+display: none;
+}
+nav ul {
+display: flex;
+gap: 0.6rem 1rem;
+list-style: none;
+flex-wrap: wrap;
+justify-content: center;
+padding: 0.3rem 0.2rem;
+}
+nav ul li a {
+display: inline-block;
+padding: 0.8rem 1.4rem;
+color: #eef3f0;
+text-decoration: none;
+font-weight: 600;
+border-radius: 50px;
+transition: 0.2s;
+font-size: 1.1rem;
+white-space: nowrap;
+background-color: rgba(0, 0, 0, 0.2);
+border: 1px solid rgba(255, 255, 255, 0.2);
+}
+nav ul li a.active,
+nav ul li a:hover {
+background-color: #f4b942;
+color: #1e2f33;
+border-color: #f4b942;
+}
+@media (min-width: 760px) {
+.header-flex {
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+}
+.logo-area {
+justify-content: flex-start;
+text-align: left;
+}
+.logo-text {
+text-align: left;
+}
+nav {
+width: auto;
+border-top: none;
+margin-top: 0;
+}
+nav ul {
+flex-wrap: nowrap;
+justify-content: flex-end;
+}
+nav ul li a {
+background-color: transparent;
+border: none;
+padding: 0.8rem 1.5rem;
+}
+}
+@media (max-width: 399px) {
+.logo-text h1 {
+font-size: 1.6rem;
+}
+.logo-text span {
+font-size: 0.85rem;
+}
+.logo-img {
+width: 55px;
+height: 55px;
+}
+nav ul li a {
+padding: 0.6rem 1rem;
+font-size: 0.95rem;
+}
+}
+main {
+min-height: 60vh;
+padding: 2rem 0 2.5rem;
+}
+/* ===== ANIMATION DU TITRE PRINCIPAL ===== */
+.page-title {
+font-size: 2.2rem;
+font-weight: 350;
+border-left: 6px solid #f4b942;
+padding-left: 1.2rem;
+margin-bottom: 2rem;
+color: #1e2f33;
+line-height: 1.2;
+word-break: break-word;
+animation: titleAppear 0.8s ease-out forwards;
+transform-origin: left;
+}
+@keyframes titleAppear {
+0% {
+opacity: 0;
+transform: translateX(-30px) scale(0.95);
+border-left-color: transparent;
+}
+50% {
+opacity: 0.8;
+transform: translateX(5px) scale(1.02);
+border-left-color: #f4b942;
+}
+100% {
+opacity: 1;
+transform: translateX(0) scale(1);
+border-left-color: #f4b942;
+}
+}
+.home-title {
+animation: homeTitleGlow 1.2s ease-out forwards;
+}
+@keyframes homeTitleGlow {
+0% {
+opacity: 0;
+transform: translateY(-20px);
+text-shadow: 0 0 0 rgba(244, 185, 66, 0);
+}
+40% {
+opacity: 1;
+transform: translateY(5px);
+text-shadow: 0 0 20px rgba(244, 185, 66, 0.5);
+}
+70% {
+transform: translateY(-2px);
+text-shadow: 0 0 10px rgba(244, 185, 66, 0.3);
+}
+100% {
+opacity: 1;
+transform: translateY(0);
+text-shadow: 0 0 0 rgba(244, 185, 66, 0);
+}
+}
+.grid-3 {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+gap: 1.5rem;
+}
+.grid-4 {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+gap: 1.5rem;
+margin-top: 2rem;
+}
+.grid-5 {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+gap: 1.2rem;
+margin: 1.5rem 0;
+}
+.grid-2 {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+gap: 1.8rem;
+align-items: center;
+}
+.card {
+background: white;
+border-radius: 28px;
+overflow: hidden;
+box-shadow: 0 8px 18px rgba(0,0,0,0.04);
+transition: 0.15s ease;
+border: 1px solid #e9e3db;
+height: 100%;
+display: flex;
+flex-direction: column;
+opacity: 0;
+transform: translateY(40px);
+}
+.card:nth-child(1) { animation: cardSlideIn 0.7s ease-out 0.3s forwards; }
+.card:nth-child(2) { animation: cardSlideIn 0.7s ease-out 0.5s forwards; }
+.card:nth-child(3) { animation: cardSlideIn 0.7s ease-out 0.7s forwards; }
+
+@keyframes cardSlideIn {
+0% {
+opacity: 0;
+transform: translateY(40px);
+}
+100% {
+opacity: 1;
+transform: translateY(0);
+}
+}
+.card:hover {
+transform: translateY(-6px);
+box-shadow: 0 25px 30px -12px rgba(45,62,60,0.2);
+}
+.card-img {
+width: 100%;
+height: 200px;
+object-fit: cover;
+display: block;
+background-color: #e0e8e3;
+}
+.img-responsive {
+width: 100%;
+height: auto;
+border-radius: 28px;
+object-fit: cover;
+opacity: 0;
+transform: translateX(40px);
+animation: imageSlideIn 0.8s ease-out 0.4s forwards;
+}
+@keyframes imageSlideIn {
+0% {
+opacity: 0;
+transform: translateX(40px);
+}
+100% {
+opacity: 1;
+transform: translateX(0);
+}
+}
+.img-hero {
+width: 100%;
+height: auto;
+max-height: 260px;
+object-fit: cover;
+border-radius: 36px;
+opacity: 0;
+transform: translateX(40px);
+animation: imageSlideIn 0.8s ease-out 0.5s forwards;
+}
+.card-content {
+padding: 1.5rem 1.5rem 2rem;
+flex-grow: 1;
+}
+.card-content h3 {
+font-size: 1.5rem;
+margin-bottom: 0.7rem;
+color: #25413a;
+}
+.card-content p {
+color: #3a5a4f;
+font-size: 0.95rem;
+line-height: 1.5;
+}
+.btn {
+display: inline-block;
+background: transparent;
+border: 2px solid #1e2f33;
+color: #1e2f33;
+padding: 0.5rem 1.6rem;
+border-radius: 40px;
+font-weight: 600;
+text-decoration: none;
+margin-top: 1rem;
+transition: 0.2s;
+font-size: 1rem;
+opacity: 0;
+transform: translateY(20px);
+animation: btnSlideIn 0.6s ease-out 0.6s forwards;
+}
+@keyframes btnSlideIn {
+0% {
+opacity: 0;
+transform: translateY(20px);
+}
+100% {
+opacity: 1;
+transform: translateY(0);
+}
+}
+.btn:hover {
+background: #1e2f33;
+color: white;
+}
+.btn-contact {
+background: #f4b942;
+border-color: #f4b942;
+color: #1e2f33;
+}
+.btn-contact:hover {
+background: #1e2f33;
+border-color: #1e2f33;
+color: #f4b942;
+}
+.info-bar {
+background: #e9f0ec;
+border-radius: 40px;
+padding: 1.2rem 2rem;
+display: flex;
+flex-wrap: wrap;
+gap: 1rem 2rem;
+justify-content: center;
+margin: 2rem 0 0.5rem;
+border: 1px solid #cbd5cf;
+}
+.info-item {
+display: flex;
+align-items: center;
+gap: 0.7rem;
+font-size: 1rem;
+color: #1e2f33;
+flex-wrap: wrap;
+}
+.info-item i {
+font-size: 1.5rem;
+color: #f4b942;
+width: 1.8rem;
+text-align: center;
+}
+.contact-grid {
+display: grid;
+grid-template-columns: 1fr;
+gap: 2.5rem;
+background: white;
+border-radius: 36px;
+padding: 2.5rem;
+box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+}
+@media (min-width: 700px) {
+.contact-grid {
+grid-template-columns: 1fr 1fr;
+gap: 3rem;
+padding: 3rem;
+}
+}
+.form-group {
+margin-bottom: 1.4rem;
+opacity: 0;
+transform: translateY(30px);
+animation: formSlideIn 0.6s ease-out forwards;
+}
+.form-group:nth-child(1) { animation-delay: 0.1s; }
+.form-group:nth-child(2) { animation-delay: 0.2s; }
+.form-group:nth-child(3) { animation-delay: 0.3s; }
+.form-group:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes formSlideIn {
+0% {
+opacity: 0;
+transform: translateY(30px);
+}
+100% {
+opacity: 1;
+transform: translateY(0);
+}
+}
+.form-group label {
+display: block;
+font-weight: 600;
+margin-bottom: 0.3rem;
+color: #25413a;
+font-size: 0.95rem;
+}
+.form-group input,
+.form-group textarea {
+width: 100%;
+padding: 1rem 1.4rem;
+border: 2px solid #ced9d2;
+border-radius: 50px;
+font-size: 1rem;
+background: #fcfaf7;
+-webkit-appearance: none;
+appearance: none;
+transition: all 0.3s ease;
+}
+.form-group input:focus,
+.form-group textarea:focus {
+outline: none;
+border-color: #f4b942;
+box-shadow: 0 0 0 4px rgba(244,185,66,0.15);
+transform: translateY(-2px);
+}
+.form-group textarea {
+min-height: 130px;
+border-radius: 30px;
+resize: vertical;
+}
+.submit-btn-wrapper {
+opacity: 0;
+transform: translateY(30px);
+animation: formSlideIn 0.6s ease-out 0.5s forwards;
+}
+button[type="submit"] {
+background: #1e2f33;
+color: white;
+border: none;
+padding: 1.2rem 2.5rem;
+border-radius: 50px;
+font-size: 1.2rem;
+font-weight: 600;
+cursor: pointer;
+transition: all 0.3s ease;
+border: 2px solid #1e2f33;
+width: 100%;
+max-width: 320px;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+gap: 0.8rem;
+}
+button[type="submit"]:hover {
+background: #f4b942;
+color: #1e2f33;
+border-color: #f4b942;
+transform: translateY(-5px);
+box-shadow: 0 15px 35px rgba(244,185,66,0.4);
+}
+.contact-info-block {
+background: #eef4f1;
+border-radius: 32px;
+padding: 2.5rem;
+opacity: 0;
+transform: translateX(50px);
+animation: contactInfoSlide 0.8s ease-out 0.3s forwards;
+}
+@keyframes contactInfoSlide {
+0% {
+opacity: 0;
+transform: translateX(50px);
+}
+100% {
+opacity: 1;
+transform: translateX(0);
+}
+}
+.contact-detail-item {
+margin-bottom: 2rem;
+display: flex;
+gap: 1.2rem;
+align-items: center;
+padding: 0.8rem;
+border-radius: 16px;
+transition: all 0.3s ease;
+opacity: 0;
+transform: translateX(30px);
+}
+.contact-detail-item:nth-child(1) { animation: contactItemSlide 0.6s ease-out 0.5s forwards; }
+.contact-detail-item:nth-child(2) { animation: contactItemSlide 0.6s ease-out 0.6s forwards; }
+.contact-detail-item:nth-child(3) { animation: contactItemSlide 0.6s ease-out 0.7s forwards; }
+.contact-detail-item:nth-child(4) { animation: contactItemSlide 0.6s ease-out 0.8s forwards; }
+
+@keyframes contactItemSlide {
+0% {
+opacity: 0;
+transform: translateX(30px);
+}
+100% {
+opacity: 1;
+transform: translateX(0);
+}
+}
+.contact-detail-item:hover {
+background: rgba(244,185,66,0.15);
+transform: translateX(10px);
+}
+.contact-detail-item i {
+font-size: 2rem;
+color: #f4b942;
+width: 2.5rem;
+flex-shrink: 0;
+transition: transform 0.3s ease;
+}
+.contact-detail-item:hover i {
+transform: scale(1.2) rotate(10deg);
+}
+.about-highlight {
+background: white;
+border-radius: 36px;
+padding: 2rem;
+box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+border: 1px solid #e0e6e2;
+margin-bottom: 2rem;
+}
+.signature-block {
+background: #f4b94215;
+border-radius: 32px;
+padding: 2rem;
+margin-top: 2rem;
+border: 1px solid #f4b94260;
+opacity: 0;
+transform: translateY(30px);
+animation: signatureSlide 0.8s ease-out 0.6s forwards;
+}
+@keyframes signatureSlide {
+0% {
+opacity: 0;
+transform: translateY(30px);
+}
+100% {
+opacity: 1;
+transform: translateY(0);
+}
+}
+.engagement-block {
+background: #e8f4f0;
+border-radius: 36px;
+padding: 2rem;
+margin: 2.5rem 0 1.5rem;
+border: 1px solid #c0dad0;
+opacity: 0;
+transform: translateY(30px);
+animation: engagementSlide 0.8s ease-out 0.7s forwards;
+}
+@keyframes engagementSlide {
+0% {
+opacity: 0;
+transform: translateY(30px);
+}
+100% {
+opacity: 1;
+transform: translateY(0);
+}
+}
+.service-detail {
+background: white;
+border-radius: 36px;
+padding: 2rem;
+margin: 2rem 0;
+border: 1px solid #e0e6e2;
+}
+.stats {
+display: flex;
+flex-wrap: wrap;
+gap: 1.5rem;
+justify-content: space-around;
+text-align: center;
+margin: 1.8rem 0;
+}
+.stat-item {
+flex: 1 1 120px;
+min-width: 110px;
+opacity: 0;
+transform: scale(0.8);
+animation: statPopIn 0.6s ease-out 0.5s forwards;
+}
+@keyframes statPopIn {
+0% {
+opacity: 0;
+transform: scale(0.8);
+}
+100% {
+opacity: 1;
+transform: scale(1);
+}
+}
+.stat-number {
+font-size: 2.2rem;
+font-weight: 700;
+color: #1e2f33;
+line-height: 1;
+}
+.stat-label {
+font-size: 0.95rem;
+color: #4d6a5e;
+}
+.images-note {
+background: #e3f2fd;
+border-radius: 36px;
+padding: 1.2rem 1.5rem;
+margin: 2rem 0 1.5rem;
+border-left: 6px solid #2196f3;
+font-size: 1rem;
+word-break: break-word;
+}
+.gallery-title {
+font-size: 1.5rem;
+margin: 1.5rem 0 1rem;
+color: #25413a;
+display: flex;
+align-items: center;
+gap: 0.8rem;
+}
+hr {
+border: 1px dashed #c9d2cb;
+margin: 2rem 0;
+}
+footer {
+background: #1e2f33;
+color: #cfd7d4;
+text-align: center;
+padding: 2rem 0;
+font-size: 0.95rem;
+border-top: 4px solid #f4b942;
+}
+img {
+max-width: 100%;
+height: auto;
+vertical-align: middle;
+}
+.nav-link,
+.btn,
+button,
+[data-page] {
+touch-action: manipulation;
+}
+@media (max-width: 700px) and (orientation: landscape) {
+.logo-text h1 {
+font-size: 1.5rem;
+}
+.logo-text span {
+display: inline-block;
+font-size: 0.8rem;
+}
+nav ul li a {
+padding: 0.5rem 1rem;
+}
+}
+.whatsapp-float {
+position: fixed;
+bottom: 30px;
+right: 25px;
+background-color: #25D366;
+color: white;
+width: 65px;
+height: 65px;
+border-radius: 50%;
+text-align: center;
+font-size: 38px;
+box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+z-index: 999;
+display: flex;
+align-items: center;
+justify-content: center;
+text-decoration: none;
+transition: 0.25s;
+border: 3px solid white;
+}
+.whatsapp-float:hover {
+background-color: #20b859;
+transform: scale(1.08);
+color: white;
+}
+.whatsapp-float i {
+font-size: 42px;
+}
+@media (max-width: 600px) {
+.whatsapp-float {
+width: 58px;
+height: 58px;
+font-size: 32px;
+bottom: 20px;
+right: 18px;
+}
+.whatsapp-float i {
+font-size: 38px;
+}
+}
+.action-buttons {
+display: flex;
+flex-wrap: wrap;
+gap: 1rem;
+align-items: center;
+justify-content: center;
+margin-top: 2rem;
+opacity: 0;
+transform: translateY(30px);
+animation: actionButtonsSlide 0.8s ease-out 0.9s forwards;
+}
+@keyframes actionButtonsSlide {
+0% {
+opacity: 0;
+transform: translateY(30px);
+}
+100% {
+opacity: 1;
+transform: translateY(0);
+}
+}
+.btn-wsp, .btn-email, .btn-call {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+gap: 0.8rem;
+padding: 1.1rem 2.2rem;
+border-radius: 60px;
+font-size: 1.15rem;
+font-weight: 600;
+text-decoration: none;
+transition: all 0.3s ease;
+border: 2px solid transparent;
+white-space: nowrap;
+}
+.btn-wsp {
+background-color: #25D366;
+color: white;
+border-color: #25D366;
+animation: buttonPulse 2s ease-in-out infinite;
+}
+.btn-email {
+background-color: #1e2f33;
+color: white;
+border-color: #1e2f33;
+animation: buttonPulse 2s ease-in-out 0.3s infinite;
+}
+.btn-call {
+background-color: #f4b942;
+color: #1e2f33;
+border-color: #f4b942;
+animation: buttonPulse 2s ease-in-out 0.6s infinite;
+}
+@keyframes buttonPulse {
+0%, 100% {
+transform: scale(1);
+box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+}
+50% {
+transform: scale(1.03);
+box-shadow: 0 12px 35px rgba(0,0,0,0.3);
+}
+}
+.btn-wsp i, .btn-email i, .btn-call i {
+font-size: 1.5rem;
+transition: transform 0.3s ease;
+}
+.btn-wsp:hover, .btn-email:hover, .btn-call:hover {
+transform: translateY(-8px) scale(1.05);
+}
+.btn-wsp:hover i, .btn-email:hover i, .btn-call:hover i {
+transform: scale(1.3) rotate(15deg);
+}
+.btn-wsp:hover {
+background-color: white;
+color: #25D366;
+box-shadow: 0 20px 45px rgba(37,211,102,0.4);
+}
+.btn-email:hover {
+background-color: white;
+color: #1e2f33;
+box-shadow: 0 20px 45px rgba(30,47,51,0.4);
+}
+.btn-call:hover {
+background-color: #1e2f33;
+color: #f4b942;
+border-color: #1e2f33;
+box-shadow: 0 20px 45px rgba(244,185,66,0.4);
+}
+@media (max-width: 500px) {
+.action-buttons {
+flex-direction: column;
+align-items: stretch;
+}
+.btn-wsp, .btn-email, .btn-call {
+justify-content: center;
+}
+}
+.call-link {
+display: inline-flex;
+align-items: center;
+gap: 0.4rem;
+background: #eef4f1;
+padding: 0.6rem 1.4rem;
+border-radius: 40px;
+text-decoration: none;
+color: #1e2f33;
+font-weight: 500;
+border: 2px solid #cbd5cf;
+transition: all 0.3s ease;
+opacity: 0;
+animation: fadeInUp 0.6s ease-out 1s forwards;
+}
+@keyframes fadeInUp {
+0% {
+opacity: 0;
+transform: translateY(20px);
+}
+100% {
+opacity: 1;
+transform: translateY(0);
+}
+}
+.call-link i {
+color: #f4b942;
+font-size: 1.3rem;
+transition: transform 0.3s ease;
+}
+.call-link:hover {
+background: #f4b942;
+color: #1e2f33;
+border-color: #f4b942;
+transform: translateY(-5px);
+box-shadow: 0 10px 30px rgba(244,185,66,0.3);
+}
+.call-link:hover i {
+color: #1e2f33;
+transform: scale(1.2) rotate(15deg);
+}
+/* ===== DÉFILEMENT AUTO HORIZONTAL ===== */
+.auto-scroll-wrapper {
+width: 100%;
+overflow: hidden;
+margin: 2rem 0;
+padding: 1rem 0;
+}
+.auto-scroll-track {
+display: flex;
+gap: 1.8rem;
+width: fit-content;
+animation: scrollHorizontal 40s linear infinite;
+}
+.auto-scroll-track.paused {
+animation-play-state: paused !important;
+}
+.auto-scroll-track.fast {
+animation-duration: 15s !important;
+}
+.scroll-card {
+width: 300px;
+background: white;
+border-radius: 28px;
+overflow: hidden;
+box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+border: 1px solid #e9e3db;
+flex-shrink: 0;
+transition: all 0.3s ease;
+}
+.scroll-card:hover {
+transform: scale(1.08);
+box-shadow: 0 25px 35px rgba(0,0,0,0.25);
+z-index: 10;
+}
+.scroll-card img {
+width: 100%;
+height: 200px;
+object-fit: cover;
+display: block;
+border-bottom: 3px solid #f4b942;
+transition: transform 0.3s ease;
+}
+.scroll-card:hover img {
+transform: scale(1.02);
+}
+.scroll-card .card-caption {
+padding: 1.2rem 1.2rem 1.5rem;
+transition: background-color 0.3s ease;
+}
+.scroll-card:hover .card-caption {
+background-color: #fef9f0;
+}
+.scroll-card .card-caption h3 {
+font-size: 1.4rem;
+color: #25413a;
+margin-bottom: 0.4rem;
+}
+.scroll-card .card-caption p {
+color: #3a5a4f;
+font-size: 0.9rem;
+line-height: 1.4;
+}
+@keyframes scrollHorizontal {
+0% { transform: translateX(0); }
+100% { transform: translateX(calc(-300px * 6 - 1.8rem * 6)); }
+}
+@media (max-width: 600px) {
+.scroll-card {
+width: 260px;
+}
+@keyframes scrollHorizontal {
+100% { transform: translateX(calc(-260px * 6 - 1.8rem * 6)); }
+}
+}
+.scroll-img {
+width: 280px;
+height: 200px;
+object-fit: cover;
+border-radius: 20px;
+box-shadow: 0 8px 18px rgba(0,0,0,0.1);
+border: 2px solid #f4b942;
+flex-shrink: 0;
+transition: all 0.3s ease;
+}
+.scroll-img:hover {
+transform: scale(1.05);
+box-shadow: 0 15px 25px rgba(0,0,0,0.2);
+border-color: #1e2f33;
+}
+
+/* ===== BOUTON FLECHE ACCELERATION ===== */
+.speed-control {
+position: fixed;
+right: 20px;
+top: 50%;
+transform: translateY(-50%);
+z-index: 998;
+display: none;
+}
+
+.speed-control.visible {
+display: block;
+}
+
+.speed-btn {
+width: 45px;
+height: 45px;
+background: transparent;
+border: 2px solid #f4b942;
+border-radius: 50%;
+cursor: pointer;
+display: flex;
+align-items: center;
+justify-content: center;
+transition: all 0.3s ease;
+position: relative;
+}
+
+.speed-btn:hover {
+border-color: #1e2f33;
+transform: scale(1.1);
+}
+
+.speed-btn:active,
+.speed-btn.active {
+border-color: #1e2f33;
+transform: scale(0.95);
+}
+
+.speed-btn .ep-icon-arrow-right-0 {
+font-size: 20px;
+color: #f4b942;
+position: relative;
+z-index: 1;
+transition: all 0.3s ease;
+}
+
+.speed-btn:hover .ep-icon-arrow-right-0 {
+color: #1e2f33;
+}
+
+.speed-btn.active .ep-icon-arrow-right-0 {
+color: #1e2f33;
+transform: scale(1.3);
+}
+
+.speed-label {
+position: absolute;
+right: 60px;
+top: 50%;
+transform: translateY(-50%);
+background: #1e2f33;
+color: white;
+padding: 0.5rem 1rem;
+border-radius: 8px;
+font-size: 0.8rem;
+white-space: nowrap;
+opacity: 0;
+visibility: hidden;
+transition: all 0.3s ease;
+font-weight: 500;
+}
+
+.speed-btn:hover .speed-label {
+opacity: 1;
+visibility: visible;
+right: 55px;
+}
+
+@media (max-width: 900px) {
+.speed-btn {
+width: 40px;
+height: 40px;
+}
+.speed-btn .ep-icon-arrow-right-0 {
+font-size: 18px;
+}
+.speed-label {
+display: none;
+}
+}
+
+/* ===== ANIMATIONS TEXTE ACCUEIL & A PROPOS ===== */
+.text-animate {
+opacity: 0;
+transform: translateY(30px);
+animation: textSlideIn 0.7s ease-out forwards;
+}
+.text-animate:nth-of-type(1) { animation-delay: 0.2s; }
+.text-animate:nth-of-type(2) { animation-delay: 0.4s; }
+.text-animate:nth-of-type(3) { animation-delay: 0.6s; }
+
+@keyframes textSlideIn {
+0% {
+opacity: 0;
+transform: translateY(30px);
+}
+100% {
+opacity: 1;
+transform: translateY(0);
+}
+}
+.about-text-animate {
+opacity: 0;
+transform: translateX(-30px);
+animation: aboutTextSlide 0.7s ease-out forwards;
+}
+.about-text-animate:nth-of-type(1) { animation-delay: 0.3s; }
+.about-text-animate:nth-of-type(2) { animation-delay: 0.5s; }
+.about-text-animate:nth-of-type(3) { animation-delay: 0.7s; }
+.about-text-animate:nth-of-type(4) { animation-delay: 0.9s; }
+
+@keyframes aboutTextSlide {
+0% {
+opacity: 0;
+transform: translateX(-30px);
+}
+100% {
+opacity: 1;
+transform: translateX(0);
+}
+}
+.engagement-text-animate {
+opacity: 0;
+transform: translateY(20px);
+animation: engagementTextSlide 0.6s ease-out forwards;
+}
+.engagement-text-animate:nth-of-type(1) { animation-delay: 0.8s; }
+.engagement-text-animate:nth-of-type(2) { animation-delay: 1s; }
+.engagement-text-animate:nth-of-type(3) { animation-delay: 1.2s; }
+
+@keyframes engagementTextSlide {
+0% {
+opacity: 0;
+transform: translateY(20px);
+}
+100% {
+opacity: 1;
+transform: translateY(0);
+}
+}
+</style>
 </head>
 <body>
-  <a href="https://wa.me/33772227674" class="whatsapp-float" target="_blank" aria-label="Contact WhatsApp">
-    <i class="fab fa-whatsapp"></i>
-  </a>
-  
-  <button class="scroll-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" aria-label="Retour en haut">
-    <i class="fas fa-arrow-up"></i>
-  </button>
+<a href="https://wa.me/33772227674" class="whatsapp-float" target="_blank" title="Envoyer un message WhatsApp">
+<i class="fab fa-whatsapp"></i>
+</a>
 
-  <header id="header">
-    <div class="container header-flex">
-      <a href="#accueil" class="logo-area" data-page="accueil">
-        <img src="https://ik.imagekit.io/fwmsbpxje/logos/WhatsApp%20Image%202026-02-27%20at%2013.45.42.jpeg" alt="DBH Bâtiment Logo" class="logo-img">
-        <div class="logo-text">
-          <h1>DBH Bâtiment</h1>
-          <span>Artisans du bâti</span>
-        </div>
-      </a>
-      
-      <button class="mobile-menu-btn" onclick="toggleMenu()" aria-label="Menu">
-        <i class="fas fa-bars"></i>
-      </button>
-      
-      <nav id="mainNav">
-        <ul>
-          <li><a href="#accueil" class="nav-link active" data-page="accueil">Accueil</a></li>
-          <li><a href="#services" class="nav-link" data-page="services">Services</a></li>
-          <li><a href="#projets" class="nav-link" data-page="projets">Réalisations</a></li>
-          <li><a href="#a-propos" class="nav-link" data-page="a-propos">À propos</a></li>
-          <li><a href="#contact" class="nav-link" data-page="contact" style="background: var(--accent); color: var(--white);">Devis gratuit</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+<!-- Bouton Flèche Accélération -->
+<div class="speed-control" id="speedControl">
+<button class="speed-btn" id="speedBtn" title="Accélérer le défilement">
+<i class="ep-icon-arrow-right-0 fas fa-chevron-right"></i>
+<span class="speed-label">Maintenir pour accélérer</span>
+</button>
+</div>
 
-  <main id="page-content">
-    </main>
+<header>
+<div class="container header-flex">
+<div class="logo-area">
+<img src="https://ik.imagekit.io/fwmsbpxje/logos/WhatsApp%20Image%202026-02-27%20at%2013.45.42.jpeg" alt="DBH Bâtiment Logo" class="logo-img">
+<div class="logo-text">
+<h1>DBH Bâtiment</h1>
+<span>rénovation · sérieux · confiance</span>
+</div>
+</div>
+<nav>
+<ul>
+<li><a href="#accueil" class="nav-link active" data-page="accueil">Accueil</a></li>
+<li><a href="#a-propos" class="nav-link" data-page="a-propos">À propos</a></li>
+<li><a href="#services" class="nav-link" data-page="services">Services</a></li>
+<li><a href="#projets" class="nav-link" data-page="projets">Projets</a></li>
+<li><a href="#contact" class="nav-link" data-page="contact">Contact</a></li>
+</ul>
+</nav>
+</div>
+</header>
+<main class="container">
+<div id="page-content"></div>
+<div class="info-bar">
+<div class="info-item"><i class="fas fa-map-pin"></i> 21 Rue de Fontenay, 78200 Magnanville</div>
+<div class="info-item"><i class="fas fa-phone-alt"></i> +33 7 72 22 76 74</div>
+<div class="info-item"><i class="fas fa-envelope"></i> Dbh.bati@gmail.com</div>
+</div>
+</main>
+<footer>
+<div class="container">
+<p>© 2025 DBH Bâtiment — 21 Rue de Fontenay, Magnanville — Tél. +33 7 72 22 76 74</p>
+<p style="margin-top: 0.8rem; font-size: 0.9rem;">suivez-nous
+<i class="fab fa-facebook" style="margin-left: 0.8rem;"></i>
+<i class="fab fa-instagram" style="margin-left: 0.6rem;"></i>
+<i class="fab fa-linkedin" style="margin-left: 0.6rem;"></i>
+</p>
+</div>
+</footer>
+<script>
+(function() {
+const imageUrls = {
+img1: 'https://ik.imagekit.io/fwmsbpxje/images/img1.jpg?updatedAt=1771411160168',
+img2: 'https://ik.imagekit.io/fwmsbpxje/images/img2.jpg?updatedAt=1771411156799',
+img3: 'https://ik.imagekit.io/fwmsbpxje/images/img3.jpg?updatedAt=1771411160124',
+img4: 'https://ik.imagekit.io/fwmsbpxje/images/img4.jpeg?updatedAt=1771411159989',
+img5: 'https://ik.imagekit.io/fwmsbpxje/images/img5.jpeg?updatedAt=1771411157796',
+img6: 'https://ik.imagekit.io/fwmsbpxje/images/img6.jpeg?updatedAt=1771411160829',
+img7: 'https://ik.imagekit.io/fwmsbpxje/images/img7.jpeg?updatedAt=1771411146030',
+img8: 'https://ik.imagekit.io/fwmsbpxje/images/img8.jpeg?updatedAt=1771411161882',
+img9: 'https://ik.imagekit.io/fwmsbpxje/images/img9.jpeg?updatedAt=1771411154689',
+img10: 'https://ik.imagekit.io/fwmsbpxje/images/img10.jpeg?updatedAt=1771411151954',
+img11: 'https://ik.imagekit.io/fwmsbpxje/images/renovation/img33.jpeg?updatedAt=1771411160910',
+img12: 'https://ik.imagekit.io/fwmsbpxje/images/img12.jpeg?updatedAt=1771411161974',
+ren21: 'https://ik.imagekit.io/fwmsbpxje/images/renovation/img21.jpeg?updatedAt=1771427509487',
+ren28: 'https://ik.imagekit.io/fwmsbpxje/images/renovation/img28.jpeg?updatedAt=1771427508925',
+ren26: 'https://ik.imagekit.io/fwmsbpxje/images/renovation/img26.jpeg?updatedAt=1771427509074',
+ren23: 'https://ik.imagekit.io/fwmsbpxje/images/renovation/img23.jpeg?updatedAt=1771427508879',
+ren25: 'https://ik.imagekit.io/fwmsbpxje/images/renovation/img25.jpeg?updatedAt=1771427508752',
+ren20: 'https://ik.imagekit.io/fwmsbpxje/images/renovation/img20.jpeg?updatedAt=1771427508613',
+ren24: 'https://ik.imagekit.io/fwmsbpxje/images/renovation/img24.jpeg?updatedAt=1771427508570',
+ren27: 'https://ik.imagekit.io/fwmsbpxje/images/renovation/img27.jpeg?updatedAt=1771427505814',
+ren22: 'https://ik.imagekit.io/fwmsbpxje/images/renovation/img22.jpeg?updatedAt=1771427503676',
+ren29: 'https://ik.imagekit.io/fwmsbpxje/images/renovation/img29.jpeg',
+ren30: 'https://ik.imagekit.io/fwmsbpxje/images/renovation/img30.jpeg',
+ren31: 'https://ik.imagekit.io/fwmsbpxje/images/renovation/img31.jpeg',
+ren32: 'https://ik.imagekit.io/fwmsbpxje/images/renovation/img32.jpeg',
+im34: 'https://ik.imagekit.io/fwmsbpxje/images/renovation/im34.jpeg',
+v35: 'https://ik.imagekit.io/fwmsbpxje/images/renovation/v35.jpeg',
+deb14: 'https://ik.imagekit.io/fwmsbpxje/images/dbarat/img14.jpeg?updatedAt=1771427475328',
+deb15: 'https://ik.imagekit.io/fwmsbpxje/images/dbarat/img15.jpeg?updatedAt=1771427477610',
+deb16: 'https://ik.imagekit.io/fwmsbpxje/images/dbarat/img16.jpeg?updatedAt=1771427471744',
+deb18: 'https://ik.imagekit.io/fwmsbpxje/images/dbarat/img18.jpeg?updatedAt=1771427477915',
+deb19: 'https://ik.imagekit.io/fwmsbpxje/images/dbarat/img19.jpeg?updatedAt=1771427476232'
+};
+const pageContent = document.getElementById('page-content');
+const navLinks = document.querySelectorAll('.nav-link');
+const speedControl = document.getElementById('speedControl');
+const speedBtn = document.getElementById('speedBtn');
 
-  <footer>
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <h3><i class="fas fa-hard-hat" style="color: var(--accent);"></i> DBH Bâtiment</h3>
-          <p>Artisans passionnés, nous transformons vos espaces avec expertise et créativité. Votre satisfaction est notre meilleure récompense.</p>
-          <div class="social-links">
-            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-          </div>
-        </div>
-        
-        <div class="footer-links">
-          <h4>Navigation</h4>
-          <ul>
-            <li><a href="#accueil" data-page="accueil"><i class="fas fa-chevron-right"></i> Accueil</a></li>
-            <li><a href="#services" data-page="services"><i class="fas fa-chevron-right"></i> Services</a></li>
-            <li><a href="#projets" data-page="projets"><i class="fas fa-chevron-right"></i> Réalisations</a></li>
-            <li><a href="#contact" data-page="contact"><i class="fas fa-chevron-right"></i> Contact</a></li>
-          </ul>
-        </div>
-        
-        <div class="footer-links">
-          <h4>Services</h4>
-          <ul>
-            <li><a href="#services"><i class="fas fa-chevron-right"></i> Rénovation intérieure</a></li>
-            <li><a href="#services"><i class="fas fa-chevron-right"></i> Rénovation extérieure</a></li>
-            <li><a href="#services"><i class="fas fa-chevron-right"></i> Carrelage</a></li>
-            <li><a href="#services"><i class="fas fa-chevron-right"></i> Débarras</a></li>
-          </ul>
-        </div>
-        
-        <div class="footer-links">
-          <h4>Contact</h4>
-          <ul>
-            <li style="display: flex; gap: 10px; align-items: flex-start; margin-bottom: 1rem;"><i class="fas fa-map-marker-alt" style="color: var(--accent); margin-top: 5px;"></i> 21 Rue de Fontenay,<br>78200 Magnanville</li>
-            <li style="display: flex; gap: 10px; align-items: center; margin-bottom: 1rem;"><i class="fas fa-phone" style="color: var(--accent);"></i> +33 7 72 22 76 74</li>
-            <li style="display: flex; gap: 10px; align-items: center;"><i class="fas fa-envelope" style="color: var(--accent);"></i> Dbh.bati@gmail.com</li>
-          </ul>
-        </div>
-      </div>
-      
-      <div class="footer-bottom">
-        <p>&copy; 2025 DBH Bâtiment. Tous droits réservés.</p>
-        <p><a href="#" style="color: var(--accent); text-decoration: none;">Mentions légales</a></p>
-      </div>
-    </div>
-  </footer>
+const projetsAutoScroll = `
+<h2 class="page-title">Nos réalisations</h2>
+<div class="auto-scroll-wrapper" id="projet-scroll-wrapper">
+<div class="auto-scroll-track" id="projet-scroll-track">
+<div class="scroll-card">
+<img src="${imageUrls.img11}" alt="Rénovation complète">
+<div class="card-caption">
+<h3>Rénovation Intérieure Complète – Avant / Après</h3>
+<p>Transformation totale d'un espace brut en intérieur moderne et lumineux. Travaux réalisés : faux plafond avec spots intégrés, revêtement de sol, peinture, aménagement cuisine et finitions soignées. Résultat : un espace contemporain, fonctionnel et prêt à vivre. ✨</p>
+</div>
+</div>
+<div class="scroll-card">
+<img src="${imageUrls.img1}" alt="Mise en peinture">
+<div class="card-caption">
+<h3>Mise en peinture moderne</h3>
+<p>Travaux de peinture réalisés avec soin et précision. Une finition moderne qui apporte luminosité et fraîcheur à l'espace.</p>
+</div>
+</div>
+<div class="scroll-card">
+<img src="${imageUrls.img2}" alt="Salle de bain">
+<div class="card-caption">
+<h3>Rénovation de salle de bain moderne</h3>
+<p>Aménagement d'une salle de bain contemporaine aux finitions soignées. Carrelage grand format, douche à l'italienne et mobilier épuré pour un espace lumineux et élégant.</p>
+</div>
+</div>
+<div class="scroll-card">
+<img src="${imageUrls.ren25}" alt="Avant/Après">
+<div class="card-caption">
+<h3>Transformation complète – Avant / Après</h3>
+<p>Rénovation totale d'un intérieur, du gros rafraîchissement à la finition soignée. Un espace ancien transformé en pièce lumineuse, moderne et élégante grâce à un travail précis et professionnel.</p>
+</div>
+</div>
+<div class="scroll-card">
+<img src="${imageUrls.ren28}" alt="Faux plafond">
+<div class="card-caption">
+<h3>Installation de faux plafond en placo</h3>
+<p>Pose professionnelle de plaques de plâtre pour la réalisation d'un faux plafond moderne. Travail précis assurant isolation, esthétique et finition de qualité pour un intérieur parfaitement aménagé.</p>
+</div>
+</div>
+<div class="scroll-card">
+<img src="${imageUrls.ren29}" alt="Salle de bain">
+<div class="card-caption">
+<h3>Salle de bain – Rénovation complète</h3>
+<p>Création d'une salle de bain moderne et lumineuse avec douche vitrée, faïence contemporaine, meuble vasque suspendu et finitions soignées.</p>
+</div>
+</div>
+<div class="scroll-card">
+<img src="${imageUrls.img11}" alt="Rénovation complète">
+<div class="card-caption">
+<h3>Rénovation Intérieure Complète – Avant / Après</h3>
+<p>Transformation totale d'un espace brut en intérieur moderne et lumineux. Travaux réalisés : faux plafond avec spots intégrés, revêtement de sol, peinture, aménagement cuisine et finitions soignées. ✨</p>
+</div>
+</div>
+<div class="scroll-card">
+<img src="${imageUrls.img1}" alt="Mise en peinture">
+<div class="card-caption">
+<h3>Mise en peinture moderne</h3>
+<p>Travaux de peinture réalisés avec soin et précision. Une finition moderne qui apporte luminosité et fraîcheur à l'espace.</p>
+</div>
+</div>
+</div>
+</div>
+`;
 
-  <script>
-    // Image URLs (Strictement conservées)
-    const imageUrls = {
-      img1: 'https://ik.imagekit.io/fwmsbpxje/images/img1.jpg?updatedAt=1771411160168',
-      img2: 'https://ik.imagekit.io/fwmsbpxje/images/img2.jpg?updatedAt=1771411156799',
-      img3: 'https://ik.imagekit.io/fwmsbpxje/images/img3.jpg?updatedAt=1771411160124',
-      img4: 'https://ik.imagekit.io/fwmsbpxje/images/img4.jpeg?updatedAt=1771411159989',
-      img5: 'https://ik.imagekit.io/fwmsbpxje/images/img5.jpeg?updatedAt=1771411157796',
-      img6: 'https://ik.imagekit.io/fwmsbpxje/images/img6.jpeg?updatedAt=1771411160829',
-      img7: 'https://ik.imagekit.io/fwmsbpxje/images/img7.jpeg?updatedAt=1771411146030',
-      img8: 'https://ik.imagekit.io/fwmsbpxje/images/img8.jpeg?updatedAt=1771411161882',
-      img9: 'https://ik.imagekit.io/fwmsbpxje/images/img9.jpeg?updatedAt=1771411154689',
-      img10: 'https://ik.imagekit.io/fwmsbpxje/images/img10.jpeg?updatedAt=1771411151954',
-      img11: 'https://ik.imagekit.io/fwmsbpxje/images/renovation/img33.jpeg?updatedAt=1771411160910',
-      img12: 'https://ik.imagekit.io/fwmsbpxje/images/img12.jpeg?updatedAt=1771411161974',
-      ren21: 'https://ik.imagekit.io/fwmsbpxje/images/renovation/img21.jpeg?updatedAt=1771427509487',
-      ren28: 'https://ik.imagekit.io/fwmsbpxje/images/renovation/img28.jpeg?updatedAt=1771427508925',
-      ren26: 'https://ik.imagekit.io/fwmsbpxje/images/renovation/img26.jpeg?updatedAt=1771427509074',
-      ren23: 'https://ik.imagekit.io/fwmsbpxje/images/renovation/img23.jpeg?updatedAt=1771427508879',
-      ren25: 'https://ik.imagekit.io/fwmsbpxje/images/renovation/img25.jpeg?updatedAt=1771427508752',
-      ren20: 'https://ik.imagekit.io/fwmsbpxje/images/renovation/img20.jpeg?updatedAt=1771427508613',
-      ren24: 'https://ik.imagekit.io/fwmsbpxje/images/renovation/img24.jpeg?updatedAt=1771427508570',
-      ren27: 'https://ik.imagekit.io/fwmsbpxje/images/renovation/img27.jpeg?updatedAt=1771427505814',
-      ren22: 'https://ik.imagekit.io/fwmsbpxje/images/renovation/img22.jpeg?updatedAt=1771427503676',
-      ren29: 'https://ik.imagekit.io/fwmsbpxje/images/renovation/img29.jpeg',
-      ren30: 'https://ik.imagekit.io/fwmsbpxje/images/renovation/img30.jpeg',
-      ren31: 'https://ik.imagekit.io/fwmsbpxje/images/renovation/img31.jpeg',
-      ren32: 'https://ik.imagekit.io/fwmsbpxje/images/renovation/img32.jpeg',
-      im34: 'https://ik.imagekit.io/fwmsbpxje/images/renovation/im34.jpeg',
-      v35: 'https://ik.imagekit.io/fwmsbpxje/images/renovation/v35.jpeg',
-      deb14: 'https://ik.imagekit.io/fwmsbpxje/images/dbarat/img14.jpeg?updatedAt=1771427475328',
-      deb15: 'https://ik.imagekit.io/fwmsbpxje/images/dbarat/img15.jpeg?updatedAt=1771427477610',
-      deb16: 'https://ik.imagekit.io/fwmsbpxje/images/dbarat/img16.jpeg?updatedAt=1771427471744',
-      deb18: 'https://ik.imagekit.io/fwmsbpxje/images/dbarat/img18.jpeg?updatedAt=1771427477915',
-      deb19: 'https://ik.imagekit.io/fwmsbpxje/images/dbarat/img19.jpeg?updatedAt=1771427476232'
-    };
+const servicesPage = `
+<h2 class="page-title">Nos services</h2>
+<div class="auto-scroll-wrapper" id="services-scroll-wrapper">
+<div class="auto-scroll-track" id="services-scroll-track">
+<div class="scroll-card">
+<img src="${imageUrls.img8}" alt="Rénovation intérieure">
+<div class="card-caption">
+<h3>Rénovation intérieure</h3>
+<p>Plâtrerie, carrelage, peinture, agencements sur-mesure : donnez une nouvelle vie à vos espaces. Rénovation complète ou partielle.</p>
+</div>
+</div>
+<div class="scroll-card">
+<img src="${imageUrls.ren21}" alt="Rénovation extérieure">
+<div class="card-caption">
+<h3>Rénovation extérieure</h3>
+<p>DBH Bâtiment réalise tous vos travaux extérieure. Nous préparons soigneusement les supports (ponçage, enduits, rebouchage) afin d'assurer une finition propre, durable et esthétique.</p>
+</div>
+</div>
+<div class="scroll-card">
+<img src="${imageUrls.ren24}" alt="Carrelage">
+<div class="card-caption">
+<h3>Carrelage & revêtements de sols</h3>
+<p>Nous intervenons pour la pose de carrelage mural et au sol, ainsi que tous types de revêtements de sols. Que ce soit pour une salle de bain, une cuisine, un salon ou un espace professionnel, nous vous garantissons un travail précis et soigné.</p>
+</div>
+</div>
+<div class="scroll-card">
+<img src="${imageUrls.ren26}" alt="Petite maçonnerie">
+<div class="card-caption">
+<h3>Rénovation interieure - petite maçonnerie</h3>
+<p>Nous réalisons des travaux de rénovation extérieure pour redonner vie à vos façades et espaces extérieurs. Cela comprend la peinture extérieure, les petites réparations de maçonnerie (rebouchage de fissures, reprises de murs, petits ouvrages), ainsi que divers travaux d'amélioration et d'entretien.</p>
+</div>
+</div>
+<div class="scroll-card">
+<img src="${imageUrls.img10}" alt="Aménagements">
+<div class="card-caption">
+<h3>aménagements interieure-extérieurs</h3>
+<p>Pavés, dalles, béton désactivé : valorisez votre jardin ou cour. Création de pool house et cuisine d'été.</p>
+</div>
+</div>
+<div class="scroll-card">
+<img src="${imageUrls.v35}" alt="Pose de Carrelage">
+<div class="card-caption">
+<h3>🧱 Pose de Carrelage – Finition Précise</h3>
+<p>Installation professionnelle de carrelage avec système de nivellement pour un alignement parfait et une surface uniforme. Application soignée de la colle, respect des joints et finition impeccable pour un rendu durable et esthétique. ✨</p>
+</div>
+</div>
+<div class="scroll-card">
+<img src="${imageUrls.img8}" alt="Rénovation intérieure">
+<div class="card-caption">
+<h3>Rénovation intérieure</h3>
+<p>Plâtrerie, carrelage, peinture, agencements sur-mesure : donnez une nouvelle vie à vos espaces. Rénovation complète ou partielle.</p>
+</div>
+</div>
+<div class="scroll-card">
+<img src="${imageUrls.ren21}" alt="Rénovation extérieure">
+<div class="card-caption">
+<h3>Rénovation extérieure</h3>
+<p>DBH Bâtiment réalise tous vos travaux extérieure. Nous préparons soigneusement les supports (ponçage, enduits, rebouchage) afin d'assurer une finition propre, durable et esthétique.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="service-detail">
+<h3 style="font-size: 2rem; margin-bottom: 1rem; color: #25413a;"><i class="fas fa-truck" style="color: #f4b942; margin-right: 1rem;"></i>Service de débarras</h3>
+<p style="font-size: 1.2rem; margin-bottom: 2rem;">En complément de nos travaux de rénovation, nous proposons un service de débarras professionnel. Nous intervenons pour vider maisons, appartements, garages ou locaux après travaux ou avant rénovation.</p>
+<p style="font-size: 1.1rem; margin-bottom: 2rem;">Nous assurons l'évacuation des gravats, encombrants et déchets, afin de vous laisser un espace propre et prêt à être réutilisé.</p>
+<div class="gallery-title" style="margin-bottom: 0.5rem;"><i class="fas fa-images" style="color: #f4b942;"></i><span>Quelques exemples de nos interventions</span></div>
+<div class="auto-scroll-wrapper" id="debarras-scroll-wrapper" style="margin-top: 1rem;">
+<div class="auto-scroll-track" id="debarras-scroll-track">
+<img src="${imageUrls.deb15}" class="scroll-img" alt="Débarras avant/après">
+<img src="${imageUrls.deb18}" class="scroll-img" alt="Débarras maison">
+<img src="${imageUrls.deb19}" class="scroll-img" alt="Évacuation encombrants">
+<img src="${imageUrls.deb14}" class="scroll-img" alt="Débarras garage">
+<img src="${imageUrls.deb16}" class="scroll-img" alt="Nettoyage après débarras">
+<img src="${imageUrls.deb15}" class="scroll-img" alt="Débarras avant/après">
+<img src="${imageUrls.deb18}" class="scroll-img" alt="Débarras maison">
+<img src="${imageUrls.deb19}" class="scroll-img" alt="Évacuation encombrants">
+<img src="${imageUrls.deb14}" class="scroll-img" alt="Débarras garage">
+<img src="${imageUrls.deb16}" class="scroll-img" alt="Nettoyage après débarras">
+</div>
+</div>
+<div style="margin-top: 2rem; text-align: center;">
+<a href="#contact" class="btn btn-contact" data-page="contact" style="font-size: 1.2rem; padding: 0.8rem 2.5rem;">Demander un devis débarras</a>
+</div>
+</div>
+<div class="engagement-block">
+<h3 style="color: #1e2f33; margin-bottom: 1.5rem;"><i class="fas fa-handshake" style="color: #f4b942; margin-right: 0.8rem;"></i>Notre engagement</h3>
+<p class="engagement-text-animate" style="font-size: 1.1rem; margin-bottom: 1rem;">Chez DBH Bâtiment, nous plaçons la qualité et la satisfaction client au cœur de chacune de nos réalisations. Chaque chantier, qu'il s'agisse d'une simple remise en état ou d'une rénovation complète, est réalisé avec le même niveau d'exigence et d'attention aux détails.</p>
+<p class="engagement-text-animate" style="font-size: 1.1rem; margin-bottom: 1rem;">Nous nous engageons à fournir un travail soigné, durable et conforme aux normes en vigueur. Le respect des délais annoncés fait partie de nos priorités, car nous savons à quel point votre temps est précieux. Nous veillons également à maintenir un chantier propre et organisé tout au long des travaux.</p>
+<p class="engagement-text-animate" style="font-size: 1.1rem;">À l'écoute de vos besoins, nous vous conseillons avec transparence afin de vous proposer les solutions les plus adaptées à votre budget et à vos attentes. Notre objectif est simple : vous offrir un résultat à la hauteur de votre projet et établir une relation de confiance sur le long terme.</p>
+</div>
+`;
 
-    // Pages content (Contenu textuel strictement conservé)
-    const pages = {
-      accueil: `
-        <section class="hero">
-          <div class="hero-bg"></div>
-          <div class="hero-overlay"></div>
-          <div class="container">
-            <div class="hero-content">
-              <div class="hero-badge">
-                <i class="fas fa-hard-hat"></i> Artisans certifiés
-              </div>
-              <h2>Votre projet de <span>rénovation</span> entre des mains d'experts</h2>
-              <p>DBH Bâtiment transforme vos espaces intérieurs et extérieurs avec passion et savoir-faire. Devis gratuit sous 24h.</p>
-              <div class="hero-cta">
-                <a href="#contact" class="btn-primary" data-page="contact">
-                  <i class="fas fa-calculator"></i> Demander un devis
-                </a>
-                <a href="#projets" class="btn-secondary" data-page="projets">
-                  <i class="fas fa-images"></i> Voir nos réalisations
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
+const pages = {
+accueil: `
+<h2 class="page-title home-title">Bienvenue chez DBH Bâtiment</h2>
+<div style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: center;">
+<div style="flex: 1 1 260px;">
+<p class="text-animate" style="font-size: 1.2rem; font-weight: 300;">Artisans expérimentés, nous réalisons vos travaux de rénovation avec passion dans les Yvelines et en Île-de-France.</p>
+<p class="text-animate" style="margin-top: 1rem;">DBH Bâtiment, c'est la promesse d'un travail soigné, dans les délais et avec des matériaux de qualité. Découvrez nos réalisations.</p>
+<a href="#contact" class="btn btn-contact" data-page="contact" style="margin-top: 1.5rem;">Demander un devis →</a>
+</div>
+<img src="${imageUrls.img3}" alt="DBH Bâtiment accueil" class="img-hero" style="flex: 1 1 260px; max-height: 240px;">
+</div>
+<hr>
+<h3 style="font-size: 1.9rem; margin-bottom: 1.2rem; opacity: 0; animation: textSlideIn 0.7s ease-out 0.8s forwards;">Nos trois valeurs</h3>
+<div class="grid-3">
+<div class="card">
+<img src="${imageUrls.img2}" alt="Proximité" class="card-img">
+<div class="card-content"><h3>Proximité</h3><p>À l'écoute de vos projets, nous vous conseillons de la première visite jusqu'à la livraison. Nous privilégions le contact humain et la réactivité.</p></div>
+</div>
+<div class="card">
+<img src="${imageUrls.img1}" alt="Savoir-faire" class="card-img">
+<div class="card-content"><h3>Savoir-faire</h3><p>Maçons, carreleurs, charpentiers : une équipe expérimentée pour des finitions impeccables. Nous perpétuons les techniques traditionnelles.</p></div>
+</div>
+<div class="card">
+<img src="${imageUrls.img4}" alt="Matériaux durables" class="card-img">
+<div class="card-content"><h3>Matériaux durables</h3><p>Nous privilégions les fournisseurs locaux et les isolants écologiques. Une construction saine pour vous et pour l'environnement.</p></div>
+</div>
+</div>
+<div class="engagement-block">
+<h3 style="color: #1e2f33; margin-bottom: 1.5rem;"><i class="fas fa-heart" style="color: #f4b942; margin-right: 0.8rem;"></i>Notre engagement</h3>
+<p class="engagement-text-animate" style="font-size: 1.1rem; margin-bottom: 1rem;">Chez DBH Bâtiment, nous plaçons la qualité et la satisfaction client au cœur de chacune de nos réalisations. Chaque chantier, qu'il s'agisse d'une simple remise en état ou d'une rénovation complète, est réalisé avec le même niveau d'exigence et d'attention aux détails.</p>
+<p class="engagement-text-animate" style="font-size: 1.1rem; margin-bottom: 1rem;">Nous nous engageons à fournir un travail soigné, durable et conforme aux normes en vigueur. Le respect des délais annoncés fait partie de nos priorités, car nous savons à quel point votre temps est précieux. Nous veillons également à maintenir un chantier propre et organisé tout au long des travaux.</p>
+<p class="engagement-text-animate" style="font-size: 1.1rem;">À l'écoute de vos besoins, nous vous conseillons avec transparence afin de vous proposer les solutions les plus adaptées à votre budget et à vos attentes. Notre objectif est simple : vous offrir un résultat à la hauteur de votre projet et établir une relation de confiance sur le long terme.</p>
+</div>
+`,
+"a-propos": `
+<h2 class="page-title">À propos de DBH Bâtiment</h2>
+<div class="about-highlight">
+<div class="grid-2">
+<div>
+<p class="about-text-animate" style="font-size: 1.3rem; font-weight: 300;">Nous intervenons pour transformer, moderniser et optimiser vos espaces intérieurs.</p>
+<p class="about-text-animate" style="margin-top: 1.2rem;">Nous réalisons la pose de placo (cloisons, doublages, aménagement de pièces), la création de faux plafonds pour un rendu esthétique et une meilleure isolation, ainsi que les travaux d'isolation thermique et phonique pour améliorer votre confort au quotidien.</p>
+<p class="about-text-animate" style="margin-top: 1rem;">Nous prenons également en charge les travaux d'électricité (mise aux normes, installation de luminaires, prises, tableaux électriques) et de plomberie (installation ou remplacement de sanitaires, robinetterie, réseaux d'eau).</p>
+<p class="about-text-animate" style="margin-top: 1rem; font-weight: 500;">Notre objectif est de vous livrer un intérieur fonctionnel, confortable et conforme aux normes en vigueur.</p>
+</div>
+<img src="${imageUrls.img5}" alt="Équipe DBH Bâtiment" class="img-responsive" style="border-radius: 28px; max-height: 240px; object-fit: cover;">
+</div>
+<div class="stats">
+<div class="stat-item"><span class="stat-number">100%</span> <span class="stat-label">satisfaits</span></div>
+</div>
+</div>
+<div class="signature-block">
+<h3 style="color: #1e2f33;"><i class="fas fa-quote-right" style="color: #f4b942; margin-right: 0.8rem;"></i>Notre philosophie</h3>
+<p style="font-size: 1.1rem; font-style: italic; margin: 1rem 0 1.2rem;">« Un chantier réussi, c'est un client qui devient ami. Nous mettons autant d'attention dans une petite rénovation que dans une construction complète. »</p>
+<div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+<div style="background: #f4b942; width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #1e2f33; font-weight: bold;">IM</div>
+<div><strong>IMLOULI</strong> – fondateur </div>
+</div>
+</div>
+<hr>
+<div style="display: flex; flex-wrap: wrap; gap: 1.8rem; margin-top: 1.8rem;">
+<div style="flex: 1 1 200px; opacity: 0; animation: textSlideIn 0.7s ease-out 1s forwards;"><i class="fas fa-handshake" style="font-size: 2rem; color: #f4b942;"></i><h4>Engagement et confiance</h4><p>La satisfaction client représente notre engagement à offrir un service professionnel basé sur la transparence et une confiance durable.</p></div>
+<div style="flex: 1 1 200px; opacity: 0; animation: textSlideIn 0.7s ease-out 1.2s forwards;"><i class="fas fa-calendar-check" style="font-size: 2rem; color: #f4b942;"></i><h4>Garantie décennale</h4><p>Votre projet est assuré et sécurisé de A à Z.</p></div>
+</div>
+`,
+services: servicesPage,
+projets: projetsAutoScroll,
+contact: `
+<h2 class="page-title">Contactez‑nous</h2>
+<div class="contact-grid">
+<div>
+<p style="margin-bottom: 1.5rem; opacity: 0; animation: fadeInUp 0.6s ease-out 0.2s forwards;">Réponse sous 24h, déplacement gratuit pour devis.</p>
+<form id="demo-contact-form" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+<div class="form-group" style="width: 100%; max-width: 500px;">
+<label for="name">Nom / société</label>
+<input type="text" id="name" placeholder="ex: Jean Dupont" style="width: 100%;">
+</div>
+<div class="form-group" style="width: 100%; max-width: 500px;">
+<label for="email">Email</label>
+<input type="email" id="email" placeholder="votre@email.com" style="width: 100%;">
+</div>
+<div class="form-group" style="width: 100%; max-width: 500px;">
+<label for="message">Message</label>
+<textarea id="message" placeholder="Bonjour, je souhaiterais un devis pour..." style="width: 100%;"></textarea>
+</div>
+<div class="submit-btn-wrapper">
+<button type="submit" style="background: #1e2f33; color: white; border: none; padding: 1.2rem 2.5rem; border-radius: 50px; font-size: 1.2rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; border: 2px solid #1e2f33; width: auto; min-width: 220px; display: inline-flex; align-items: center; justify-content: center; gap: 0.8rem; margin: 0.5rem 0;">
+<i class="fas fa-paper-plane"></i>Envoyer
+</button>
+</div>
+<p style="margin: 1.2rem 0 0.8rem; text-align: center;">
+<a href="tel:+33772227674" class="call-link" style="display: inline-flex; align-items: center; gap: 0.4rem; background: #eef4f1; padding: 0.6rem 1.4rem; border-radius: 40px; text-decoration: none; color: #1e2f33; font-weight: 500; border: 2px solid #cbd5cf; transition: all 0.3s ease;">
+<i class="fas fa-phone-alt" style="color: #f4b942;"></i> +33 7 72 22 76 74
+</a>
+</p>
+</form>
+<div class="action-buttons" style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: center; margin-top: 2rem;">
+<a href="https://wa.me/33772227674" class="btn-wsp" target="_blank" style="display: inline-flex; align-items: center; justify-content: center; gap: 0.8rem; padding: 1.1rem 2.2rem; border-radius: 60px; font-size: 1.15rem; font-weight: 600; text-decoration: none; transition: all 0.3s ease; border: 2px solid #25D366; background-color: #25D366; color: white;">
+<i class="fab fa-whatsapp"></i> WhatsApp
+</a>
+<a href="mailto:Dbh.bati@gmail.com" class="btn-email" style="display: inline-flex; align-items: center; justify-content: center; gap: 0.8rem; padding: 1.1rem 2.2rem; border-radius: 60px; font-size: 1.15rem; font-weight: 600; text-decoration: none; transition: all 0.3s ease; border: 2px solid #1e2f33; background-color: #1e2f33; color: white;">
+<i class="fas fa-envelope"></i> Email
+</a>
+<a href="tel:+33772227674" class="btn-call" style="display: inline-flex; align-items: center; justify-content: center; gap: 0.8rem; padding: 1.1rem 2.2rem; border-radius: 60px; font-size: 1.15rem; font-weight: 600; text-decoration: none; transition: all 0.3s ease; border: 2px solid #f4b942; background-color: #f4b942; color: #1e2f33;">
+<i class="fas fa-phone"></i> Appel
+</a>
+</div>
+</div>
+<div class="contact-info-block">
+<h3 style="margin-bottom:2rem; opacity: 0; animation: fadeInUp 0.6s ease-out 0.4s forwards;">DBH Bâtiment</h3>
+<div class="contact-detail-item"><i class="fas fa-location-dot"></i> 21 Rue de Fontenay, 78200 Magnanville</div>
+<div class="contact-detail-item"><i class="fas fa-phone"></i> +33 7 72 22 76 74</div>
+<div class="contact-detail-item"><i class="fas fa-envelope"></i> Dbh.bati@gmail.com</div>
+<div class="contact-detail-item" style="background:white; margin-top:1rem;"><i class="fas fa-clock"></i> Lundi-vendredi : 8h–18h · samedi sur RDV</div>
+</div>
+</div>
+`
+};
 
-        <div class="stats-bar">
-          <div class="container fade-in">
-            <div class="stats-grid">
-              <div class="stat-item">
-                <span class="stat-number">100%</span>
-                <span class="stat-label">Clients satisfaits</span>
-              </div>
-              <div class="stat-item">
-                <span class="stat-number">15+</span>
-                <span class="stat-label">Années d'expérience</span>
-              </div>
-              <div class="stat-item">
-                <span class="stat-number">200+</span>
-                <span class="stat-label">Projets réalisés</span>
-              </div>
-              <div class="stat-item">
-                <span class="stat-number">24h</span>
-                <span class="stat-label">Réponse garantie</span>
-              </div>
-            </div>
-          </div>
-        </div>
+function showPage(pageId) {
+pageContent.innerHTML = pages[pageId] || pages.accueil;
+navLinks.forEach(link => {
+link.classList.toggle('active', link.getAttribute('data-page') === pageId);
+});
+attachNavLinksListeners();
 
-        <section class="services-section">
-          <div class="container">
-            <div class="section-header fade-in">
-              <span class="section-tag">Nos expertises</span>
-              <h2 class="section-title">Des services complets pour votre habitat</h2>
-              <p class="section-subtitle">Du simple débarras à la rénovation complète, nous gérons votre projet de A à Z avec professionnalisme.</p>
-            </div>
-            
-            <div class="services-grid">
-              <div class="service-card fade-in">
-                <div style="overflow: hidden;">
-                  <img src="${imageUrls.img8}" alt="Rénovation intérieure" class="service-img">
-                </div>
-                <div class="service-content">
-                  <div class="service-icon"><i class="fas fa-home"></i></div>
-                  <h3>Rénovation Intérieure</h3>
-                  <p>Plâtrerie, carrelage, peinture, électricité et plomberie. Nous transformez vos espaces intérieurs avec des finitions impeccables.</p>
-                  <a href="#services" class="service-link" data-page="services">En savoir plus <i class="fas fa-arrow-right"></i></a>
-                </div>
-              </div>
-              
-              <div class="service-card fade-in">
-                <div style="overflow: hidden;">
-                  <img src="${imageUrls.ren21}" alt="Rénovation extérieure" class="service-img">
-                </div>
-                <div class="service-content">
-                  <div class="service-icon"><i class="fas fa-building"></i></div>
-                  <h3>Rénovation Extérieure</h3>
-                  <p>Façades, terrasses, isolation extérieure. Donnez une nouvelle vie à l'extérieur de votre maison avec nos solutions durables.</p>
-                  <a href="#services" class="service-link" data-page="services">En savoir plus <i class="fas fa-arrow-right"></i></a>
-                </div>
-              </div>
-              
-              <div class="service-card fade-in">
-                <div style="overflow: hidden;">
-                  <img src="${imageUrls.ren24}" alt="Carrelage" class="service-img">
-                </div>
-                <div class="service-content">
-                  <div class="service-icon"><i class="fas fa-th-large"></i></div>
-                  <h3>Carrelage & Sols</h3>
-                  <p>Pose précise de carrelage grand format, parquet, béton ciré. Des sols magnifiques et durables pour toutes vos pièces.</p>
-                  <a href="#services" class="service-link" data-page="services">En savoir plus <i class="fas fa-arrow-right"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+// Show/hide speed button based on page
+if (pageId === 'projets' || pageId === 'services') {
+speedControl.classList.add('visible');
+} else {
+speedControl.classList.remove('visible');
+}
+}
 
-        <section class="about-section">
-          <div class="container">
-            <div class="about-grid">
-              <div class="about-content fade-in">
-                <span class="section-tag" style="background: rgba(217,119,6,0.1); color: var(--accent); border: none;">À propos</span>
-                <h2>Une équipe passionnée à votre <span>service</span></h2>
-                <p>Depuis plus de 15 ans, DBH Bâtiment accompagne les particuliers et professionnels dans leurs projets de rénovation. Notre expertise technique alliée à notre créativité nous permet de réaliser des chantiers de qualité, dans le respect des délais et des budgets.</p>
-                <p>Nous croyons en une relation de confiance avec nos clients, basée sur la transparence et l'écoute. Chaque projet est unique et mérite une attention particulière.</p>
-                
-                <ul class="features-list">
-                  <li><i class="fas fa-check-square"></i> Devis détaillé et transparent</li>
-                  <li><i class="fas fa-check-square"></i> Respect strict des délais</li>
-                  <li><i class="fas fa-check-square"></i> Garantie décennale incluse</li>
-                  <li><i class="fas fa-check-square"></i> Matériaux de qualité premium</li>
-                </ul>
-                
-                <a href="#contact" class="btn-primary" data-page="contact" style="margin-top: 1rem;">
-                  <i class="fas fa-phone"></i> Nous contacter
-                </a>
-              </div>
-              
-              <div class="about-image fade-in">
-                <img src="${imageUrls.img5}" alt="Équipe DBH Bâtiment">
-                <div class="experience-badge">
-                  <span class="years">15+</span>
-                  <span class="text">Ans d'expérience</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+function attachNavLinksListeners() {
+document.querySelectorAll('.nav-link').forEach(link => {
+link.removeEventListener('click', navClickHandler);
+link.addEventListener('click', navClickHandler);
+});
+}
 
-        <section style="background: var(--bg-cream);">
-          <div class="container">
-            <div class="section-header fade-in">
-              <span class="section-tag">Pourquoi nous choisir</span>
-              <h2 class="section-title">L'excellence à chaque étape</h2>
-            </div>
-            
-            <div class="why-us-grid">
-              <div class="why-card fade-in">
-                <div class="why-icon"><i class="fas fa-award"></i></div>
-                <h3>Expertise Reconnue</h3>
-                <p>Plus de 200 projets réussis et des clients 100% satisfaits qui recommandent nos services.</p>
-              </div>
-              
-              <div class="why-card fade-in">
-                <div class="why-icon"><i class="fas fa-clock"></i></div>
-                <h3>Réactivité</h3>
-                <p>Devis sous 24h et intervention rapide. Nous respectons scrupuleusement les délais convenus.</p>
-              </div>
-              
-              <div class="why-card fade-in">
-                <div class="why-icon"><i class="fas fa-shield-alt"></i></div>
-                <h3>Garanties</h3>
-                <p>Tous nos travaux sont couverts par une garantie décennale pour votre tranquillité d'esprit.</p>
-              </div>
-              
-              <div class="why-card fade-in">
-                <div class="why-icon"><i class="fas fa-leaf"></i></div>
-                <h3>Éco-responsable</h3>
-                <p>Nous privilégions les matériaux durables et les solutions économes en énergie.</p>
-              </div>
-            </div>
-          </div>
-        </section>
-      `,
-      
-      services: `
-        <section style="margin-top: 80px; padding: 5rem 0; background: var(--primary); color: white; text-align: center; border-bottom: 4px solid var(--accent);">
-          <div class="container">
-            <span class="section-tag" style="background: rgba(217,119,6,0.1); color: var(--accent); border: none;">Nos prestations</span>
-            <h2 style="font-size: clamp(2.5rem, 4vw, 3.5rem); margin: 1rem 0; color: white;">Services professionnels de rénovation</h2>
-            <p style="font-size: 1.2rem; opacity: 0.8; max-width: 700px; margin: 0 auto;">Des solutions complètes et sur-mesure pour tous vos projets d'aménagement intérieur et extérieur.</p>
-          </div>
-        </section>
+function navClickHandler(e) {
+e.preventDefault();
+const page = this.getAttribute('data-page');
+if (page) {
+showPage(page);
+window.location.hash = page;
+}
+}
 
-        <section class="services-section">
-          <div class="container">
-            <div class="services-grid" style="margin-bottom: 4rem;">
-              <div class="service-card fade-in">
-                <img src="${imageUrls.img8}" alt="Rénovation intérieure" class="service-img">
-                <div class="service-content">
-                  <div class="service-icon"><i class="fas fa-paint-roller"></i></div>
-                  <h3>Rénovation Intérieure Complète</h3>
-                  <p>Plâtrerie, pose de cloisons, faux plafonds, peinture, électricité et plomberie. Nous gérons l'intégralité de votre projet intérieur avec des artisans qualifiés dans chaque domaine.</p>
-                  <ul style="list-style: none; margin: 1rem 0; font-size: 0.95rem; color: var(--text-dark); font-weight: 600;">
-                    <li><i class="fas fa-caret-right" style="color: var(--accent); margin-right: 0.5rem;"></i> Placo & isolation</li>
-                    <li><i class="fas fa-caret-right" style="color: var(--accent); margin-right: 0.5rem;"></i> Peinture & sols</li>
-                    <li><i class="fas fa-caret-right" style="color: var(--accent); margin-right: 0.5rem;"></i> Électricité & plomberie</li>
-                  </ul>
-                </div>
-              </div>
-              
-              <div class="service-card fade-in">
-                <img src="${imageUrls.ren21}" alt="Rénovation extérieure" class="service-img">
-                <div class="service-content">
-                  <div class="service-icon"><i class="fas fa-home"></i></div>
-                  <h3>Rénovation Extérieure</h3>
-                  <p>Façades, terrasses, balcons, toitures. Nous redonnent vie à l'extérieur de votre maison avec des matériaux résistants et esthétiques.</p>
-                  <ul style="list-style: none; margin: 1rem 0; font-size: 0.95rem; color: var(--text-dark); font-weight: 600;">
-                    <li><i class="fas fa-caret-right" style="color: var(--accent); margin-right: 0.5rem;"></i> Ravalement de façade</li>
-                    <li><i class="fas fa-caret-right" style="color: var(--accent); margin-right: 0.5rem;"></i> Terrasses & balcons</li>
-                    <li><i class="fas fa-caret-right" style="color: var(--accent); margin-right: 0.5rem;"></i> Étanchéité & toiture</li>
-                  </ul>
-                </div>
-              </div>
-              
-              <div class="service-card fade-in">
-                <img src="${imageUrls.ren24}" alt="Carrelage" class="service-img">
-                <div class="service-content">
-                  <div class="service-icon"><i class="fas fa-th"></i></div>
-                  <h3>Carrelage & Revêtements</h3>
-                  <p>Pose professionnelle de carrelage grand format, parquet flottant, moquette et sols techniques. Finitions impeccables garanties.</p>
-                  <ul style="list-style: none; margin: 1rem 0; font-size: 0.95rem; color: var(--text-dark); font-weight: 600;">
-                    <li><i class="fas fa-caret-right" style="color: var(--accent); margin-right: 0.5rem;"></i> Carrelage intérieur/extérieur</li>
-                    <li><i class="fas fa-caret-right" style="color: var(--accent); margin-right: 0.5rem;"></i> Parquet & stratifié</li>
-                    <li><i class="fas fa-caret-right" style="color: var(--accent); margin-right: 0.5rem;"></i> Béton ciré & résine</li>
-                  </ul>
-                </div>
-              </div>
-              
-              <div class="service-card fade-in">
-                <img src="${imageUrls.ren26}" alt="Maçonnerie" class="service-img">
-                <div class="service-content">
-                  <div class="service-icon"><i class="fas fa-hammer"></i></div>
-                  <h3>Petite Maçonnerie</h3>
-                  <p>Ouverture de murs, création d'ouvertures, réparation de fissures, enduits et crépis. Travaux de maçonnerie précis et durables.</p>
-                  <ul style="list-style: none; margin: 1rem 0; font-size: 0.95rem; color: var(--text-dark); font-weight: 600;">
-                    <li><i class="fas fa-caret-right" style="color: var(--accent); margin-right: 0.5rem;"></i> Ouverture de murs porteurs</li>
-                    <li><i class="fas fa-caret-right" style="color: var(--accent); margin-right: 0.5rem;"></i> Enduits & crépis</li>
-                    <li><i class="fas fa-caret-right" style="color: var(--accent); margin-right: 0.5rem;"></i> Réparations structurelles</li>
-                  </ul>
-                </div>
-              </div>
-              
-              <div class="service-card fade-in">
-                <img src="${imageUrls.img10}" alt="Aménagements" class="service-img">
-                <div class="service-content">
-                  <div class="service-icon"><i class="fas fa-tools"></i></div>
-                  <h3>Aménagements Sur-mesure</h3>
-                  <p>Cuisines, salles de bain, dressings, meubles intégrés. Nous concevons et réalisons vos aménagements personnalisés.</p>
-                  <ul style="list-style: none; margin: 1rem 0; font-size: 0.95rem; color: var(--text-dark); font-weight: 600;">
-                    <li><i class="fas fa-caret-right" style="color: var(--accent); margin-right: 0.5rem;"></i> Cuisine équipée</li>
-                    <li><i class="fas fa-caret-right" style="color: var(--accent); margin-right: 0.5rem;"></i> Salle de bain complète</li>
-                    <li><i class="fas fa-caret-right" style="color: var(--accent); margin-right: 0.5rem;"></i> Dressings & rangements</li>
-                  </ul>
-                </div>
-              </div>
-              
-              <div class="service-card fade-in">
-                <img src="${imageUrls.v35}" alt="Débarras" class="service-img">
-                <div class="service-content">
-                  <div class="service-icon"><i class="fas fa-truck-moving"></i></div>
-                  <h3>Service de Débarras</h3>
-                  <p>Évacuation professionnelle d'encombrants, gravats et déchets. Intervention rapide avec tri sélectif et respect de l'environnement.</p>
-                  <ul style="list-style: none; margin: 1rem 0; font-size: 0.95rem; color: var(--text-dark); font-weight: 600;">
-                    <li><i class="fas fa-caret-right" style="color: var(--accent); margin-right: 0.5rem;"></i> Débarras complet</li>
-                    <li><i class="fas fa-caret-right" style="color: var(--accent); margin-right: 0.5rem;"></i> Évacuation gravats</li>
-                    <li><i class="fas fa-caret-right" style="color: var(--accent); margin-right: 0.5rem;"></i> Tri & recyclage</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            
-            <div style="background: var(--primary); color: white; padding: 4rem; border-radius: var(--radius-sm); text-align: center; border-left: 5px solid var(--accent); box-shadow: var(--shadow-lg);">
-              <h3 style="font-size: 2rem; margin-bottom: 1rem; color: var(--white);">Besoin d'un devis personnalisé ?</h3>
-              <p style="font-size: 1.1rem; margin-bottom: 2.5rem; color: rgba(255,255,255,0.8);">Contactez-nous pour une étude gratuite de votre projet. Réponse sous 24h garantie.</p>
-              <a href="#contact" class="btn-primary" data-page="contact">
-                <i class="fas fa-calculator"></i> Demander un devis gratuit
-              </a>
-            </div>
-          </div>
-        </section>
-      `,
-      
-      projets: `
-        <section style="margin-top: 80px; padding: 5rem 0; background: var(--primary); color: white; text-align: center; border-bottom: 4px solid var(--accent);">
-          <div class="container">
-            <span class="section-tag" style="background: rgba(217,119,6,0.1); color: var(--accent); border: none;">Portfolio</span>
-            <h2 style="font-size: clamp(2.5rem, 4vw, 3.5rem); margin: 1rem 0; color: white;">Nos réalisations récentes</h2>
-            <p style="font-size: 1.2rem; opacity: 0.8; max-width: 600px; margin: 0 auto;">Découvrez nos transformations avant/après et la qualité de nos finitions.</p>
-          </div>
-        </section>
+function initPageFromHash() {
+const hash = window.location.hash.replace('#', '');
+showPage(['accueil', 'a-propos', 'services', 'projets', 'contact'].includes(hash) ? hash : 'accueil');
+}
 
-        <section class="projects-section">
-          <div class="container">
-            <div class="projects-carousel">
-              <div class="projects-track">
-                <div class="project-card">
-                  <div style="position: relative;">
-                    <img src="${imageUrls.img11}" alt="Rénovation complète" class="project-img">
-                    <span class="project-badge">Avant/Après</span>
-                  </div>
-                  <div class="project-content">
-                    <h3>Rénovation Intérieure Complète</h3>
-                    <p>Transformation totale d'un espace brut en intérieur moderne avec faux plafond, spots intégrés et cuisine aménagée.</p>
-                  </div>
-                </div>
-                
-                <div class="project-card">
-                  <div style="position: relative;">
-                    <img src="${imageUrls.img2}" alt="Salle de bain" class="project-img">
-                    <span class="project-badge">Design</span>
-                  </div>
-                  <div class="project-content">
-                    <h3>Salle de Bain Moderne</h3>
-                    <p>Carrelage grand format, douche à l'italienne et mobilier suspendu pour un espace lumineux et élégant.</p>
-                  </div>
-                </div>
-                
-                <div class="project-card">
-                  <div style="position: relative;">
-                    <img src="${imageUrls.ren25}" alt="Transformation" class="project-img">
-                    <span class="project-badge">Rénovation</span>
-                  </div>
-                  <div class="project-content">
-                    <h3>Transformation Complète</h3>
-                    <p>Rénovation totale d'un intérieur ancien en pièce contemporaine avec finitions haut de gamme.</p>
-                  </div>
-                </div>
-                
-                <div class="project-card">
-                  <div style="position: relative;">
-                    <img src="${imageUrls.ren28}" alt="Faux plafond" class="project-img">
-                    <span class="project-badge">Plâtrerie</span>
-                  </div>
-                  <div class="project-content">
-                    <h3>Faux Plafond & Spots</h3>
-                    <p>Installation professionnelle de placo avec éclairage intégré pour une ambiance moderne et épurée.</p>
-                  </div>
-                </div>
-                
-                <div class="project-card">
-                  <div style="position: relative;">
-                    <img src="${imageUrls.ren29}" alt="Salle de bain 2" class="project-img">
-                    <span class="project-badge">Luxe</span>
-                  </div>
-                  <div class="project-content">
-                    <h3>Salle de Bain Premium</h3>
-                    <p>Douche vitrée, faïence contemporaine et meuble vasque design pour un rendu haut de gamme.</p>
-                  </div>
-                </div>
-                
-                <div class="project-card">
-                  <div style="position: relative;">
-                    <img src="${imageUrls.img1}" alt="Peinture" class="project-img">
-                    <span class="project-badge">Finitions</span>
-                  </div>
-                  <div class="project-content">
-                    <h3>Mise en Peinture</h3>
-                    <p>Travaux de peinture soignés apportant luminosité et fraîcheur à l'espace avec des couleurs tendance.</p>
-                  </div>
-                </div>
-                
-                <div class="project-card">
-                  <div style="position: relative;">
-                    <img src="${imageUrls.img11}" alt="Rénovation complète" class="project-img">
-                    <span class="project-badge">Avant/Après</span>
-                  </div>
-                  <div class="project-content">
-                    <h3>Rénovation Intérieure Complète</h3>
-                    <p>Transformation totale d'un espace brut en intérieur moderne avec faux plafond, spots intégrés et cuisine aménagée.</p>
-                  </div>
-                </div>
-                
-                <div class="project-card">
-                  <div style="position: relative;">
-                    <img src="${imageUrls.img2}" alt="Salle de bain" class="project-img">
-                    <span class="project-badge">Design</span>
-                  </div>
-                  <div class="project-content">
-                    <h3>Salle de Bain Moderne</h3>
-                    <p>Carrelage grand format, douche à l'italienne et mobilier suspendu pour un espace lumineux et élégant.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div style="text-align: center; margin-top: 4rem;">
-              <p style="color: var(--text-muted); font-weight: 600; margin-bottom: 2rem;"><i class="fas fa-mouse-pointer" style="color: var(--accent);"></i> Survolez le carousel pour mettre en pause</p>
-              <a href="#contact" class="btn-primary" data-page="contact">
-                <i class="fas fa-comment-dots"></i> Discuter de votre projet
-              </a>
-            </div>
-          </div>
-        </section>
-      `,
-      
-      "a-propos": `
-        <section style="margin-top: 80px; padding: 5rem 0; background: var(--primary); color: white; border-bottom: 4px solid var(--accent);">
-          <div class="container">
-            <div style="max-width: 800px;">
-              <span class="section-tag" style="background: rgba(217,119,6,0.1); color: var(--accent); border: none;">Notre histoire</span>
-              <h2 style="font-size: clamp(2.5rem, 4vw, 3.5rem); margin: 1rem 0; color: white;">DBH Bâtiment : L'excellence artisanale depuis 2008</h2>
-              <p style="font-size: 1.2rem; opacity: 0.8;">Une entreprise familiale passionnée par la transformation des espaces et la satisfaction client.</p>
-            </div>
-          </div>
-        </section>
+document.addEventListener('submit', e => {
+if (e.target.id === 'demo-contact-form') {
+e.preventDefault();
+alert('Merci de votre message. Nous vous répondrons rapidement par email ou téléphone.');
+}
+});
 
-        <section style="background: var(--white);">
-          <div class="container">
-            <div class="about-grid" style="align-items: center;">
-              <div class="fade-in about-image">
-                <img src="${imageUrls.img5}" alt="Équipe DBH">
-              </div>
-              <div class="fade-in">
-                <h2 style="font-size: 2.5rem; color: var(--primary); margin-bottom: 1.5rem;">Notre <span style="color: var(--accent);">philosophie</span></h2>
-                <p style="font-size: 1.05rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 1.5rem;">Chez DBH Bâtiment, nous croyons que chaque projet mérite une attention méticuleuse. Depuis notre création, nous avons à cœur de transformer vos envies en réalité concrète, avec un souci permanent de la qualité et des détails.</p>
-                <p style="font-size: 1.05rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 2.5rem;">Notre équipe d'artisans qualifiés intervient sur tous types de chantiers, de la simple rénovation à la transformation complète de votre habitat. Nous privilégions les matériaux durables et les techniques éprouvées pour vous garantir des résultats qui durent dans le temps.</p>
-                
-                <div style="background: var(--bg-cream); padding: 2.5rem; border-radius: var(--radius-sm); border-left: 4px solid var(--accent);">
-                  <i class="fas fa-quote-left" style="color: var(--accent); font-size: 2rem; margin-bottom: 1rem;"></i>
-                  <p style="font-style: italic; font-size: 1.1rem; color: var(--primary); font-weight: 600; margin-bottom: 1.5rem;">"Un chantier réussi, c'est un client qui devient ami. C'est cette relation de confiance que nous cherchons à établir avec chacun de nos clients."</p>
-                  <div style="display: flex; align-items: center; gap: 1rem;">
-                    <div style="width: 50px; height: 50px; background: var(--primary); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-weight: bold; color: var(--accent);">IM</div>
-                    <div>
-                      <strong style="color: var(--primary); text-transform: uppercase; letter-spacing: 1px;">IMLOULI</strong>
-                      <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0; font-weight: 600;">Fondateur & Gérant</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+window.addEventListener('hashchange', initPageFromHash);
+initPageFromHash();
 
-        <section style="background: var(--bg-light); border-top: 1px solid rgba(0,0,0,0.05);">
-          <div class="container">
-            <div class="section-header fade-in">
-              <span class="section-tag">Nos engagements</span>
-              <h2 class="section-title">Pourquoi nous faire confiance ?</h2>
-            </div>
-            
-            <div class="why-us-grid" style="grid-template-columns: repeat(2, 1fr);">
-              <div class="why-card fade-in" style="text-align: left; display: flex; gap: 1.5rem; align-items: flex-start;">
-                <div class="why-icon" style="margin: 0; flex-shrink: 0;"><i class="fas fa-handshake"></i></div>
-                <div>
-                  <h3 style="color: var(--primary);">Transparence totale</h3>
-                  <p>Devis détaillé sans surprise, explications claires des travaux et suivi régulier du chantier. Aucun coût caché, une communication honnête à chaque étape.</p>
-                </div>
-              </div>
-              
-              <div class="why-card fade-in" style="text-align: left; display: flex; gap: 1.5rem; align-items: flex-start;">
-                <div class="why-icon" style="margin: 0; flex-shrink: 0;"><i class="fas fa-certificate"></i></div>
-                <div>
-                  <h3 style="color: var(--primary);">Garanties solides</h3>
-                  <p>Tous nos travaux sont couverts par la garantie décennale. Nous travaillons avec des assurances professionnelles pour votre tranquillité d'esprit totale.</p>
-                </div>
-              </div>
-              
-              <div class="why-card fade-in" style="text-align: left; display: flex; gap: 1.5rem; align-items: flex-start;">
-                <div class="why-icon" style="margin: 0; flex-shrink: 0;"><i class="fas fa-users"></i></div>
-                <div>
-                  <h3 style="color: var(--primary);">Écoute personnalisée</h3>
-                  <p>Chaque projet est unique. Nous prenons le temps de comprendre vos besoins, vos contraintes budgétaires et vos envies pour vous proposer la solution idéale.</p>
-                </div>
-              </div>
-              
-              <div class="why-card fade-in" style="text-align: left; display: flex; gap: 1.5rem; align-items: flex-start;">
-                <div class="why-icon" style="margin: 0; flex-shrink: 0;"><i class="fas fa-recycle"></i></div>
-                <div>
-                  <h3 style="color: var(--primary);">Respect de l'environnement</h3>
-                  <p>Nous privilégions les matériaux écologiques, locaux et recyclables. Tri sélectif sur les chantiers et optimisation énergétique de vos installations.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      `,
-      
-      contact: `
-        <section style="margin-top: 80px; padding: 5rem 0; background: var(--primary); color: white; text-align: center; border-bottom: 4px solid var(--accent);">
-          <div class="container">
-            <span class="section-tag" style="background: rgba(217,119,6,0.1); color: var(--accent); border: none;">Contact</span>
-            <h2 style="font-size: clamp(2.5rem, 4vw, 3.5rem); margin: 1rem 0; color: white;">Parlons de votre projet</h2>
-            <p style="font-size: 1.2rem; opacity: 0.8; max-width: 600px; margin: 0 auto;">Disponible 7j/7 pour répondre à vos questions. Devis gratuit et sans engagement sous 24h.</p>
-          </div>
-        </section>
+// ===== SPEED CONTROL FOR SCROLLING =====
+let isSpeedActive = false;
 
-        <section class="contact-section">
-          <div class="container">
-            <div class="contact-grid">
-              <div class="contact-form-wrapper fade-in">
-                <h3 style="font-size: 1.8rem; color: var(--primary); margin-bottom: 0.5rem; font-weight: 800;">Envoyez-nous un message</h3>
-                <p style="color: var(--text-muted); margin-bottom: 2.5rem;">Remplissez le formulaire ci-dessous, nous vous répondrons rapidement.</p>
-                
-                <form id="contactForm">
-                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
-                    <div class="form-group">
-                      <label for="nom">Nom</label>
-                      <input type="text" id="nom" name="nom" placeholder="Votre nom" required>
-                    </div>
-                    <div class="form-group">
-                      <label for="prenom">Prénom</label>
-                      <input type="text" id="prenom" name="prenom" placeholder="Votre prénom" required>
-                    </div>
-                  </div>
-                  
-                  <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" placeholder="votre@email.com" required>
-                  </div>
-                  
-                  <div class="form-group">
-                    <label for="telephone">Téléphone</label>
-                    <input type="tel" id="telephone" name="telephone" placeholder="+33 6 12 34 56 78">
-                  </div>
-                  
-                  <div class="form-group">
-                    <label for="service">Type de projet</label>
-                    <select id="service" name="service">
-                      <option value="">Sélectionnez un service</option>
-                      <option value="renovation-interieure">Rénovation intérieure</option>
-                      <option value="renovation-exterieure">Rénovation extérieure</option>
-                      <option value="carrelage">Carrelage & sols</option>
-                      <option value="maconnerie">Petite maçonnerie</option>
-                      <option value="amenagement">Aménagement sur-mesure</option>
-                      <option value="debarras">Service de débarras</option>
-                      <option value="autre">Autre demande</option>
-                    </select>
-                  </div>
-                  
-                  <div class="form-group">
-                    <label for="message">Votre message</label>
-                    <textarea id="message" name="message" placeholder="Décrivez votre projet..." required></textarea>
-                  </div>
-                  
-                  <button type="submit" class="submit-btn">
-                    <i class="fas fa-paper-plane"></i> Envoyer ma demande
-                  </button>
-                </form>
-              </div>
-              
-              <div class="contact-info fade-in">
-                <div>
-                  <h3 style="font-weight: 800;">Informations de contact</h3>
-                  
-                  <div class="contact-item">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <div>
-                      <strong>Adresse</strong>
-                      <span>21 Rue de Fontenay<br>78200 Magnanville, France</span>
-                    </div>
-                  </div>
-                  
-                  <div class="contact-item">
-                    <i class="fas fa-phone-alt"></i>
-                    <div>
-                      <strong>Téléphone</strong>
-                      <a href="tel:+33772227674">+33 7 72 22 76 74</a>
-                    </div>
-                  </div>
-                  
-                  <div class="contact-item">
-                    <i class="fas fa-envelope"></i>
-                    <div>
-                      <strong>Email</strong>
-                      <a href="mailto:Dbh.bati@gmail.com">Dbh.bati@gmail.com</a>
-                    </div>
-                  </div>
-                  
-                  <div class="contact-item">
-                    <i class="fas fa-clock"></i>
-                    <div>
-                      <strong>Horaires</strong>
-                      <span>Lundi - Vendredi : 8h00 - 18h00<br>Samedi : Sur rendez-vous</span>
-                    </div>
-                  </div>
-                </div>
-                
-                <div>
-                  <h4 style="margin-bottom: 1rem; color: var(--accent); text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px;">Suivez-nous</h4>
-                  <div class="social-links">
-                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                  </div>
-                  
-                  <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1);">
-                    <a href="https://wa.me/33772227674" target="_blank" style="display: flex; align-items: center; justify-content: center; gap: 1rem; background: #25D366; color: white; padding: 1.2rem; border-radius: var(--radius-sm); text-decoration: none; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; transition: var(--transition);">
-                      <i class="fab fa-whatsapp" style="font-size: 1.5rem;"></i>
-                      <span>Discuter sur WhatsApp</span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      `
-    };
+function setActiveSpeed(active) {
+isSpeedActive = active;
+const tracks = document.querySelectorAll('.auto-scroll-track');
+tracks.forEach(track => {
+if (active) {
+track.classList.add('fast');
+} else {
+track.classList.remove('fast');
+}
+});
+if (speedBtn) {
+speedBtn.classList.toggle('active', active);
+}
+}
 
-    // Navigation functionality (Strictement conservée)
-    function showPage(pageId) {
-      const content = document.getElementById('page-content');
-      content.innerHTML = pages[pageId] || pages.accueil;
-      
-      // Update active nav
-      document.querySelectorAll('.nav-link').forEach(link => {
-        link.classList.toggle('active', link.getAttribute('data-page') === pageId);
-      });
-      
-      // Re-initialize animations
-      initAnimations();
-      
-      // Scroll to top
-      window.scrollTo({top: 0, behavior: 'smooth'});
-    }
+// Mouse events for desktop
+if (speedBtn) {
+speedBtn.addEventListener('mousedown', () => {
+setActiveSpeed(true);
+});
 
-    function initAnimations() {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-          }
-        });
-      }, { threshold: 0.1 });
+speedBtn.addEventListener('mouseup', () => {
+setActiveSpeed(false);
+});
 
-      document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-    }
+speedBtn.addEventListener('mouseleave', () => {
+if (isSpeedActive) {
+setActiveSpeed(false);
+}
+});
 
-    function toggleMenu() {
-      document.getElementById('mainNav').classList.toggle('active');
-    }
+// Touch events for mobile
+speedBtn.addEventListener('touchstart', (e) => {
+e.preventDefault();
+setActiveSpeed(true);
+});
 
-    // Header scroll effect
-    window.addEventListener('scroll', () => {
-      const header = document.getElementById('header');
-      const scrollTop = document.querySelector('.scroll-top');
-      
-      if (window.scrollY > 50) {
-        header.classList.add('scrolled');
-        scrollTop.classList.add('visible');
-      } else {
-        header.classList.remove('scrolled');
-        scrollTop.classList.remove('visible');
-      }
-    });
+speedBtn.addEventListener('touchend', (e) => {
+e.preventDefault();
+setActiveSpeed(false);
+});
+}
 
-    // Form handling
-    document.addEventListener('submit', (e) => {
-      if (e.target.id === 'contactForm') {
-        e.preventDefault();
-        alert('Merci pour votre message ! Nous vous contacterons dans les plus brefs délais.');
-        e.target.reset();
-      }
-    });
+// Pause animation on hover over scroll cards
+document.addEventListener('mouseenter', function(e) {
+if (e.target.closest('.scroll-card') || e.target.closest('.scroll-img')) {
+const track = e.target.closest('.auto-scroll-wrapper')?.querySelector('.auto-scroll-track');
+if (track && !isSpeedActive) {
+track.style.animationPlayState = 'paused';
+}
+}
+}, true);
 
-    // Navigation links
-    document.addEventListener('click', (e) => {
-      const link = e.target.closest('[data-page]');
-      if (link) {
-        e.preventDefault();
-        const page = link.getAttribute('data-page');
-        window.location.hash = page;
-        showPage(page);
-        
-        // Close mobile menu
-        document.getElementById('mainNav').classList.remove('active');
-      }
-    });
+document.addEventListener('mouseleave', function(e) {
+if (e.target.closest('.scroll-card') || e.target.closest('.scroll-img')) {
+const track = e.target.closest('.auto-scroll-wrapper')?.querySelector('.auto-scroll-track');
+if (track) {
+track.style.animationPlayState = 'running';
+}
+}
+}, true);
 
-    // Hash change handling
-    window.addEventListener('hashchange', () => {
-      const hash = window.location.hash.replace('#', '');
-      if (pages[hash]) showPage(hash);
-    });
+// Reset animations when changing page
+function resetAllAnimations() {
+const tracks = document.querySelectorAll('.auto-scroll-track');
+tracks.forEach(track => {
+track.style.animationPlayState = 'running';
+track.classList.remove('fast');
+});
+setActiveSpeed(false);
+}
 
-    // Initialize
-    window.addEventListener('DOMContentLoaded', () => {
-      const hash = window.location.hash.replace('#', '');
-      showPage(pages[hash] ? hash : 'accueil');
-    });
-  </script>
+window.addEventListener('hashchange', function() {
+resetAllAnimations();
+});
+
+})();
+</script>
+<script>
+document.addEventListener('click', function(e) {
+const btn = e.target.closest('[data-page]');
+if (btn && !btn.classList.contains('nav-link')) {
+e.preventDefault();
+window.location.hash = btn.getAttribute('data-page');
+}
+});
+</script>
+<script>
+document.addEventListener('click', function(e) {
+const projetWrapper = document.getElementById('projet-scroll-wrapper');
+const projetTrack = document.getElementById('projet-scroll-track');
+if (projetWrapper && projetTrack && window.location.hash === '#projets') {
+if (projetWrapper.contains(e.target)) {
+const currentAnimation = window.getComputedStyle(projetTrack).animationPlayState;
+projetTrack.style.animationPlayState = currentAnimation === 'paused' ? 'running' : 'paused';
+}
+}
+const servicesWrapper = document.getElementById('services-scroll-wrapper');
+const servicesTrack = document.getElementById('services-scroll-track');
+if (servicesWrapper && servicesTrack && window.location.hash === '#services') {
+if (servicesWrapper.contains(e.target)) {
+const currentAnimation = window.getComputedStyle(servicesTrack).animationPlayState;
+servicesTrack.style.animationPlayState = currentAnimation === 'paused' ? 'running' : 'paused';
+}
+}
+const debarrasWrapper = document.getElementById('debarras-scroll-wrapper');
+const debarrasTrack = document.getElementById('debarras-scroll-track');
+if (debarrasWrapper && debarrasTrack && window.location.hash === '#services') {
+if (debarrasWrapper.contains(e.target)) {
+const currentAnimation = window.getComputedStyle(debarrasTrack).animationPlayState;
+debarrasTrack.style.animationPlayState = currentAnimation === 'paused' ? 'running' : 'paused';
+}
+}
+});
+
+function resetAllAnimations() {
+const projetTrack = document.getElementById('projet-scroll-track');
+const servicesTrack = document.getElementById('services-scroll-track');
+const debarrasTrack = document.getElementById('debarras-scroll-track');
+if (projetTrack) {
+projetTrack.style.animationPlayState = 'running';
+}
+if (servicesTrack) {
+servicesTrack.style.animationPlayState = 'running';
+}
+if (debarrasTrack) {
+debarrasTrack.style.animationPlayState = 'running';
+}
+}
+
+window.addEventListener('hashchange', function() {
+resetAllAnimations();
+});
+</script>
 </body>
 </html>
+
