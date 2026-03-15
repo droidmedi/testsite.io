@@ -1,1691 +1,390 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-<title>DBH Bâtiment · Artisans du bâti</title>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-V62SVHWV1P"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-V62SVHWV1P');
-</script>
-<!-- Font Awesome 6 (Free) -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-<style>
-/* ===== STYLES ===== */
-* {
-margin: 0;
-padding: 0;
-box-sizing: border-box;
-font-family: 'Segoe UI', Roboto, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-}
-body {
-background-color: #fbfaf8;
-color: #2f3e46;
-line-height: 1.5;
-font-size: 16px;
--webkit-font-smoothing: antialiased;
--webkit-tap-highlight-color: transparent;
-}
-.container {
-width: 100%;
-max-width: 1400px;
-margin: 0 auto;
-padding: 0 2rem;
-}
-header {
-background-image: url('https://ik.imagekit.io/fwmsbpxje/images/renovation/img36.jpg');
-background-size: cover;
-background-position: center;
-background-repeat: no-repeat;
-color: white;
-padding: 1.5rem 0;
-box-shadow: 0 6px 15px rgba(0, 20, 10, 0.2);
-position: sticky;
-top: 0;
-z-index: 1000;
-width: 100%;
-position: relative;
-}
-header::before {
-content: '';
-position: absolute;
-top: 0;
-left: 0;
-right: 0;
-bottom: 0;
-background: rgba(0, 0, 0, 0.5);
-z-index: 1;
-}
-header .container {
-position: relative;
-z-index: 2;
-}
-.header-flex {
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-gap: 1rem 2rem;
-}
-.logo-area {
-display: flex;
-align-items: center;
-gap: 1rem;
-flex-wrap: wrap;
-justify-content: center;
-}
-.logo-img {
-width: 70px;
-height: 70px;
-object-fit: contain;
-transition: transform 0.3s ease;
-}
-.logo-img:hover {
-transform: scale(1.05);
-}
-.logo-text {
-text-align: center;
-}
-.logo-text h1 {
-font-size: 2rem;
-font-weight: 600;
-letter-spacing: -0.5px;
-line-height: 1.2;
-white-space: normal;
-word-break: keep-all;
-}
-.logo-text span {
-font-size: 1rem;
-color: #cfd7d4;
-font-weight: 400;
-display: block;
-}
-nav {
-width: 100%;
-overflow-x: auto;
-overflow-y: hidden;
--webkit-overflow-scrolling: touch;
-scrollbar-width: none;
--ms-overflow-style: none;
-padding: 0.3rem 0 0.5rem;
-border-top: 1px solid rgba(255,255,255,0.2);
-margin-top: 0.3rem;
-}
-nav::-webkit-scrollbar {
-display: none;
-}
-nav ul {
-display: flex;
-gap: 0.6rem 1rem;
-list-style: none;
-flex-wrap: wrap;
-justify-content: center;
-padding: 0.3rem 0.2rem;
-}
-nav ul li a {
-display: inline-block;
-padding: 0.8rem 1.4rem;
-color: #eef3f0;
-text-decoration: none;
-font-weight: 600;
-border-radius: 50px;
-transition: 0.2s;
-font-size: 1.1rem;
-white-space: nowrap;
-background-color: rgba(0, 0, 0, 0.2);
-border: 1px solid rgba(255, 255, 255, 0.2);
-}
-nav ul li a.active,
-nav ul li a:hover {
-background-color: #f4b942;
-color: #1e2f33;
-border-color: #f4b942;
-}
-@media (min-width: 760px) {
-.header-flex {
-flex-direction: row;
-justify-content: space-between;
-align-items: center;
-}
-.logo-area {
-justify-content: flex-start;
-text-align: left;
-}
-.logo-text {
-text-align: left;
-}
-nav {
-width: auto;
-border-top: none;
-margin-top: 0;
-}
-nav ul {
-flex-wrap: nowrap;
-justify-content: flex-end;
-}
-nav ul li a {
-background-color: transparent;
-border: none;
-padding: 0.8rem 1.5rem;
-}
-}
-@media (max-width: 399px) {
-.logo-text h1 {
-font-size: 1.6rem;
-}
-.logo-text span {
-font-size: 0.85rem;
-}
-.logo-img {
-width: 55px;
-height: 55px;
-}
-nav ul li a {
-padding: 0.6rem 1rem;
-font-size: 0.95rem;
-}
-}
-main {
-min-height: 60vh;
-padding: 2rem 0 2.5rem;
-}
-/* ===== ANIMATION DU TITRE PRINCIPAL ===== */
-.page-title {
-font-size: 2.2rem;
-font-weight: 350;
-border-left: 6px solid #f4b942;
-padding-left: 1.2rem;
-margin-bottom: 2rem;
-color: #1e2f33;
-line-height: 1.2;
-word-break: break-word;
-animation: titleAppear 0.8s ease-out forwards;
-transform-origin: left;
-}
-@keyframes titleAppear {
-0% {
-opacity: 0;
-transform: translateX(-30px) scale(0.95);
-border-left-color: transparent;
-}
-50% {
-opacity: 0.8;
-transform: translateX(5px) scale(1.02);
-border-left-color: #f4b942;
-}
-100% {
-opacity: 1;
-transform: translateX(0) scale(1);
-border-left-color: #f4b942;
-}
-}
-.home-title {
-animation: homeTitleGlow 1.2s ease-out forwards;
-}
-@keyframes homeTitleGlow {
-0% {
-opacity: 0;
-transform: translateY(-20px);
-text-shadow: 0 0 0 rgba(244, 185, 66, 0);
-}
-40% {
-opacity: 1;
-transform: translateY(5px);
-text-shadow: 0 0 20px rgba(244, 185, 66, 0.5);
-}
-70% {
-transform: translateY(-2px);
-text-shadow: 0 0 10px rgba(244, 185, 66, 0.3);
-}
-100% {
-opacity: 1;
-transform: translateY(0);
-text-shadow: 0 0 0 rgba(244, 185, 66, 0);
-}
-}
-.grid-3 {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-gap: 1.5rem;
-}
-.grid-4 {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-gap: 1.5rem;
-margin-top: 2rem;
-}
-.grid-5 {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-gap: 1.2rem;
-margin: 1.5rem 0;
-}
-.grid-2 {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-gap: 1.8rem;
-align-items: center;
-}
-.card {
-background: white;
-border-radius: 28px;
-overflow: hidden;
-box-shadow: 0 8px 18px rgba(0,0,0,0.04);
-transition: 0.15s ease;
-border: 1px solid #e9e3db;
-height: 100%;
-display: flex;
-flex-direction: column;
-opacity: 0;
-transform: translateY(40px);
-}
-.card:nth-child(1) { animation: cardSlideIn 0.7s ease-out 0.3s forwards; }
-.card:nth-child(2) { animation: cardSlideIn 0.7s ease-out 0.5s forwards; }
-.card:nth-child(3) { animation: cardSlideIn 0.7s ease-out 0.7s forwards; }
-
-@keyframes cardSlideIn {
-0% {
-opacity: 0;
-transform: translateY(40px);
-}
-100% {
-opacity: 1;
-transform: translateY(0);
-}
-}
-.card:hover {
-transform: translateY(-6px);
-box-shadow: 0 25px 30px -12px rgba(45,62,60,0.2);
-}
-.card-img {
-width: 100%;
-height: 200px;
-object-fit: cover;
-display: block;
-background-color: #e0e8e3;
-}
-.img-responsive {
-width: 100%;
-height: auto;
-border-radius: 28px;
-object-fit: cover;
-opacity: 0;
-transform: translateX(40px);
-animation: imageSlideIn 0.8s ease-out 0.4s forwards;
-}
-@keyframes imageSlideIn {
-0% {
-opacity: 0;
-transform: translateX(40px);
-}
-100% {
-opacity: 1;
-transform: translateX(0);
-}
-}
-.img-hero {
-width: 100%;
-height: auto;
-max-height: 260px;
-object-fit: cover;
-border-radius: 36px;
-opacity: 0;
-transform: translateX(40px);
-animation: imageSlideIn 0.8s ease-out 0.5s forwards;
-}
-.card-content {
-padding: 1.5rem 1.5rem 2rem;
-flex-grow: 1;
-}
-.card-content h3 {
-font-size: 1.5rem;
-margin-bottom: 0.7rem;
-color: #25413a;
-}
-.card-content p {
-color: #3a5a4f;
-font-size: 0.95rem;
-line-height: 1.5;
-}
-.btn {
-display: inline-block;
-background: transparent;
-border: 2px solid #1e2f33;
-color: #1e2f33;
-padding: 0.5rem 1.6rem;
-border-radius: 40px;
-font-weight: 600;
-text-decoration: none;
-margin-top: 1rem;
-transition: 0.2s;
-font-size: 1rem;
-opacity: 0;
-transform: translateY(20px);
-animation: btnSlideIn 0.6s ease-out 0.6s forwards;
-}
-@keyframes btnSlideIn {
-0% {
-opacity: 0;
-transform: translateY(20px);
-}
-100% {
-opacity: 1;
-transform: translateY(0);
-}
-}
-.btn:hover {
-background: #1e2f33;
-color: white;
-}
-.btn-contact {
-background: #f4b942;
-border-color: #f4b942;
-color: #1e2f33;
-}
-.btn-contact:hover {
-background: #1e2f33;
-border-color: #1e2f33;
-color: #f4b942;
-}
-.info-bar {
-background: #e9f0ec;
-border-radius: 40px;
-padding: 1.2rem 2rem;
-display: flex;
-flex-wrap: wrap;
-gap: 1rem 2rem;
-justify-content: center;
-margin: 2rem 0 0.5rem;
-border: 1px solid #cbd5cf;
-}
-.info-item {
-display: flex;
-align-items: center;
-gap: 0.7rem;
-font-size: 1rem;
-color: #1e2f33;
-flex-wrap: wrap;
-}
-.info-item i {
-font-size: 1.5rem;
-color: #f4b942;
-width: 1.8rem;
-text-align: center;
-}
-.contact-grid {
-display: grid;
-grid-template-columns: 1fr;
-gap: 2.5rem;
-background: white;
-border-radius: 36px;
-padding: 2.5rem;
-box-shadow: 0 6px 18px rgba(0,0,0,0.04);
-}
-@media (min-width: 700px) {
-.contact-grid {
-grid-template-columns: 1fr 1fr;
-gap: 3rem;
-padding: 3rem;
-}
-}
-.form-group {
-margin-bottom: 1.4rem;
-opacity: 0;
-transform: translateY(30px);
-animation: formSlideIn 0.6s ease-out forwards;
-}
-.form-group:nth-child(1) { animation-delay: 0.1s; }
-.form-group:nth-child(2) { animation-delay: 0.2s; }
-.form-group:nth-child(3) { animation-delay: 0.3s; }
-.form-group:nth-child(4) { animation-delay: 0.4s; }
-
-@keyframes formSlideIn {
-0% {
-opacity: 0;
-transform: translateY(30px);
-}
-100% {
-opacity: 1;
-transform: translateY(0);
-}
-}
-.form-group label {
-display: block;
-font-weight: 600;
-margin-bottom: 0.3rem;
-color: #25413a;
-font-size: 0.95rem;
-}
-.form-group input,
-.form-group textarea {
-width: 100%;
-padding: 1rem 1.4rem;
-border: 2px solid #ced9d2;
-border-radius: 50px;
-font-size: 1rem;
-background: #fcfaf7;
--webkit-appearance: none;
-appearance: none;
-transition: all 0.3s ease;
-}
-.form-group input:focus,
-.form-group textarea:focus {
-outline: none;
-border-color: #f4b942;
-box-shadow: 0 0 0 4px rgba(244,185,66,0.15);
-transform: translateY(-2px);
-}
-.form-group textarea {
-min-height: 130px;
-border-radius: 30px;
-resize: vertical;
-}
-.submit-btn-wrapper {
-opacity: 0;
-transform: translateY(30px);
-animation: formSlideIn 0.6s ease-out 0.5s forwards;
-}
-button[type="submit"] {
-background: #1e2f33;
-color: white;
-border: none;
-padding: 1.2rem 2.5rem;
-border-radius: 50px;
-font-size: 1.2rem;
-font-weight: 600;
-cursor: pointer;
-transition: all 0.3s ease;
-border: 2px solid #1e2f33;
-width: 100%;
-max-width: 320px;
-display: inline-flex;
-align-items: center;
-justify-content: center;
-gap: 0.8rem;
-}
-button[type="submit"]:hover {
-background: #f4b942;
-color: #1e2f33;
-border-color: #f4b942;
-transform: translateY(-5px);
-box-shadow: 0 15px 35px rgba(244,185,66,0.4);
-}
-.contact-info-block {
-background: #eef4f1;
-border-radius: 32px;
-padding: 2.5rem;
-opacity: 0;
-transform: translateX(50px);
-animation: contactInfoSlide 0.8s ease-out 0.3s forwards;
-}
-@keyframes contactInfoSlide {
-0% {
-opacity: 0;
-transform: translateX(50px);
-}
-100% {
-opacity: 1;
-transform: translateX(0);
-}
-}
-.contact-detail-item {
-margin-bottom: 2rem;
-display: flex;
-gap: 1.2rem;
-align-items: center;
-padding: 0.8rem;
-border-radius: 16px;
-transition: all 0.3s ease;
-opacity: 0;
-transform: translateX(30px);
-}
-.contact-detail-item:nth-child(1) { animation: contactItemSlide 0.6s ease-out 0.5s forwards; }
-.contact-detail-item:nth-child(2) { animation: contactItemSlide 0.6s ease-out 0.6s forwards; }
-.contact-detail-item:nth-child(3) { animation: contactItemSlide 0.6s ease-out 0.7s forwards; }
-.contact-detail-item:nth-child(4) { animation: contactItemSlide 0.6s ease-out 0.8s forwards; }
-
-@keyframes contactItemSlide {
-0% {
-opacity: 0;
-transform: translateX(30px);
-}
-100% {
-opacity: 1;
-transform: translateX(0);
-}
-}
-.contact-detail-item:hover {
-background: rgba(244,185,66,0.15);
-transform: translateX(10px);
-}
-.contact-detail-item i {
-font-size: 2rem;
-color: #f4b942;
-width: 2.5rem;
-flex-shrink: 0;
-transition: transform 0.3s ease;
-}
-.contact-detail-item:hover i {
-transform: scale(1.2) rotate(10deg);
-}
-.about-highlight {
-background: white;
-border-radius: 36px;
-padding: 2rem;
-box-shadow: 0 4px 12px rgba(0,0,0,0.02);
-border: 1px solid #e0e6e2;
-margin-bottom: 2rem;
-}
-.signature-block {
-background: #f4b94215;
-border-radius: 32px;
-padding: 2rem;
-margin-top: 2rem;
-border: 1px solid #f4b94260;
-opacity: 0;
-transform: translateY(30px);
-animation: signatureSlide 0.8s ease-out 0.6s forwards;
-}
-@keyframes signatureSlide {
-0% {
-opacity: 0;
-transform: translateY(30px);
-}
-100% {
-opacity: 1;
-transform: translateY(0);
-}
-}
-.engagement-block {
-background: #e8f4f0;
-border-radius: 36px;
-padding: 2rem;
-margin: 2.5rem 0 1.5rem;
-border: 1px solid #c0dad0;
-opacity: 0;
-transform: translateY(30px);
-animation: engagementSlide 0.8s ease-out 0.7s forwards;
-}
-@keyframes engagementSlide {
-0% {
-opacity: 0;
-transform: translateY(30px);
-}
-100% {
-opacity: 1;
-transform: translateY(0);
-}
-}
-.service-detail {
-background: white;
-border-radius: 36px;
-padding: 2rem;
-margin: 2rem 0;
-border: 1px solid #e0e6e2;
-}
-.stats {
-display: flex;
-flex-wrap: wrap;
-gap: 1.5rem;
-justify-content: space-around;
-text-align: center;
-margin: 1.8rem 0;
-}
-.stat-item {
-flex: 1 1 120px;
-min-width: 110px;
-opacity: 0;
-transform: scale(0.8);
-animation: statPopIn 0.6s ease-out 0.5s forwards;
-}
-@keyframes statPopIn {
-0% {
-opacity: 0;
-transform: scale(0.8);
-}
-100% {
-opacity: 1;
-transform: scale(1);
-}
-}
-.stat-number {
-font-size: 2.2rem;
-font-weight: 700;
-color: #1e2f33;
-line-height: 1;
-}
-.stat-label {
-font-size: 0.95rem;
-color: #4d6a5e;
-}
-.images-note {
-background: #e3f2fd;
-border-radius: 36px;
-padding: 1.2rem 1.5rem;
-margin: 2rem 0 1.5rem;
-border-left: 6px solid #2196f3;
-font-size: 1rem;
-word-break: break-word;
-}
-.gallery-title {
-font-size: 1.5rem;
-margin: 1.5rem 0 1rem;
-color: #25413a;
-display: flex;
-align-items: center;
-gap: 0.8rem;
-}
-hr {
-border: 1px dashed #c9d2cb;
-margin: 2rem 0;
-}
-footer {
-background: #1e2f33;
-color: #cfd7d4;
-text-align: center;
-padding: 2rem 0;
-font-size: 0.95rem;
-border-top: 4px solid #f4b942;
-}
-img {
-max-width: 100%;
-height: auto;
-vertical-align: middle;
-}
-.nav-link,
-.btn,
-button,
-[data-page] {
-touch-action: manipulation;
-}
-@media (max-width: 700px) and (orientation: landscape) {
-.logo-text h1 {
-font-size: 1.5rem;
-}
-.logo-text span {
-display: inline-block;
-font-size: 0.8rem;
-}
-nav ul li a {
-padding: 0.5rem 1rem;
-}
-}
-.whatsapp-float {
-position: fixed;
-bottom: 30px;
-right: 25px;
-background-color: #25D366;
-color: white;
-width: 65px;
-height: 65px;
-border-radius: 50%;
-text-align: center;
-font-size: 38px;
-box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-z-index: 999;
-display: flex;
-align-items: center;
-justify-content: center;
-text-decoration: none;
-transition: 0.25s;
-border: 3px solid white;
-}
-.whatsapp-float:hover {
-background-color: #20b859;
-transform: scale(1.08);
-color: white;
-}
-.whatsapp-float i {
-font-size: 42px;
-}
-@media (max-width: 600px) {
-.whatsapp-float {
-width: 58px;
-height: 58px;
-font-size: 32px;
-bottom: 20px;
-right: 18px;
-}
-.whatsapp-float i {
-font-size: 38px;
-}
-}
-.action-buttons {
-display: flex;
-flex-wrap: wrap;
-gap: 1rem;
-align-items: center;
-justify-content: center;
-margin-top: 2rem;
-opacity: 0;
-transform: translateY(30px);
-animation: actionButtonsSlide 0.8s ease-out 0.9s forwards;
-}
-@keyframes actionButtonsSlide {
-0% {
-opacity: 0;
-transform: translateY(30px);
-}
-100% {
-opacity: 1;
-transform: translateY(0);
-}
-}
-.btn-wsp, .btn-email, .btn-call {
-display: inline-flex;
-align-items: center;
-justify-content: center;
-gap: 0.8rem;
-padding: 1.1rem 2.2rem;
-border-radius: 60px;
-font-size: 1.15rem;
-font-weight: 600;
-text-decoration: none;
-transition: all 0.3s ease;
-border: 2px solid transparent;
-white-space: nowrap;
-}
-.btn-wsp {
-background-color: #25D366;
-color: white;
-border-color: #25D366;
-animation: buttonPulse 2s ease-in-out infinite;
-}
-.btn-email {
-background-color: #1e2f33;
-color: white;
-border-color: #1e2f33;
-animation: buttonPulse 2s ease-in-out 0.3s infinite;
-}
-.btn-call {
-background-color: #f4b942;
-color: #1e2f33;
-border-color: #f4b942;
-animation: buttonPulse 2s ease-in-out 0.6s infinite;
-}
-@keyframes buttonPulse {
-0%, 100% {
-transform: scale(1);
-box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-}
-50% {
-transform: scale(1.03);
-box-shadow: 0 12px 35px rgba(0,0,0,0.3);
-}
-}
-.btn-wsp i, .btn-email i, .btn-call i {
-font-size: 1.5rem;
-transition: transform 0.3s ease;
-}
-.btn-wsp:hover, .btn-email:hover, .btn-call:hover {
-transform: translateY(-8px) scale(1.05);
-}
-.btn-wsp:hover i, .btn-email:hover i, .btn-call:hover i {
-transform: scale(1.3) rotate(15deg);
-}
-.btn-wsp:hover {
-background-color: white;
-color: #25D366;
-box-shadow: 0 20px 45px rgba(37,211,102,0.4);
-}
-.btn-email:hover {
-background-color: white;
-color: #1e2f33;
-box-shadow: 0 20px 45px rgba(30,47,51,0.4);
-}
-.btn-call:hover {
-background-color: #1e2f33;
-color: #f4b942;
-border-color: #1e2f33;
-box-shadow: 0 20px 45px rgba(244,185,66,0.4);
-}
-@media (max-width: 500px) {
-.action-buttons {
-flex-direction: column;
-align-items: stretch;
-}
-.btn-wsp, .btn-email, .btn-call {
-justify-content: center;
-}
-}
-.call-link {
-display: inline-flex;
-align-items: center;
-gap: 0.4rem;
-background: #eef4f1;
-padding: 0.6rem 1.4rem;
-border-radius: 40px;
-text-decoration: none;
-color: #1e2f33;
-font-weight: 500;
-border: 2px solid #cbd5cf;
-transition: all 0.3s ease;
-opacity: 0;
-animation: fadeInUp 0.6s ease-out 1s forwards;
-}
-@keyframes fadeInUp {
-0% {
-opacity: 0;
-transform: translateY(20px);
-}
-100% {
-opacity: 1;
-transform: translateY(0);
-}
-}
-.call-link i {
-color: #f4b942;
-font-size: 1.3rem;
-transition: transform 0.3s ease;
-}
-.call-link:hover {
-background: #f4b942;
-color: #1e2f33;
-border-color: #f4b942;
-transform: translateY(-5px);
-box-shadow: 0 10px 30px rgba(244,185,66,0.3);
-}
-.call-link:hover i {
-color: #1e2f33;
-transform: scale(1.2) rotate(15deg);
-}
-/* ===== DÉFILEMENT AUTO HORIZONTAL ===== */
-.auto-scroll-wrapper {
-width: 100%;
-overflow: hidden;
-margin: 2rem 0;
-padding: 1rem 0;
-}
-.auto-scroll-track {
-display: flex;
-gap: 1.8rem;
-width: fit-content;
-animation: scrollHorizontal 40s linear infinite;
-}
-.auto-scroll-track.paused {
-animation-play-state: paused !important;
-}
-.auto-scroll-track.fast {
-animation-duration: 15s !important;
-}
-.scroll-card {
-width: 300px;
-background: white;
-border-radius: 28px;
-overflow: hidden;
-box-shadow: 0 12px 25px rgba(0,0,0,0.15);
-border: 1px solid #e9e3db;
-flex-shrink: 0;
-transition: all 0.3s ease;
-}
-.scroll-card:hover {
-transform: scale(1.08);
-box-shadow: 0 25px 35px rgba(0,0,0,0.25);
-z-index: 10;
-}
-.scroll-card img {
-width: 100%;
-height: 200px;
-object-fit: cover;
-display: block;
-border-bottom: 3px solid #f4b942;
-transition: transform 0.3s ease;
-}
-.scroll-card:hover img {
-transform: scale(1.02);
-}
-.scroll-card .card-caption {
-padding: 1.2rem 1.2rem 1.5rem;
-transition: background-color 0.3s ease;
-}
-.scroll-card:hover .card-caption {
-background-color: #fef9f0;
-}
-.scroll-card .card-caption h3 {
-font-size: 1.4rem;
-color: #25413a;
-margin-bottom: 0.4rem;
-}
-.scroll-card .card-caption p {
-color: #3a5a4f;
-font-size: 0.9rem;
-line-height: 1.4;
-}
-@keyframes scrollHorizontal {
-0% { transform: translateX(0); }
-100% { transform: translateX(calc(-300px * 6 - 1.8rem * 6)); }
-}
-@media (max-width: 600px) {
-.scroll-card {
-width: 260px;
-}
-@keyframes scrollHorizontal {
-100% { transform: translateX(calc(-260px * 6 - 1.8rem * 6)); }
-}
-}
-.scroll-img {
-width: 280px;
-height: 200px;
-object-fit: cover;
-border-radius: 20px;
-box-shadow: 0 8px 18px rgba(0,0,0,0.1);
-border: 2px solid #f4b942;
-flex-shrink: 0;
-transition: all 0.3s ease;
-}
-.scroll-img:hover {
-transform: scale(1.05);
-box-shadow: 0 15px 25px rgba(0,0,0,0.2);
-border-color: #1e2f33;
-}
-
-/* ===== BOUTON FLECHE ACCELERATION ===== */
-.speed-control {
-position: fixed;
-right: 20px;
-top: 50%;
-transform: translateY(-50%);
-z-index: 998;
-display: none;
-}
-
-.speed-control.visible {
-display: block;
-}
-
-.speed-btn {
-width: 45px;
-height: 45px;
-background: transparent;
-border: 2px solid #f4b942;
-border-radius: 50%;
-cursor: pointer;
-display: flex;
-align-items: center;
-justify-content: center;
-transition: all 0.3s ease;
-position: relative;
-}
-
-.speed-btn:hover {
-border-color: #1e2f33;
-transform: scale(1.1);
-}
-
-.speed-btn:active,
-.speed-btn.active {
-border-color: #1e2f33;
-transform: scale(0.95);
-}
-
-.speed-btn .ep-icon-arrow-right-0 {
-font-size: 20px;
-color: #f4b942;
-position: relative;
-z-index: 1;
-transition: all 0.3s ease;
-}
-
-.speed-btn:hover .ep-icon-arrow-right-0 {
-color: #1e2f33;
-}
-
-.speed-btn.active .ep-icon-arrow-right-0 {
-color: #1e2f33;
-transform: scale(1.3);
-}
-
-.speed-label {
-position: absolute;
-right: 60px;
-top: 50%;
-transform: translateY(-50%);
-background: #1e2f33;
-color: white;
-padding: 0.5rem 1rem;
-border-radius: 8px;
-font-size: 0.8rem;
-white-space: nowrap;
-opacity: 0;
-visibility: hidden;
-transition: all 0.3s ease;
-font-weight: 500;
-}
-
-.speed-btn:hover .speed-label {
-opacity: 1;
-visibility: visible;
-right: 55px;
-}
-
-@media (max-width: 900px) {
-.speed-btn {
-width: 40px;
-height: 40px;
-}
-.speed-btn .ep-icon-arrow-right-0 {
-font-size: 18px;
-}
-.speed-label {
-display: none;
-}
-}
-
-/* ===== ANIMATIONS TEXTE ACCUEIL & A PROPOS ===== */
-.text-animate {
-opacity: 0;
-transform: translateY(30px);
-animation: textSlideIn 0.7s ease-out forwards;
-}
-.text-animate:nth-of-type(1) { animation-delay: 0.2s; }
-.text-animate:nth-of-type(2) { animation-delay: 0.4s; }
-.text-animate:nth-of-type(3) { animation-delay: 0.6s; }
-
-@keyframes textSlideIn {
-0% {
-opacity: 0;
-transform: translateY(30px);
-}
-100% {
-opacity: 1;
-transform: translateY(0);
-}
-}
-.about-text-animate {
-opacity: 0;
-transform: translateX(-30px);
-animation: aboutTextSlide 0.7s ease-out forwards;
-}
-.about-text-animate:nth-of-type(1) { animation-delay: 0.3s; }
-.about-text-animate:nth-of-type(2) { animation-delay: 0.5s; }
-.about-text-animate:nth-of-type(3) { animation-delay: 0.7s; }
-.about-text-animate:nth-of-type(4) { animation-delay: 0.9s; }
-
-@keyframes aboutTextSlide {
-0% {
-opacity: 0;
-transform: translateX(-30px);
-}
-100% {
-opacity: 1;
-transform: translateX(0);
-}
-}
-.engagement-text-animate {
-opacity: 0;
-transform: translateY(20px);
-animation: engagementTextSlide 0.6s ease-out forwards;
-}
-.engagement-text-animate:nth-of-type(1) { animation-delay: 0.8s; }
-.engagement-text-animate:nth-of-type(2) { animation-delay: 1s; }
-.engagement-text-animate:nth-of-type(3) { animation-delay: 1.2s; }
-
-@keyframes engagementTextSlide {
-0% {
-opacity: 0;
-transform: translateY(20px);
-}
-100% {
-opacity: 1;
-transform: translateY(0);
-}
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sabane Art Group · Œuvres d'exception</title>
+  <!-- Google Fonts & Font Awesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: #faf9f7;
+      color: #1e1e1e;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+    /* ===== HEADER ===== */
+    .header {
+      background: #1c1c1c;
+      color: #f0e9e0;
+      padding: 1.2rem 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #c7a25e;
+    }
+    .logo h1 {
+      font-size: 2rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+    }
+    .logo span {
+      font-weight: 300;
+      color: #c7a25e;
+      font-size: 1rem;
+      display: block;
+      line-height: 1.2;
+    }
+    .contact-info {
+      display: flex;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+    }
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: rgba(255,255,255,0.08);
+      padding: 0.5rem 1.2rem;
+      border-radius: 60px;
+      backdrop-filter: blur(2px);
+      transition: 0.2s;
+    }
+    .contact-item i {
+      color: #c7a25e;
+      font-size: 1.4rem;
+      width: 1.8rem;
+    }
+    .contact-item a {
+      color: #f0e9e0;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .contact-item a:hover {
+      color: #c7a25e;
+    }
+    .whatsapp-highlight {
+      background: #25d36620;
+      border: 1px solid #25d366;
+    }
+    /* ===== BANDEAU ADRESSE ===== */
+    .address-bar {
+      background: #e8e0d5;
+      color: #1e1e1e;
+      text-align: center;
+      padding: 0.6rem;
+      font-size: 1.1rem;
+      font-weight: 400;
+      letter-spacing: 0.3px;
+      border-bottom: 1px solid #c7a25e;
+    }
+    .address-bar i {
+      color: #a1572e;
+      margin-right: 8px;
+    }
+    /* ===== GRILLE ART ===== */
+    .art-collection {
+      max-width: 1400px;
+      margin: 3rem auto;
+      padding: 0 2rem;
+    }
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 400;
+      border-left: 8px solid #c7a25e;
+      padding-left: 1.5rem;
+      margin-bottom: 3rem;
+      color: #2a2a2a;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2.5rem;
+    }
+    /* carte œuvre */
+    .art-card {
+      background: white;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 20px 35px -8px rgba(0,0,0,0.15);
+      transition: transform 0.3s ease, box-shadow 0.4s;
+      opacity: 0;
+      animation: fadeUp 0.7s forwards;
+      animation-delay: calc(0.1s * var(--i, 1));
+      display: flex;
+      flex-direction: column;
+    }
+    .art-card:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 30px 45px -12px rgba(0,0,0,0.3);
+    }
+    @keyframes fadeUp {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    /* image container avec effet */
+    .img-wrapper {
+      width: 100%;
+      aspect-ratio: 1 / 1.1;
+      overflow: hidden;
+      background: #f0e9e0;
+      position: relative;
+    }
+    .art-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1);
+    }
+    .art-card:hover .art-image {
+      transform: scale(1.08);
+    }
+    /* détail */
+    .art-info {
+      padding: 1.6rem 1.5rem 1.8rem;
+      background: white;
+      border-top: 2px solid #f3ede5;
+    }
+    .art-title {
+      font-size: 1.7rem;
+      font-weight: 500;
+      margin-bottom: 0.3rem;
+      color: #232323;
+    }
+    .art-desc {
+      font-size: 1rem;
+      color: #5a4f46;
+      margin: 0.6rem 0 1.2rem;
+      line-height: 1.5;
+      font-weight: 300;
+    }
+    .price-whatsapp {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 0.5rem;
+    }
+    .art-price {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #1e1e1e;
+    }
+    .art-price::before {
+      content: 'DH ';
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: #a1572e;
+    }
+    .whatsapp-btn {
+      background: #25d366;
+      padding: 0.5rem 1.2rem;
+      border-radius: 40px;
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: 0.2s;
+      box-shadow: 0 4px 8px rgba(37, 211, 102, 0.3);
+    }
+    .whatsapp-btn i {
+      font-size: 1.3rem;
+    }
+    .whatsapp-btn:hover {
+      background: #20b859;
+      transform: scale(1.03);
+      box-shadow: 0 8px 14px rgba(37, 211, 102, 0.4);
+    }
+    /* admin link (petit lien discret) */
+    .admin-corner {
+      text-align: right;
+      margin: 2rem 2rem 1rem;
+    }
+    .admin-corner a {
+      color: #7a6a5a;
+      text-decoration: none;
+      font-size: 0.9rem;
+      border-bottom: 1px dashed #c7a25e;
+    }
+    footer {
+      background: #1c1c1c;
+      color: #adadad;
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.95rem;
+      border-top: 2px solid #c7a25e;
+    }
+  </style>
 </head>
 <body>
-<a href="https://wa.me/33772227674" class="whatsapp-float" target="_blank" title="Envoyer un message WhatsApp">
-<i class="fab fa-whatsapp"></i>
-</a>
+  <header class="header">
+    <div class="logo">
+      <h1>SABANE ART GROUP</h1>
+      <span>Galerie d'exception · Marrakech</span>
+    </div>
+    <div class="contact-info">
+      <div class="contact-item">
+        <i class="fas fa-phone-alt"></i>
+        <a href="tel:+212666103748">06 66 10 37 48</a>
+      </div>
+      <div class="contact-item whatsapp-highlight">
+        <i class="fab fa-whatsapp"></i>
+        <a href="https://wa.me/212666103748" target="_blank">06 66 10 37 48 (WhatsApp)</a>
+      </div>
+    </div>
+  </header>
+  <div class="address-bar">
+    <i class="fas fa-map-pin"></i> Marrakech — Médina, Derb Sidi Abbas • Ouvert du mardi au dimanche 10h–19h
+  </div>
 
-<!-- Bouton Flèche Accélération -->
-<div class="speed-control" id="speedControl">
-<button class="speed-btn" id="speedBtn" title="Accélérer le défilement">
-<i class="ep-icon-arrow-right-0 fas fa-chevron-right"></i>
-<span class="speed-label">Maintenir pour accélérer</span>
-</button>
-</div>
+  <main class="art-collection">
+    <h2 class="section-title">Œuvres récentes</h2>
+    <div class="grid" id="artGrid"></div>
+    <!-- les cartes seront injectées par JS -->
+  </main>
 
-<header>
-<div class="container header-flex">
-<div class="logo-area">
-<img src="https://ik.imagekit.io/fwmsbpxje/logos/WhatsApp%20Image%202026-02-27%20at%2013.45.42.jpeg" alt="DBH Bâtiment Logo" class="logo-img">
-<div class="logo-text">
-<h1>DBH Bâtiment</h1>
-<span>rénovation · sérieux · confiance</span>
-</div>
-</div>
-<nav>
-<ul>
-<li><a href="#accueil" class="nav-link active" data-page="accueil">Accueil</a></li>
-<li><a href="#a-propos" class="nav-link" data-page="a-propos">À propos</a></li>
-<li><a href="#services" class="nav-link" data-page="services">Services</a></li>
-<li><a href="#projets" class="nav-link" data-page="projets">Projets</a></li>
-<li><a href="#contact" class="nav-link" data-page="contact">Contact</a></li>
-</ul>
-</nav>
-</div>
-</header>
-<main class="container">
-<div id="page-content"></div>
-<div class="info-bar">
-<div class="info-item"><i class="fas fa-map-pin"></i> 21 Rue de Fontenay, 78200 Magnanville</div>
-<div class="info-item"><i class="fas fa-phone-alt"></i> +33 7 72 22 76 74</div>
-<div class="info-item"><i class="fas fa-envelope"></i> Dbh.bati@gmail.com</div>
-</div>
-</main>
-<footer>
-<div class="container">
-<p>© 2025 DBH Bâtiment — 21 Rue de Fontenay, Magnanville — Tél. +33 7 72 22 76 74</p>
-<p style="margin-top: 0.8rem; font-size: 0.9rem;">suivez-nous
-<i class="fab fa-facebook" style="margin-left: 0.8rem;"></i>
-<i class="fab fa-instagram" style="margin-left: 0.6rem;"></i>
-<i class="fab fa-linkedin" style="margin-left: 0.6rem;"></i>
-</p>
-</div>
-</footer>
-<script>
-(function() {
-const imageUrls = {
-img1: 'https://ik.imagekit.io/fwmsbpxje/images/img1.jpg?updatedAt=1771411160168',
-img2: 'https://ik.imagekit.io/fwmsbpxje/images/img2.jpg?updatedAt=1771411156799',
-img3: 'https://ik.imagekit.io/fwmsbpxje/images/img3.jpg?updatedAt=1771411160124',
-img4: 'https://ik.imagekit.io/fwmsbpxje/images/img4.jpeg?updatedAt=1771411159989',
-img5: 'https://ik.imagekit.io/fwmsbpxje/images/img5.jpeg?updatedAt=1771411157796',
-img6: 'https://ik.imagekit.io/fwmsbpxje/images/img6.jpeg?updatedAt=1771411160829',
-img7: 'https://ik.imagekit.io/fwmsbpxje/images/img7.jpeg?updatedAt=1771411146030',
-img8: 'https://ik.imagekit.io/fwmsbpxje/images/img8.jpeg?updatedAt=1771411161882',
-img9: 'https://ik.imagekit.io/fwmsbpxje/images/img9.jpeg?updatedAt=1771411154689',
-img10: 'https://ik.imagekit.io/fwmsbpxje/images/img10.jpeg?updatedAt=1771411151954',
-img11: 'https://ik.imagekit.io/fwmsbpxje/images/renovation/img33.jpeg?updatedAt=1771411160910',
-img12: 'https://ik.imagekit.io/fwmsbpxje/images/img12.jpeg?updatedAt=1771411161974',
-ren21: 'https://ik.imagekit.io/fwmsbpxje/images/renovation/img21.jpeg?updatedAt=1771427509487',
-ren28: 'https://ik.imagekit.io/fwmsbpxje/images/renovation/img28.jpeg?updatedAt=1771427508925',
-ren26: 'https://ik.imagekit.io/fwmsbpxje/images/renovation/img26.jpeg?updatedAt=1771427509074',
-ren23: 'https://ik.imagekit.io/fwmsbpxje/images/renovation/img23.jpeg?updatedAt=1771427508879',
-ren25: 'https://ik.imagekit.io/fwmsbpxje/images/renovation/img25.jpeg?updatedAt=1771427508752',
-ren20: 'https://ik.imagekit.io/fwmsbpxje/images/renovation/img20.jpeg?updatedAt=1771427508613',
-ren24: 'https://ik.imagekit.io/fwmsbpxje/images/renovation/img24.jpeg?updatedAt=1771427508570',
-ren27: 'https://ik.imagekit.io/fwmsbpxje/images/renovation/img27.jpeg?updatedAt=1771427505814',
-ren22: 'https://ik.imagekit.io/fwmsbpxje/images/renovation/img22.jpeg?updatedAt=1771427503676',
-ren29: 'https://ik.imagekit.io/fwmsbpxje/images/renovation/img29.jpeg',
-ren30: 'https://ik.imagekit.io/fwmsbpxje/images/renovation/img30.jpeg',
-ren31: 'https://ik.imagekit.io/fwmsbpxje/images/renovation/img31.jpeg',
-ren32: 'https://ik.imagekit.io/fwmsbpxje/images/renovation/img32.jpeg',
-im34: 'https://ik.imagekit.io/fwmsbpxje/images/renovation/im34.jpeg',
-v35: 'https://ik.imagekit.io/fwmsbpxje/images/renovation/v35.jpeg',
-deb14: 'https://ik.imagekit.io/fwmsbpxje/images/dbarat/img14.jpeg?updatedAt=1771427475328',
-deb15: 'https://ik.imagekit.io/fwmsbpxje/images/dbarat/img15.jpeg?updatedAt=1771427477610',
-deb16: 'https://ik.imagekit.io/fwmsbpxje/images/dbarat/img16.jpeg?updatedAt=1771427471744',
-deb18: 'https://ik.imagekit.io/fwmsbpxje/images/dbarat/img18.jpeg?updatedAt=1771427477915',
-deb19: 'https://ik.imagekit.io/fwmsbpxje/images/dbarat/img19.jpeg?updatedAt=1771427476232'
-};
-const pageContent = document.getElementById('page-content');
-const navLinks = document.querySelectorAll('.nav-link');
-const speedControl = document.getElementById('speedControl');
-const speedBtn = document.getElementById('speedBtn');
+  <!-- petit lien vers admin (sans style lourd) -->
+  <div class="admin-corner">
+    <a href="sabane-admin.html"><i class="fas fa-palette"></i> administration (créer / modifier œuvres)</a>
+  </div>
 
-const projetsAutoScroll = `
-<h2 class="page-title">Nos réalisations</h2>
-<div class="auto-scroll-wrapper" id="projet-scroll-wrapper">
-<div class="auto-scroll-track" id="projet-scroll-track">
-<div class="scroll-card">
-<img src="${imageUrls.img11}" alt="Rénovation complète">
-<div class="card-caption">
-<h3>Rénovation Intérieure Complète – Avant / Après</h3>
-<p>Transformation totale d'un espace brut en intérieur moderne et lumineux. Travaux réalisés : faux plafond avec spots intégrés, revêtement de sol, peinture, aménagement cuisine et finitions soignées. Résultat : un espace contemporain, fonctionnel et prêt à vivre. ✨</p>
-</div>
-</div>
-<div class="scroll-card">
-<img src="${imageUrls.img1}" alt="Mise en peinture">
-<div class="card-caption">
-<h3>Mise en peinture moderne</h3>
-<p>Travaux de peinture réalisés avec soin et précision. Une finition moderne qui apporte luminosité et fraîcheur à l'espace.</p>
-</div>
-</div>
-<div class="scroll-card">
-<img src="${imageUrls.img2}" alt="Salle de bain">
-<div class="card-caption">
-<h3>Rénovation de salle de bain moderne</h3>
-<p>Aménagement d'une salle de bain contemporaine aux finitions soignées. Carrelage grand format, douche à l'italienne et mobilier épuré pour un espace lumineux et élégant.</p>
-</div>
-</div>
-<div class="scroll-card">
-<img src="${imageUrls.ren25}" alt="Avant/Après">
-<div class="card-caption">
-<h3>Transformation complète – Avant / Après</h3>
-<p>Rénovation totale d'un intérieur, du gros rafraîchissement à la finition soignée. Un espace ancien transformé en pièce lumineuse, moderne et élégante grâce à un travail précis et professionnel.</p>
-</div>
-</div>
-<div class="scroll-card">
-<img src="${imageUrls.ren28}" alt="Faux plafond">
-<div class="card-caption">
-<h3>Installation de faux plafond en placo</h3>
-<p>Pose professionnelle de plaques de plâtre pour la réalisation d'un faux plafond moderne. Travail précis assurant isolation, esthétique et finition de qualité pour un intérieur parfaitement aménagé.</p>
-</div>
-</div>
-<div class="scroll-card">
-<img src="${imageUrls.ren29}" alt="Salle de bain">
-<div class="card-caption">
-<h3>Salle de bain – Rénovation complète</h3>
-<p>Création d'une salle de bain moderne et lumineuse avec douche vitrée, faïence contemporaine, meuble vasque suspendu et finitions soignées.</p>
-</div>
-</div>
-<div class="scroll-card">
-<img src="${imageUrls.img11}" alt="Rénovation complète">
-<div class="card-caption">
-<h3>Rénovation Intérieure Complète – Avant / Après</h3>
-<p>Transformation totale d'un espace brut en intérieur moderne et lumineux. Travaux réalisés : faux plafond avec spots intégrés, revêtement de sol, peinture, aménagement cuisine et finitions soignées. ✨</p>
-</div>
-</div>
-<div class="scroll-card">
-<img src="${imageUrls.img1}" alt="Mise en peinture">
-<div class="card-caption">
-<h3>Mise en peinture moderne</h3>
-<p>Travaux de peinture réalisés avec soin et précision. Une finition moderne qui apporte luminosité et fraîcheur à l'espace.</p>
-</div>
-</div>
-</div>
-</div>
-`;
+  <footer>
+    <p>Sabane Art Group – Téléphone & WhatsApp <strong>06 66 10 37 48</strong> – Marrakech, Médina</p>
+    <p style="margin-top: 0.8rem; font-size:0.85rem;">Toutes les œuvres sont accompagnées d'un certificat d'authenticité</p>
+  </footer>
 
-const servicesPage = `
-<h2 class="page-title">Nos services</h2>
-<div class="auto-scroll-wrapper" id="services-scroll-wrapper">
-<div class="auto-scroll-track" id="services-scroll-track">
-<div class="scroll-card">
-<img src="${imageUrls.img8}" alt="Rénovation intérieure">
-<div class="card-caption">
-<h3>Rénovation intérieure</h3>
-<p>Plâtrerie, carrelage, peinture, agencements sur-mesure : donnez une nouvelle vie à vos espaces. Rénovation complète ou partielle.</p>
-</div>
-</div>
-<div class="scroll-card">
-<img src="${imageUrls.ren21}" alt="Rénovation extérieure">
-<div class="card-caption">
-<h3>Rénovation extérieure</h3>
-<p>DBH Bâtiment réalise tous vos travaux extérieure. Nous préparons soigneusement les supports (ponçage, enduits, rebouchage) afin d'assurer une finition propre, durable et esthétique.</p>
-</div>
-</div>
-<div class="scroll-card">
-<img src="${imageUrls.ren24}" alt="Carrelage">
-<div class="card-caption">
-<h3>Carrelage & revêtements de sols</h3>
-<p>Nous intervenons pour la pose de carrelage mural et au sol, ainsi que tous types de revêtements de sols. Que ce soit pour une salle de bain, une cuisine, un salon ou un espace professionnel, nous vous garantissons un travail précis et soigné.</p>
-</div>
-</div>
-<div class="scroll-card">
-<img src="${imageUrls.ren26}" alt="Petite maçonnerie">
-<div class="card-caption">
-<h3>Rénovation interieure - petite maçonnerie</h3>
-<p>Nous réalisons des travaux de rénovation extérieure pour redonner vie à vos façades et espaces extérieurs. Cela comprend la peinture extérieure, les petites réparations de maçonnerie (rebouchage de fissures, reprises de murs, petits ouvrages), ainsi que divers travaux d'amélioration et d'entretien.</p>
-</div>
-</div>
-<div class="scroll-card">
-<img src="${imageUrls.img10}" alt="Aménagements">
-<div class="card-caption">
-<h3>aménagements interieure-extérieurs</h3>
-<p>Pavés, dalles, béton désactivé : valorisez votre jardin ou cour. Création de pool house et cuisine d'été.</p>
-</div>
-</div>
-<div class="scroll-card">
-<img src="${imageUrls.v35}" alt="Pose de Carrelage">
-<div class="card-caption">
-<h3>🧱 Pose de Carrelage – Finition Précise</h3>
-<p>Installation professionnelle de carrelage avec système de nivellement pour un alignement parfait et une surface uniforme. Application soignée de la colle, respect des joints et finition impeccable pour un rendu durable et esthétique. ✨</p>
-</div>
-</div>
-<div class="scroll-card">
-<img src="${imageUrls.img8}" alt="Rénovation intérieure">
-<div class="card-caption">
-<h3>Rénovation intérieure</h3>
-<p>Plâtrerie, carrelage, peinture, agencements sur-mesure : donnez une nouvelle vie à vos espaces. Rénovation complète ou partielle.</p>
-</div>
-</div>
-<div class="scroll-card">
-<img src="${imageUrls.ren21}" alt="Rénovation extérieure">
-<div class="card-caption">
-<h3>Rénovation extérieure</h3>
-<p>DBH Bâtiment réalise tous vos travaux extérieure. Nous préparons soigneusement les supports (ponçage, enduits, rebouchage) afin d'assurer une finition propre, durable et esthétique.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="service-detail">
-<h3 style="font-size: 2rem; margin-bottom: 1rem; color: #25413a;"><i class="fas fa-truck" style="color: #f4b942; margin-right: 1rem;"></i>Service de débarras</h3>
-<p style="font-size: 1.2rem; margin-bottom: 2rem;">En complément de nos travaux de rénovation, nous proposons un service de débarras professionnel. Nous intervenons pour vider maisons, appartements, garages ou locaux après travaux ou avant rénovation.</p>
-<p style="font-size: 1.1rem; margin-bottom: 2rem;">Nous assurons l'évacuation des gravats, encombrants et déchets, afin de vous laisser un espace propre et prêt à être réutilisé.</p>
-<div class="gallery-title" style="margin-bottom: 0.5rem;"><i class="fas fa-images" style="color: #f4b942;"></i><span>Quelques exemples de nos interventions</span></div>
-<div class="auto-scroll-wrapper" id="debarras-scroll-wrapper" style="margin-top: 1rem;">
-<div class="auto-scroll-track" id="debarras-scroll-track">
-<img src="${imageUrls.deb15}" class="scroll-img" alt="Débarras avant/après">
-<img src="${imageUrls.deb18}" class="scroll-img" alt="Débarras maison">
-<img src="${imageUrls.deb19}" class="scroll-img" alt="Évacuation encombrants">
-<img src="${imageUrls.deb14}" class="scroll-img" alt="Débarras garage">
-<img src="${imageUrls.deb16}" class="scroll-img" alt="Nettoyage après débarras">
-<img src="${imageUrls.deb15}" class="scroll-img" alt="Débarras avant/après">
-<img src="${imageUrls.deb18}" class="scroll-img" alt="Débarras maison">
-<img src="${imageUrls.deb19}" class="scroll-img" alt="Évacuation encombrants">
-<img src="${imageUrls.deb14}" class="scroll-img" alt="Débarras garage">
-<img src="${imageUrls.deb16}" class="scroll-img" alt="Nettoyage après débarras">
-</div>
-</div>
-<div style="margin-top: 2rem; text-align: center;">
-<a href="#contact" class="btn btn-contact" data-page="contact" style="font-size: 1.2rem; padding: 0.8rem 2.5rem;">Demander un devis débarras</a>
-</div>
-</div>
-<div class="engagement-block">
-<h3 style="color: #1e2f33; margin-bottom: 1.5rem;"><i class="fas fa-handshake" style="color: #f4b942; margin-right: 0.8rem;"></i>Notre engagement</h3>
-<p class="engagement-text-animate" style="font-size: 1.1rem; margin-bottom: 1rem;">Chez DBH Bâtiment, nous plaçons la qualité et la satisfaction client au cœur de chacune de nos réalisations. Chaque chantier, qu'il s'agisse d'une simple remise en état ou d'une rénovation complète, est réalisé avec le même niveau d'exigence et d'attention aux détails.</p>
-<p class="engagement-text-animate" style="font-size: 1.1rem; margin-bottom: 1rem;">Nous nous engageons à fournir un travail soigné, durable et conforme aux normes en vigueur. Le respect des délais annoncés fait partie de nos priorités, car nous savons à quel point votre temps est précieux. Nous veillons également à maintenir un chantier propre et organisé tout au long des travaux.</p>
-<p class="engagement-text-animate" style="font-size: 1.1rem;">À l'écoute de vos besoins, nous vous conseillons avec transparence afin de vous proposer les solutions les plus adaptées à votre budget et à vos attentes. Notre objectif est simple : vous offrir un résultat à la hauteur de votre projet et établir une relation de confiance sur le long terme.</p>
-</div>
-`;
+  <script>
+    (function() {
+      // ------------------------------------------------------------------
+      // BASE DE DONNÉES DES ŒUVRES (simulée, mais alimentée depuis localStorage)
+      // Si aucune donnée n'existe, on crée un catalogue par défaut
+      // ------------------------------------------------------------------
+      const defaultArtworks = [
+        {
+          id: 'art1',
+          title: 'Lueur d’Atlas',
+          description: 'Huile sur toile, 80x80 cm. Les lumières de l’Atlas au couchant.',
+          price: 4800,
+          imageUrl: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=500&auto=format&fit=crop'
+        },
+        {
+          id: 'art2',
+          title: 'Médina rouge',
+          description: 'Technique mixte, 60x80 cm. Inspiration des ruelles de Marrakech.',
+          price: 6200,
+          imageUrl: 'https://images.unsplash.com/photo-1605721911519-3dfeb3be25e7?w=500&auto=format&fit=crop'
+        },
+        {
+          id: 'art3',
+          title: 'Jardin secret',
+          description: 'Aquarelle et encre, 50x65 cm. La verdure et la lumière des riads.',
+          price: 3900,
+          imageUrl: 'https://images.unsplash.com/photo-1602002418082-a4443e081dd1?w=500&auto=format&fit=crop'
+        },
+        {
+          id: 'art4',
+          title: 'Improvisation berbère',
+          description: 'Acrylique sur lin, 90x90 cm. Symboles et terre ocre.',
+          price: 7500,
+          imageUrl: 'https://images.unsplash.com/photo-1547826039-bfc35e0f1ea8?w=500&auto=format&fit=crop'
+        },
+        {
+          id: 'art5',
+          title: 'Sable et lumière',
+          description: 'Photographie fine art, tirage limité, 70x100 cm.',
+          price: 2800,
+          imageUrl: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=500&auto=format&fit=crop'
+        },
+        {
+          id: 'art6',
+          title: 'Femme en bleu',
+          description: 'Sculpture bronze, hauteur 42 cm. Pièce unique.',
+          price: 12500,
+          imageUrl: 'https://images.unsplash.com/photo-1554188248-986adbb73be4?w=500&auto=format&fit=crop'
+        }
+      ];
 
-const pages = {
-accueil: `
-<h2 class="page-title home-title">Bienvenue chez DBH Bâtiment</h2>
-<div style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: center;">
-<div style="flex: 1 1 260px;">
-<p class="text-animate" style="font-size: 1.2rem; font-weight: 300;">Artisans expérimentés, nous réalisons vos travaux de rénovation avec passion dans les Yvelines et en Île-de-France.</p>
-<p class="text-animate" style="margin-top: 1rem;">DBH Bâtiment, c'est la promesse d'un travail soigné, dans les délais et avec des matériaux de qualité. Découvrez nos réalisations.</p>
-<a href="#contact" class="btn btn-contact" data-page="contact" style="margin-top: 1.5rem;">Demander un devis →</a>
-</div>
-<img src="${imageUrls.img3}" alt="DBH Bâtiment accueil" class="img-hero" style="flex: 1 1 260px; max-height: 240px;">
-</div>
-<hr>
-<h3 style="font-size: 1.9rem; margin-bottom: 1.2rem; opacity: 0; animation: textSlideIn 0.7s ease-out 0.8s forwards;">Nos trois valeurs</h3>
-<div class="grid-3">
-<div class="card">
-<img src="${imageUrls.img2}" alt="Proximité" class="card-img">
-<div class="card-content"><h3>Proximité</h3><p>À l'écoute de vos projets, nous vous conseillons de la première visite jusqu'à la livraison. Nous privilégions le contact humain et la réactivité.</p></div>
-</div>
-<div class="card">
-<img src="${imageUrls.img1}" alt="Savoir-faire" class="card-img">
-<div class="card-content"><h3>Savoir-faire</h3><p>Maçons, carreleurs, charpentiers : une équipe expérimentée pour des finitions impeccables. Nous perpétuons les techniques traditionnelles.</p></div>
-</div>
-<div class="card">
-<img src="${imageUrls.img4}" alt="Matériaux durables" class="card-img">
-<div class="card-content"><h3>Matériaux durables</h3><p>Nous privilégions les fournisseurs locaux et les isolants écologiques. Une construction saine pour vous et pour l'environnement.</p></div>
-</div>
-</div>
-<div class="engagement-block">
-<h3 style="color: #1e2f33; margin-bottom: 1.5rem;"><i class="fas fa-heart" style="color: #f4b942; margin-right: 0.8rem;"></i>Notre engagement</h3>
-<p class="engagement-text-animate" style="font-size: 1.1rem; margin-bottom: 1rem;">Chez DBH Bâtiment, nous plaçons la qualité et la satisfaction client au cœur de chacune de nos réalisations. Chaque chantier, qu'il s'agisse d'une simple remise en état ou d'une rénovation complète, est réalisé avec le même niveau d'exigence et d'attention aux détails.</p>
-<p class="engagement-text-animate" style="font-size: 1.1rem; margin-bottom: 1rem;">Nous nous engageons à fournir un travail soigné, durable et conforme aux normes en vigueur. Le respect des délais annoncés fait partie de nos priorités, car nous savons à quel point votre temps est précieux. Nous veillons également à maintenir un chantier propre et organisé tout au long des travaux.</p>
-<p class="engagement-text-animate" style="font-size: 1.1rem;">À l'écoute de vos besoins, nous vous conseillons avec transparence afin de vous proposer les solutions les plus adaptées à votre budget et à vos attentes. Notre objectif est simple : vous offrir un résultat à la hauteur de votre projet et établir une relation de confiance sur le long terme.</p>
-</div>
-`,
-"a-propos": `
-<h2 class="page-title">À propos de DBH Bâtiment</h2>
-<div class="about-highlight">
-<div class="grid-2">
-<div>
-<p class="about-text-animate" style="font-size: 1.3rem; font-weight: 300;">Nous intervenons pour transformer, moderniser et optimiser vos espaces intérieurs.</p>
-<p class="about-text-animate" style="margin-top: 1.2rem;">Nous réalisons la pose de placo (cloisons, doublages, aménagement de pièces), la création de faux plafonds pour un rendu esthétique et une meilleure isolation, ainsi que les travaux d'isolation thermique et phonique pour améliorer votre confort au quotidien.</p>
-<p class="about-text-animate" style="margin-top: 1rem;">Nous prenons également en charge les travaux d'électricité (mise aux normes, installation de luminaires, prises, tableaux électriques) et de plomberie (installation ou remplacement de sanitaires, robinetterie, réseaux d'eau).</p>
-<p class="about-text-animate" style="margin-top: 1rem; font-weight: 500;">Notre objectif est de vous livrer un intérieur fonctionnel, confortable et conforme aux normes en vigueur.</p>
-</div>
-<img src="${imageUrls.img5}" alt="Équipe DBH Bâtiment" class="img-responsive" style="border-radius: 28px; max-height: 240px; object-fit: cover;">
-</div>
-<div class="stats">
-<div class="stat-item"><span class="stat-number">100%</span> <span class="stat-label">satisfaits</span></div>
-</div>
-</div>
-<div class="signature-block">
-<h3 style="color: #1e2f33;"><i class="fas fa-quote-right" style="color: #f4b942; margin-right: 0.8rem;"></i>Notre philosophie</h3>
-<p style="font-size: 1.1rem; font-style: italic; margin: 1rem 0 1.2rem;">« Un chantier réussi, c'est un client qui devient ami. Nous mettons autant d'attention dans une petite rénovation que dans une construction complète. »</p>
-<div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
-<div style="background: #f4b942; width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #1e2f33; font-weight: bold;">IM</div>
-<div><strong>IMLOULI</strong> – fondateur </div>
-</div>
-</div>
-<hr>
-<div style="display: flex; flex-wrap: wrap; gap: 1.8rem; margin-top: 1.8rem;">
-<div style="flex: 1 1 200px; opacity: 0; animation: textSlideIn 0.7s ease-out 1s forwards;"><i class="fas fa-handshake" style="font-size: 2rem; color: #f4b942;"></i><h4>Engagement et confiance</h4><p>La satisfaction client représente notre engagement à offrir un service professionnel basé sur la transparence et une confiance durable.</p></div>
-<div style="flex: 1 1 200px; opacity: 0; animation: textSlideIn 0.7s ease-out 1.2s forwards;"><i class="fas fa-calendar-check" style="font-size: 2rem; color: #f4b942;"></i><h4>Garantie décennale</h4><p>Votre projet est assuré et sécurisé de A à Z.</p></div>
-</div>
-`,
-services: servicesPage,
-projets: projetsAutoScroll,
-contact: `
-<h2 class="page-title">Contactez‑nous</h2>
-<div class="contact-grid">
-<div>
-<p style="margin-bottom: 1.5rem; opacity: 0; animation: fadeInUp 0.6s ease-out 0.2s forwards;">Réponse sous 24h, déplacement gratuit pour devis.</p>
-<form id="demo-contact-form" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
-<div class="form-group" style="width: 100%; max-width: 500px;">
-<label for="name">Nom / société</label>
-<input type="text" id="name" placeholder="ex: Jean Dupont" style="width: 100%;">
-</div>
-<div class="form-group" style="width: 100%; max-width: 500px;">
-<label for="email">Email</label>
-<input type="email" id="email" placeholder="votre@email.com" style="width: 100%;">
-</div>
-<div class="form-group" style="width: 100%; max-width: 500px;">
-<label for="message">Message</label>
-<textarea id="message" placeholder="Bonjour, je souhaiterais un devis pour..." style="width: 100%;"></textarea>
-</div>
-<div class="submit-btn-wrapper">
-<button type="submit" style="background: #1e2f33; color: white; border: none; padding: 1.2rem 2.5rem; border-radius: 50px; font-size: 1.2rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; border: 2px solid #1e2f33; width: auto; min-width: 220px; display: inline-flex; align-items: center; justify-content: center; gap: 0.8rem; margin: 0.5rem 0;">
-<i class="fas fa-paper-plane"></i>Envoyer
-</button>
-</div>
-<p style="margin: 1.2rem 0 0.8rem; text-align: center;">
-<a href="tel:+33772227674" class="call-link" style="display: inline-flex; align-items: center; gap: 0.4rem; background: #eef4f1; padding: 0.6rem 1.4rem; border-radius: 40px; text-decoration: none; color: #1e2f33; font-weight: 500; border: 2px solid #cbd5cf; transition: all 0.3s ease;">
-<i class="fas fa-phone-alt" style="color: #f4b942;"></i> +33 7 72 22 76 74
-</a>
-</p>
-</form>
-<div class="action-buttons" style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: center; margin-top: 2rem;">
-<a href="https://wa.me/33772227674" class="btn-wsp" target="_blank" style="display: inline-flex; align-items: center; justify-content: center; gap: 0.8rem; padding: 1.1rem 2.2rem; border-radius: 60px; font-size: 1.15rem; font-weight: 600; text-decoration: none; transition: all 0.3s ease; border: 2px solid #25D366; background-color: #25D366; color: white;">
-<i class="fab fa-whatsapp"></i> WhatsApp
-</a>
-<a href="mailto:Dbh.bati@gmail.com" class="btn-email" style="display: inline-flex; align-items: center; justify-content: center; gap: 0.8rem; padding: 1.1rem 2.2rem; border-radius: 60px; font-size: 1.15rem; font-weight: 600; text-decoration: none; transition: all 0.3s ease; border: 2px solid #1e2f33; background-color: #1e2f33; color: white;">
-<i class="fas fa-envelope"></i> Email
-</a>
-<a href="tel:+33772227674" class="btn-call" style="display: inline-flex; align-items: center; justify-content: center; gap: 0.8rem; padding: 1.1rem 2.2rem; border-radius: 60px; font-size: 1.15rem; font-weight: 600; text-decoration: none; transition: all 0.3s ease; border: 2px solid #f4b942; background-color: #f4b942; color: #1e2f33;">
-<i class="fas fa-phone"></i> Appel
-</a>
-</div>
-</div>
-<div class="contact-info-block">
-<h3 style="margin-bottom:2rem; opacity: 0; animation: fadeInUp 0.6s ease-out 0.4s forwards;">DBH Bâtiment</h3>
-<div class="contact-detail-item"><i class="fas fa-location-dot"></i> 21 Rue de Fontenay, 78200 Magnanville</div>
-<div class="contact-detail-item"><i class="fas fa-phone"></i> +33 7 72 22 76 74</div>
-<div class="contact-detail-item"><i class="fas fa-envelope"></i> Dbh.bati@gmail.com</div>
-<div class="contact-detail-item" style="background:white; margin-top:1rem;"><i class="fas fa-clock"></i> Lundi-vendredi : 8h–18h · samedi sur RDV</div>
-</div>
-</div>
-`
-};
+      // initialiser / charger depuis localStorage
+      function loadArtworks() {
+        const stored = localStorage.getItem('sabane_artworks');
+        if (stored) {
+          try {
+            return JSON.parse(stored);
+          } catch (e) {
+            return defaultArtworks;
+          }
+        } else {
+          // premier chargement : on stocke les défauts
+          localStorage.setItem('sabane_artworks', JSON.stringify(defaultArtworks));
+          return defaultArtworks;
+        }
+      }
 
-function showPage(pageId) {
-pageContent.innerHTML = pages[pageId] || pages.accueil;
-navLinks.forEach(link => {
-link.classList.toggle('active', link.getAttribute('data-page') === pageId);
-});
-attachNavLinksListeners();
+      // afficher les cartes
+      function renderGallery() {
+        const artworks = loadArtworks();
+        const grid = document.getElementById('artGrid');
+        if (!grid) return;
+        grid.innerHTML = ''; // nettoyer
 
-// Show/hide speed button based on page
-if (pageId === 'projets' || pageId === 'services') {
-speedControl.classList.add('visible');
-} else {
-speedControl.classList.remove('visible');
-}
-}
+        artworks.forEach((art, index) => {
+          // gestion des guillemets pour whatsapp
+          const message = encodeURIComponent(`Bonjour, je suis intéressé par l'œuvre "${art.title}" à ${art.price} DH.`);
+          const whatsappUrl = `https://wa.me/212666103748?text=${message}`;
 
-function attachNavLinksListeners() {
-document.querySelectorAll('.nav-link').forEach(link => {
-link.removeEventListener('click', navClickHandler);
-link.addEventListener('click', navClickHandler);
-});
-}
+          const card = document.createElement('div');
+          card.className = 'art-card';
+          card.style.setProperty('--i', index + 1); // délai animation
+          card.innerHTML = `
+            <div class="img-wrapper">
+              <img class="art-image" src="${art.imageUrl}" alt="${art.title}" loading="lazy" onerror="this.src='https://via.placeholder.com/500x600?text=Image+non+disponible'">
+            </div>
+            <div class="art-info">
+              <h3 class="art-title">${art.title}</h3>
+              <p class="art-desc">${art.description}</p>
+              <div class="price-whatsapp">
+                <span class="art-price">${art.price.toLocaleString()}</span>
+                <a href="${whatsappUrl}" target="_blank" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+              </div>
+            </div>
+          `;
+          grid.appendChild(card);
+        });
+      }
 
-function navClickHandler(e) {
-e.preventDefault();
-const page = this.getAttribute('data-page');
-if (page) {
-showPage(page);
-window.location.hash = page;
-}
-}
+      // écouter les modifications du localStorage (si admin modifie sur un autre onglet, mettre à jour)
+      window.addEventListener('storage', function(e) {
+        if (e.key === 'sabane_artworks') {
+          renderGallery();
+        }
+      });
 
-function initPageFromHash() {
-const hash = window.location.hash.replace('#', '');
-showPage(['accueil', 'a-propos', 'services', 'projets', 'contact'].includes(hash) ? hash : 'accueil');
-}
+      renderGallery();
+    })();
+  </script>
 
-document.addEventListener('submit', e => {
-if (e.target.id === 'demo-contact-form') {
-e.preventDefault();
-alert('Merci de votre message. Nous vous répondrons rapidement par email ou téléphone.');
-}
-});
-
-window.addEventListener('hashchange', initPageFromHash);
-initPageFromHash();
-
-// ===== SPEED CONTROL FOR SCROLLING =====
-let isSpeedActive = false;
-
-function setActiveSpeed(active) {
-isSpeedActive = active;
-const tracks = document.querySelectorAll('.auto-scroll-track');
-tracks.forEach(track => {
-if (active) {
-track.classList.add('fast');
-} else {
-track.classList.remove('fast');
-}
-});
-if (speedBtn) {
-speedBtn.classList.toggle('active', active);
-}
-}
-
-// Mouse events for desktop
-if (speedBtn) {
-speedBtn.addEventListener('mousedown', () => {
-setActiveSpeed(true);
-});
-
-speedBtn.addEventListener('mouseup', () => {
-setActiveSpeed(false);
-});
-
-speedBtn.addEventListener('mouseleave', () => {
-if (isSpeedActive) {
-setActiveSpeed(false);
-}
-});
-
-// Touch events for mobile
-speedBtn.addEventListener('touchstart', (e) => {
-e.preventDefault();
-setActiveSpeed(true);
-});
-
-speedBtn.addEventListener('touchend', (e) => {
-e.preventDefault();
-setActiveSpeed(false);
-});
-}
-
-// Pause animation on hover over scroll cards
-document.addEventListener('mouseenter', function(e) {
-if (e.target.closest('.scroll-card') || e.target.closest('.scroll-img')) {
-const track = e.target.closest('.auto-scroll-wrapper')?.querySelector('.auto-scroll-track');
-if (track && !isSpeedActive) {
-track.style.animationPlayState = 'paused';
-}
-}
-}, true);
-
-document.addEventListener('mouseleave', function(e) {
-if (e.target.closest('.scroll-card') || e.target.closest('.scroll-img')) {
-const track = e.target.closest('.auto-scroll-wrapper')?.querySelector('.auto-scroll-track');
-if (track) {
-track.style.animationPlayState = 'running';
-}
-}
-}, true);
-
-// Reset animations when changing page
-function resetAllAnimations() {
-const tracks = document.querySelectorAll('.auto-scroll-track');
-tracks.forEach(track => {
-track.style.animationPlayState = 'running';
-track.classList.remove('fast');
-});
-setActiveSpeed(false);
-}
-
-window.addEventListener('hashchange', function() {
-resetAllAnimations();
-});
-
-})();
-</script>
-<script>
-document.addEventListener('click', function(e) {
-const btn = e.target.closest('[data-page]');
-if (btn && !btn.classList.contains('nav-link')) {
-e.preventDefault();
-window.location.hash = btn.getAttribute('data-page');
-}
-});
-</script>
-<script>
-document.addEventListener('click', function(e) {
-const projetWrapper = document.getElementById('projet-scroll-wrapper');
-const projetTrack = document.getElementById('projet-scroll-track');
-if (projetWrapper && projetTrack && window.location.hash === '#projets') {
-if (projetWrapper.contains(e.target)) {
-const currentAnimation = window.getComputedStyle(projetTrack).animationPlayState;
-projetTrack.style.animationPlayState = currentAnimation === 'paused' ? 'running' : 'paused';
-}
-}
-const servicesWrapper = document.getElementById('services-scroll-wrapper');
-const servicesTrack = document.getElementById('services-scroll-track');
-if (servicesWrapper && servicesTrack && window.location.hash === '#services') {
-if (servicesWrapper.contains(e.target)) {
-const currentAnimation = window.getComputedStyle(servicesTrack).animationPlayState;
-servicesTrack.style.animationPlayState = currentAnimation === 'paused' ? 'running' : 'paused';
-}
-}
-const debarrasWrapper = document.getElementById('debarras-scroll-wrapper');
-const debarrasTrack = document.getElementById('debarras-scroll-track');
-if (debarrasWrapper && debarrasTrack && window.location.hash === '#services') {
-if (debarrasWrapper.contains(e.target)) {
-const currentAnimation = window.getComputedStyle(debarrasTrack).animationPlayState;
-debarrasTrack.style.animationPlayState = currentAnimation === 'paused' ? 'running' : 'paused';
-}
-}
-});
-
-function resetAllAnimations() {
-const projetTrack = document.getElementById('projet-scroll-track');
-const servicesTrack = document.getElementById('services-scroll-track');
-const debarrasTrack = document.getElementById('debarras-scroll-track');
-if (projetTrack) {
-projetTrack.style.animationPlayState = 'running';
-}
-if (servicesTrack) {
-servicesTrack.style.animationPlayState = 'running';
-}
-if (debarrasTrack) {
-debarrasTrack.style.animationPlayState = 'running';
-}
-}
-
-window.addEventListener('hashchange', function() {
-resetAllAnimations();
-});
-</script>
+  <!-- petit script pour forcer mise à jour après retour depuis admin (via visibility) -->
+  <script>
+    document.addEventListener('visibilitychange', function() {
+      if (!document.hidden) {
+        // on ré-affiche au cas où on revient d'un autre onglet avec modif
+        // pour éviter de dupliquer, on recharge simplement la fonction
+        // mais on va juste rappeler le render via un customEvent simple
+        const event = new Event('storage'); // on simule storage
+        window.dispatchEvent(event);
+      }
+    });
+  </script>
 </body>
 </html>
-
