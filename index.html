@@ -1,390 +1,1940 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sabane Art Group · Œuvres d'exception</title>
-  <!-- Google Fonts & Font Awesome -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      font-family: 'Outfit', sans-serif;
-      background: #faf9f7;
-      color: #1e1e1e;
-      line-height: 1.5;
-      scroll-behavior: smooth;
-    }
-    /* ===== HEADER ===== */
-    .header {
-      background: #1c1c1c;
-      color: #f0e9e0;
-      padding: 1.2rem 2rem;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 2px solid #c7a25e;
-    }
-    .logo h1 {
-      font-size: 2rem;
-      font-weight: 600;
-      letter-spacing: 2px;
-    }
-    .logo span {
-      font-weight: 300;
-      color: #c7a25e;
-      font-size: 1rem;
-      display: block;
-      line-height: 1.2;
-    }
-    .contact-info {
-      display: flex;
-      gap: 2.5rem;
-      flex-wrap: wrap;
-    }
-    .contact-item {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      background: rgba(255,255,255,0.08);
-      padding: 0.5rem 1.2rem;
-      border-radius: 60px;
-      backdrop-filter: blur(2px);
-      transition: 0.2s;
-    }
-    .contact-item i {
-      color: #c7a25e;
-      font-size: 1.4rem;
-      width: 1.8rem;
-    }
-    .contact-item a {
-      color: #f0e9e0;
-      text-decoration: none;
-      font-weight: 500;
-    }
-    .contact-item a:hover {
-      color: #c7a25e;
-    }
-    .whatsapp-highlight {
-      background: #25d36620;
-      border: 1px solid #25d366;
-    }
-    /* ===== BANDEAU ADRESSE ===== */
-    .address-bar {
-      background: #e8e0d5;
-      color: #1e1e1e;
-      text-align: center;
-      padding: 0.6rem;
-      font-size: 1.1rem;
-      font-weight: 400;
-      letter-spacing: 0.3px;
-      border-bottom: 1px solid #c7a25e;
-    }
-    .address-bar i {
-      color: #a1572e;
-      margin-right: 8px;
-    }
-    /* ===== GRILLE ART ===== */
-    .art-collection {
-      max-width: 1400px;
-      margin: 3rem auto;
-      padding: 0 2rem;
-    }
-    .section-title {
-      font-size: 2.5rem;
-      font-weight: 400;
-      border-left: 8px solid #c7a25e;
-      padding-left: 1.5rem;
-      margin-bottom: 3rem;
-      color: #2a2a2a;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2.5rem;
-    }
-    /* carte œuvre */
-    .art-card {
-      background: white;
-      border-radius: 24px;
-      overflow: hidden;
-      box-shadow: 0 20px 35px -8px rgba(0,0,0,0.15);
-      transition: transform 0.3s ease, box-shadow 0.4s;
-      opacity: 0;
-      animation: fadeUp 0.7s forwards;
-      animation-delay: calc(0.1s * var(--i, 1));
-      display: flex;
-      flex-direction: column;
-    }
-    .art-card:hover {
-      transform: translateY(-12px);
-      box-shadow: 0 30px 45px -12px rgba(0,0,0,0.3);
-    }
-    @keyframes fadeUp {
-      0% { opacity: 0; transform: translateY(30px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-    /* image container avec effet */
-    .img-wrapper {
-      width: 100%;
-      aspect-ratio: 1 / 1.1;
-      overflow: hidden;
-      background: #f0e9e0;
-      position: relative;
-    }
-    .art-image {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1);
-    }
-    .art-card:hover .art-image {
-      transform: scale(1.08);
-    }
-    /* détail */
-    .art-info {
-      padding: 1.6rem 1.5rem 1.8rem;
-      background: white;
-      border-top: 2px solid #f3ede5;
-    }
-    .art-title {
-      font-size: 1.7rem;
-      font-weight: 500;
-      margin-bottom: 0.3rem;
-      color: #232323;
-    }
-    .art-desc {
-      font-size: 1rem;
-      color: #5a4f46;
-      margin: 0.6rem 0 1.2rem;
-      line-height: 1.5;
-      font-weight: 300;
-    }
-    .price-whatsapp {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-top: 0.5rem;
-    }
-    .art-price {
-      font-size: 2rem;
-      font-weight: 700;
-      color: #1e1e1e;
-    }
-    .art-price::before {
-      content: 'DH ';
-      font-size: 1.2rem;
-      font-weight: 400;
-      color: #a1572e;
-    }
-    .whatsapp-btn {
-      background: #25d366;
-      padding: 0.5rem 1.2rem;
-      border-radius: 40px;
-      color: white;
-      text-decoration: none;
-      font-weight: 600;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: 0.2s;
-      box-shadow: 0 4px 8px rgba(37, 211, 102, 0.3);
-    }
-    .whatsapp-btn i {
-      font-size: 1.3rem;
-    }
-    .whatsapp-btn:hover {
-      background: #20b859;
-      transform: scale(1.03);
-      box-shadow: 0 8px 14px rgba(37, 211, 102, 0.4);
-    }
-    /* admin link (petit lien discret) */
-    .admin-corner {
-      text-align: right;
-      margin: 2rem 2rem 1rem;
-    }
-    .admin-corner a {
-      color: #7a6a5a;
-      text-decoration: none;
-      font-size: 0.9rem;
-      border-bottom: 1px dashed #c7a25e;
-    }
-    footer {
-      background: #1c1c1c;
-      color: #adadad;
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.95rem;
-      border-top: 2px solid #c7a25e;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safetech Maroc - Sécurité & Domotique à Marrakech</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        :root {
+            --primary-blue: #0a2647;
+            --secondary-blue: #1e3a5f;
+            --accent-blue: #2b7a8a;
+            --light-blue: #4a9eff;
+            --dark: #0f172a;
+            --gray: #334155;
+            --light-gray: #e2e8f0;
+            --white: #ffffff;
+            --off-white: #f8fafc;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+            --gradient-1: linear-gradient(135deg, #0a2647 0%, #1e3a5f 100%);
+            --gradient-2: linear-gradient(135deg, #2b7a8a 0%, #4a9eff 100%);
+            --shadow-sm: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --shadow-md: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+        }
+
+        body {
+            background-color: var(--off-white);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Loader Animation */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-blue);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-content {
+            text-align: center;
+            color: var(--white);
+        }
+
+        .loader-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid var(--white);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--accent-blue);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9998;
+            transition: transform 0.2s ease;
+            transform: translate(-50%, -50%);
+        }
+
+        .cursor.hover {
+            transform: translate(-50%, -50%) scale(1.5);
+            background: rgba(43, 122, 138, 0.1);
+            border-color: var(--light-blue);
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: var(--shadow-md);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.2rem;
+            transform: rotate(45deg);
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover .logo-icon {
+            transform: rotate(135deg);
+        }
+
+        .logo-text h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            line-height: 1.2;
+        }
+
+        .logo-text p {
+            font-size: 0.7rem;
+            color: var(--gray);
+            letter-spacing: 1px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-blue);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--accent-blue);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .btn-contact {
+            background: var(--gradient-1);
+            color: var(--white) !important;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-contact:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-contact::after {
+            display: none;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 30px;
+            height: 3px;
+            background: var(--primary-blue);
+            transition: all 0.3s ease;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(10, 38, 71, 0.95) 0%, rgba(30, 58, 95, 0.9) 100%), url('https://images.unsplash.com/photo-1557597774-9d2736059fa2?w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+            animation: zoomIn 20s infinite alternate;
+        }
+
+        @keyframes zoomIn {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            color: var(--white);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text {
+            animation: slideInLeft 1s ease;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-title span {
+            color: var(--light-blue);
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero-title span::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: rgba(74, 158, 255, 0.3);
+            z-index: -1;
+            animation: widthPulse 2s infinite;
+        }
+
+        @keyframes widthPulse {
+            0%, 100% { width: 100%; }
+            50% { width: 80%; }
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--light-blue);
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--gradient-2);
+            color: var(--white);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--white);
+            color: var(--white);
+        }
+
+        .btn-outline:hover {
+            background: var(--white);
+            color: var(--primary-blue);
+        }
+
+        .hero-image {
+            animation: floatAnimation 3s infinite alternate;
+        }
+
+        @keyframes floatAnimation {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-20px); }
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: var(--shadow-xl);
+            transform: perspective(1000px) rotateY(-15deg);
+            transition: transform 0.5s ease;
+        }
+
+        .hero-image:hover img {
+            transform: perspective(1000px) rotateY(0deg);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 6rem 2rem;
+            background: var(--white);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-label {
+            display: inline-block;
+            color: var(--accent-blue);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .section-desc {
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 1s ease;
+            animation-fill-mode: both;
+        }
+
+        .service-card:nth-child(1) { animation-delay: 0.1s; }
+        .service-card:nth-child(2) { animation-delay: 0.2s; }
+        .service-card:nth-child(3) { animation-delay: 0.3s; }
+        .service-card:nth-child(4) { animation-delay: 0.4s; }
+        .service-card:nth-child(5) { animation-delay: 0.5s; }
+        .service-card:nth-child(6) { animation-delay: 0.6s; }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-1);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 0;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-card:hover * {
+            color: var(--white);
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-card:hover .service-icon {
+            background: var(--white);
+            color: var(--primary-blue);
+        }
+
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--light-gray);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .service-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .service-desc {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+            transition: color 0.3s ease;
+            line-height: 1.7;
+        }
+
+        .service-link {
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover .service-link {
+            color: var(--white);
+        }
+
+        .service-link:hover {
+            gap: 1rem;
+        }
+
+        /* Products Section */
+        .products {
+            padding: 6rem 2rem;
+            background: var(--off-white);
+        }
+
+        .products-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+            animation: scaleIn 1s ease;
+            animation-fill-mode: both;
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .product-card:nth-child(1) { animation-delay: 0.1s; }
+        .product-card:nth-child(2) { animation-delay: 0.2s; }
+        .product-card:nth-child(3) { animation-delay: 0.3s; }
+        .product-card:nth-child(4) { animation-delay: 0.4s; }
+
+        .product-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .product-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--accent-blue);
+            color: var(--white);
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .product-content {
+            padding: 1.5rem;
+        }
+
+        .product-title {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-price {
+            color: var(--primary-blue);
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .product-btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: var(--light-gray);
+            color: var(--dark);
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .product-btn:hover {
+            background: var(--primary-blue);
+            color: var(--white);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 2rem;
+            background: var(--gradient-1);
+            color: var(--white);
+        }
+
+        .features-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            text-align: center;
+        }
+
+        .feature-item {
+            animation: fadeInUp 1s ease;
+            animation-fill-mode: both;
+        }
+
+        .feature-item:nth-child(1) { animation-delay: 0.1s; }
+        .feature-item:nth-child(2) { animation-delay: 0.2s; }
+        .feature-item:nth-child(3) { animation-delay: 0.3s; }
+        .feature-item:nth-child(4) { animation-delay: 0.4s; }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .feature-item:hover .feature-icon {
+            background: var(--white);
+            color: var(--primary-blue);
+            transform: rotate(360deg);
+        }
+
+        .feature-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-desc {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        /* About Section */
+        .about {
+            padding: 6rem 2rem;
+            background: var(--white);
+        }
+
+        .about-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+            animation: slideInRight 1s ease;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: var(--shadow-xl);
+        }
+
+        .about-experience {
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            background: var(--gradient-2);
+            color: var(--white);
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .about-experience .number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            display: block;
+        }
+
+        .about-content {
+            animation: slideInLeft 1s ease;
+        }
+
+        .about-content .section-title {
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text {
+            color: var(--gray);
+            margin-bottom: 2rem;
+        }
+
+        .about-list {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .about-list li {
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .about-list li::before {
+            content: '✓';
+            color: var(--success);
+            font-weight: 700;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 6rem 2rem;
+            background: var(--off-white);
+        }
+
+        .testimonials-slider {
+            max-width: 1000px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .testimonials-track {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .testimonial-card {
+            flex: 0 0 100%;
+            padding: 2rem;
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: var(--shadow-md);
+            margin: 0 1rem;
+            animation: fadeIn 1s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .testimonial-content {
+            font-size: 1.1rem;
+            font-style: italic;
+            margin-bottom: 2rem;
+            color: var(--gray);
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .author-name {
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+
+        .author-position {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 2rem;
+        }
+
+        .slider-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--light-gray);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .slider-dot.active {
+            background: var(--accent-blue);
+            transform: scale(1.2);
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 6rem 2rem;
+            background: var(--white);
+        }
+
+        .contact-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info {
+            animation: slideInLeft 1s ease;
+        }
+
+        .contact-details {
+            margin: 2rem 0;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: var(--off-white);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateX(10px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.2rem;
+        }
+
+        .contact-text h4 {
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .contact-text p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: var(--light-gray);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-blue);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--primary-blue);
+            color: var(--white);
+            transform: translateY(-3px);
+        }
+
+        .contact-form {
+            background: var(--off-white);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+            animation: slideInRight 1s ease;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid transparent;
+            border-radius: 10px;
+            background: var(--white);
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+            box-shadow: var(--shadow-md);
+        }
+
+        .form-group input:hover,
+        .form-group textarea:hover,
+        .form-group select:hover {
+            border-color: var(--light-blue);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 10px;
+            background: var(--gradient-1);
+            color: var(--white);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: var(--white);
+            padding: 4rem 2rem 1rem;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-about p {
+            opacity: 0.8;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+        }
+
+        .footer-links h4 {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--light-blue);
+            padding-left: 5px;
+        }
+
+        .footer-newsletter input {
+            width: 100%;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-newsletter button {
+            width: 100%;
+            padding: 0.75rem;
+            background: var(--gradient-2);
+            border: none;
+            border-radius: 5px;
+            color: var(--white);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .footer-newsletter button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-bottom-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+        }
+
+        .footer-bottom-links a:hover {
+            color: var(--light-blue);
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-decoration: none;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-stats {
+                justify-content: center;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .about-container {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: var(--white);
+                flex-direction: column;
+                padding: 2rem;
+                transition: left 0.3s ease;
+                z-index: 1000;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-link {
+                font-size: 1.2rem;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .features-container {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-bottom-links {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .about-experience {
+                position: static;
+                margin-top: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <header class="header">
-    <div class="logo">
-      <h1>SABANE ART GROUP</h1>
-      <span>Galerie d'exception · Marrakech</span>
+    <!-- Loader -->
+    <div class="loader" id="loader">
+        <div class="loader-content">
+            <div class="loader-spinner"></div>
+            <h2>Safetech Maroc</h2>
+            <p>Sécurité & Domotique à Marrakech</p>
+        </div>
     </div>
-    <div class="contact-info">
-      <div class="contact-item">
-        <i class="fas fa-phone-alt"></i>
-        <a href="tel:+212666103748">06 66 10 37 48</a>
-      </div>
-      <div class="contact-item whatsapp-highlight">
-        <i class="fab fa-whatsapp"></i>
-        <a href="https://wa.me/212666103748" target="_blank">06 66 10 37 48 (WhatsApp)</a>
-      </div>
-    </div>
-  </header>
-  <div class="address-bar">
-    <i class="fas fa-map-pin"></i> Marrakech — Médina, Derb Sidi Abbas • Ouvert du mardi au dimanche 10h–19h
-  </div>
 
-  <main class="art-collection">
-    <h2 class="section-title">Œuvres récentes</h2>
-    <div class="grid" id="artGrid"></div>
-    <!-- les cartes seront injectées par JS -->
-  </main>
+    <!-- Custom Cursor -->
+    <div class="cursor" id="cursor"></div>
 
-  <!-- petit lien vers admin (sans style lourd) -->
-  <div class="admin-corner">
-    <a href="sabane-admin.html"><i class="fas fa-palette"></i> administration (créer / modifier œuvres)</a>
-  </div>
-
-  <footer>
-    <p>Sabane Art Group – Téléphone & WhatsApp <strong>06 66 10 37 48</strong> – Marrakech, Médina</p>
-    <p style="margin-top: 0.8rem; font-size:0.85rem;">Toutes les œuvres sont accompagnées d'un certificat d'authenticité</p>
-  </footer>
-
-  <script>
-    (function() {
-      // ------------------------------------------------------------------
-      // BASE DE DONNÉES DES ŒUVRES (simulée, mais alimentée depuis localStorage)
-      // Si aucune donnée n'existe, on crée un catalogue par défaut
-      // ------------------------------------------------------------------
-      const defaultArtworks = [
-        {
-          id: 'art1',
-          title: 'Lueur d’Atlas',
-          description: 'Huile sur toile, 80x80 cm. Les lumières de l’Atlas au couchant.',
-          price: 4800,
-          imageUrl: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=500&auto=format&fit=crop'
-        },
-        {
-          id: 'art2',
-          title: 'Médina rouge',
-          description: 'Technique mixte, 60x80 cm. Inspiration des ruelles de Marrakech.',
-          price: 6200,
-          imageUrl: 'https://images.unsplash.com/photo-1605721911519-3dfeb3be25e7?w=500&auto=format&fit=crop'
-        },
-        {
-          id: 'art3',
-          title: 'Jardin secret',
-          description: 'Aquarelle et encre, 50x65 cm. La verdure et la lumière des riads.',
-          price: 3900,
-          imageUrl: 'https://images.unsplash.com/photo-1602002418082-a4443e081dd1?w=500&auto=format&fit=crop'
-        },
-        {
-          id: 'art4',
-          title: 'Improvisation berbère',
-          description: 'Acrylique sur lin, 90x90 cm. Symboles et terre ocre.',
-          price: 7500,
-          imageUrl: 'https://images.unsplash.com/photo-1547826039-bfc35e0f1ea8?w=500&auto=format&fit=crop'
-        },
-        {
-          id: 'art5',
-          title: 'Sable et lumière',
-          description: 'Photographie fine art, tirage limité, 70x100 cm.',
-          price: 2800,
-          imageUrl: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=500&auto=format&fit=crop'
-        },
-        {
-          id: 'art6',
-          title: 'Femme en bleu',
-          description: 'Sculpture bronze, hauteur 42 cm. Pièce unique.',
-          price: 12500,
-          imageUrl: 'https://images.unsplash.com/photo-1554188248-986adbb73be4?w=500&auto=format&fit=crop'
-        }
-      ];
-
-      // initialiser / charger depuis localStorage
-      function loadArtworks() {
-        const stored = localStorage.getItem('sabane_artworks');
-        if (stored) {
-          try {
-            return JSON.parse(stored);
-          } catch (e) {
-            return defaultArtworks;
-          }
-        } else {
-          // premier chargement : on stocke les défauts
-          localStorage.setItem('sabane_artworks', JSON.stringify(defaultArtworks));
-          return defaultArtworks;
-        }
-      }
-
-      // afficher les cartes
-      function renderGallery() {
-        const artworks = loadArtworks();
-        const grid = document.getElementById('artGrid');
-        if (!grid) return;
-        grid.innerHTML = ''; // nettoyer
-
-        artworks.forEach((art, index) => {
-          // gestion des guillemets pour whatsapp
-          const message = encodeURIComponent(`Bonjour, je suis intéressé par l'œuvre "${art.title}" à ${art.price} DH.`);
-          const whatsappUrl = `https://wa.me/212666103748?text=${message}`;
-
-          const card = document.createElement('div');
-          card.className = 'art-card';
-          card.style.setProperty('--i', index + 1); // délai animation
-          card.innerHTML = `
-            <div class="img-wrapper">
-              <img class="art-image" src="${art.imageUrl}" alt="${art.title}" loading="lazy" onerror="this.src='https://via.placeholder.com/500x600?text=Image+non+disponible'">
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-icon">🔒</div>
+                <div class="logo-text">
+                    <h2>Safetech Maroc</h2>
+                    <p>SÉCURITÉ & DOMOTIQUE</p>
+                </div>
             </div>
-            <div class="art-info">
-              <h3 class="art-title">${art.title}</h3>
-              <p class="art-desc">${art.description}</p>
-              <div class="price-whatsapp">
-                <span class="art-price">${art.price.toLocaleString()}</span>
-                <a href="${whatsappUrl}" target="_blank" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-              </div>
+
+            <div class="nav-menu" id="navMenu">
+                <a href="#home" class="nav-link">Accueil</a>
+                <a href="#services" class="nav-link">Services</a>
+                <a href="#products" class="nav-link">Produits</a>
+                <a href="#about" class="nav-link">À propos</a>
+                <a href="#contact" class="nav-link btn-contact">Contact</a>
             </div>
-          `;
-          grid.appendChild(card);
+
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <span class="hero-badge">🔒 Expert en sécurité depuis 2010</span>
+                <h1 class="hero-title">
+                    Protégez ce qui compte avec <span>Safetech Maroc</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Installation de systèmes de surveillance, alarmes, domotique et vente de matériel informatique à Marrakech et ses environs.
+                </p>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">500+</span>
+                        <span class="stat-label">Clients satisfaits</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">10+</span>
+                        <span class="stat-label">Ans d'expérience</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">24/7</span>
+                        <span class="stat-label">Support</span>
+                    </div>
+                </div>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn btn-primary">Demander un devis</a>
+                    <a href="#services" class="btn btn-outline">Nos services</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1557597774-9d2736059fa2?w=600&q=80" alt="Sécurité à Marrakech">
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="section-header">
+            <span class="section-label">NOS SERVICES</span>
+            <h2 class="section-title">Solutions complètes pour votre sécurité</h2>
+            <p class="section-desc">Des services sur mesure adaptés à vos besoins spécifiques</p>
+        </div>
+
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">📹</div>
+                <h3 class="service-title">Caméras de surveillance</h3>
+                <p class="service-desc">Installation de caméras IP, analogiques, PTZ, vision nocturne, détection de mouvement. Systèmes pour particuliers et professionnels.</p>
+                <a href="#" class="service-link">En savoir plus →</a>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🔔</div>
+                <h3 class="service-title">Systèmes d'alarme</h3>
+                <p class="service-desc">Alarmes intrusion, détecteurs de mouvement, sirènes intérieures/extérieures, télésurveillance 24/7 avec notification sur smartphone.</p>
+                <a href="#" class="service-link">En savoir plus →</a>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🎵</div>
+                <h3 class="service-title">Sonorisation</h3>
+                <p class="service-desc">Installation de systèmes audio multi-pièces, sonorisation professionnelle pour commerces, restaurants et espaces publics.</p>
+                <a href="#" class="service-link">En savoir plus →</a>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">💻</div>
+                <h3 class="service-title">Vente matériel informatique</h3>
+                <p class="service-desc">Ordinateurs, serveurs, équipements réseau, accessoires. Conseils personnalisés et configuration sur mesure.</p>
+                <a href="#" class="service-link">En savoir plus →</a>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🏠</div>
+                <h3 class="service-title">Domotique</h3>
+                <p class="service-desc">Automatisation de l'éclairage, volets roulants, chauffage, portail. Contrôle vocal et à distance via smartphone.</p>
+                <a href="#" class="service-link">En savoir plus →</a>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🔧</div>
+                <h3 class="service-title">Maintenance & SAV</h3>
+                <p class="service-desc">Contrats de maintenance préventive et corrective, dépannage rapide, mise à jour des systèmes.</p>
+                <a href="#" class="service-link">En savoir plus →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <div class="section-header">
+            <span class="section-label">NOS PRODUITS</span>
+            <h2 class="section-title">Équipements professionnels</h2>
+            <p class="section-desc">Matériel de dernière génération pour une sécurité optimale</p>
+        </div>
+
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1557321527-9c5c3f0e7f7b?w=400&q=80" alt="Caméra surveillance">
+                    <span class="product-badge">Nouveau</span>
+                </div>
+                <div class="product-content">
+                    <h3 class="product-title">Caméra IP 4K</h3>
+                    <p class="product-price">2 990 DH</p>
+                    <p class="product-desc">Vision nocturne, détection de mouvement, application mobile</p>
+                    <a href="#" class="product-btn">Voir détails</a>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1582139329536-e7284fece509?w=400&q=80" alt="Alarme">
+                    <span class="product-badge">Promo</span>
+                </div>
+                <div class="product-content">
+                    <h3 class="product-title">Kit alarme sans fil</h3>
+                    <p class="product-price">3 490 DH</p>
+                    <p class="product-desc">Détecteurs ouverture, mouvement, sirène, télécommande</p>
+                    <a href="#" class="product-btn">Voir détails</a>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?w=400&q=80" alt="Enceinte">
+                </div>
+                <div class="product-content">
+                    <h3 class="product-title">Enceinte Bluetooth Pro</h3>
+                    <p class="product-price">1 290 DH</p>
+                    <p class="product-desc">Son 360°, batterie 20h, étanche IPX7</p>
+                    <a href="#" class="product-btn">Voir détails</a>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1593640408182-31c60c33e450?w=400&q=80" alt="Ordinateur">
+                </div>
+                <div class="product-content">
+                    <h3 class="product-title">PC Portable Pro</h3>
+                    <p class="product-price">8 990 DH</p>
+                    <p class="product-desc">i7, 16Go RAM, SSD 512Go, écran 15.6"</p>
+                    <a href="#" class="product-btn">Voir détails</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="features-container">
+            <div class="feature-item">
+                <div class="feature-icon">⚡</div>
+                <h3 class="feature-title">Installation rapide</h3>
+                <p class="feature-desc">Intervention sous 24h à Marrakech et environs</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">🛡️</div>
+                <h3 class="feature-title">Garantie 2 ans</h3>
+                <p class="feature-desc">Tous nos équipements sont garantis</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">👨‍🔧</div>
+                <h3 class="feature-title">Techniciens certifiés</h3>
+                <p class="feature-desc">Équipe formée aux dernières technologies</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">📞</div>
+                <h3 class="feature-title">Support 7j/7</h3>
+                <p class="feature-desc">Assistance téléphonique et dépannage</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="about-container">
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&q=80" alt="Équipe Safetech">
+                <div class="about-experience">
+                    <span class="number">10+</span>
+                    <span>Ans d'expertise</span>
+                </div>
+            </div>
+            <div class="about-content">
+                <span class="section-label">À PROPOS</span>
+                <h2 class="section-title">Votre partenaire sécurité à Marrakech</h2>
+                <p class="about-text">
+                    Safetech Maroc est spécialiste en systèmes de sécurité et domotique depuis 2010. Nous accompagnons particuliers, professionnels et collectivités dans la protection de leurs biens et personnes.
+                </p>
+                <ul class="about-list">
+                    <li>Plus de 500 installations réussies</li>
+                    <li>Équipe de techniciens certifiés</li>
+                    <li>Matériel de marques reconnues</li>
+                    <li>Service après-vente réactif</li>
+                    <li>Devis gratuit et personnalisé</li>
+                </ul>
+                <a href="#contact" class="btn btn-primary">Contactez-nous</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="section-header">
+            <span class="section-label">TÉMOIGNAGES</span>
+            <h2 class="section-title">Ce que disent nos clients</h2>
+            <p class="section-desc">Ils nous ont fait confiance pour leur sécurité</p>
+        </div>
+
+        <div class="testimonials-slider" id="testimonialsSlider">
+            <div class="testimonials-track" id="testimonialsTrack">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        "Installation impeccable de mon système de vidéosurveillance. Équipe professionnelle et à l'écoute. Je recommande vivement Safetech Maroc."
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Client" class="author-image">
+                        <div>
+                            <h4 class="author-name">Karim Benjelloun</h4>
+                            <p class="author-position">Commerçant à Guéliz</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        "J'ai fait installer la domotique dans toute ma villa. Contrôle parfait de l'éclairage et des volets. Un confort incroyable au quotidien."
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Client" class="author-image">
+                        <div>
+                            <h4 class="author-name">Samira Alaoui</h4>
+                            <p class="author-position">Propriétaire à Palmeraie</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        "Service de sonorisation pour mon restaurant. Résultat impeccable et conseils personnalisés. Le support après-vente est au top."
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Client" class="author-image">
+                        <div>
+                            <h4 class="author-name">Rachid El Fassi</h4>
+                            <p class="author-position">Restaurateur à l'Hivernage</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-dots" id="sliderDots">
+                <span class="slider-dot active"></span>
+                <span class="slider-dot"></span>
+                <span class="slider-dot"></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="contact-container">
+            <div class="contact-info">
+                <span class="section-label">CONTACT</span>
+                <h2 class="section-title">Parlons de votre projet</h2>
+                <p class="about-text">
+                    Besoin d'un devis ? Une question sur nos services ? Notre équipe est à votre écoute pour vous accompagner dans votre projet de sécurité.
+                </p>
+
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div class="contact-text">
+                            <h4>Adresse</h4>
+                            <p>123 Avenue Mohammed VI, Guéliz, Marrakech</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📞</div>
+                        <div class="contact-text">
+                            <h4>Téléphone</h4>
+                            <p>+212 5 24 00 00 00</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">✉️</div>
+                        <div class="contact-text">
+                            <h4>Email</h4>
+                            <p>contact@safetechmaroc.ma</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">⏰</div>
+                        <div class="contact-text">
+                            <h4>Horaires</h4>
+                            <p>Lun-Ven: 9h-19h | Sam: 10h-16h</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="social-links">
+                    <a href="#" class="social-link">📘</a>
+                    <a href="#" class="social-link">📷</a>
+                    <a href="#" class="social-link">🐦</a>
+                    <a href="#" class="social-link">📧</a>
+                </div>
+            </div>
+
+            <form class="contact-form" id="contactForm">
+                <div class="form-group">
+                    <input type="text" placeholder="Votre nom complet" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="Votre email" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" placeholder="Votre téléphone" required>
+                </div>
+                <div class="form-group">
+                    <select required>
+                        <option value="">Sélectionnez un service</option>
+                        <option value="camera">Caméras de surveillance</option>
+                        <option value="alarme">Systèmes d'alarme</option>
+                        <option value="sono">Sonorisation</option>
+                        <option value="informatique">Matériel informatique</option>
+                        <option value="domotique">Domotique</option>
+                        <option value="autre">Autre</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <textarea placeholder="Votre message" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Envoyer le message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-about">
+                <div class="logo">
+                    <div class="logo-icon">🔒</div>
+                    <div class="logo-text">
+                        <h2 style="color: white;">Safetech Maroc</h2>
+                        <p style="color: rgba(255,255,255,0.7);">SÉCURITÉ & DOMOTIQUE</p>
+                    </div>
+                </div>
+                <p>Votre expert en sécurité et domotique à Marrakech depuis 2010. Installation, vente et maintenance de systèmes de surveillance et d'automatisation.</p>
+            </div>
+
+            <div class="footer-links">
+                <h4>Liens rapides</h4>
+                <ul>
+                    <li><a href="#home">Accueil</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#products">Produits</a></li>
+                    <li><a href="#about">À propos</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links">
+                <h4>Nos services</h4>
+                <ul>
+                    <li><a href="#">Caméras surveillance</a></li>
+                    <li><a href="#">Systèmes d'alarme</a></li>
+                    <li><a href="#">Sonorisation</a></li>
+                    <li><a href="#">Matériel informatique</a></li>
+                    <li><a href="#">Domotique</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-newsletter">
+                <h4>Newsletter</h4>
+                <p style="opacity:0.8; margin-bottom:1rem;">Recevez nos offres et actualités</p>
+                <input type="email" placeholder="Votre email">
+                <button>S'abonner</button>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2024 Safetech Maroc. Tous droits réservés.</p>
+            <div class="footer-bottom-links">
+                <a href="#">Mentions légales</a>
+                <a href="#">Politique de confidentialité</a>
+                <a href="#">CGV</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top" id="backToTop">↑</a>
+
+    <script>
+        // Loader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 1000);
         });
-      }
 
-      // écouter les modifications du localStorage (si admin modifie sur un autre onglet, mettre à jour)
-      window.addEventListener('storage', function(e) {
-        if (e.key === 'sabane_artworks') {
-          renderGallery();
+        // Custom Cursor
+        const cursor = document.getElementById('cursor');
+        
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        document.addEventListener('mouseover', (e) => {
+            if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON' || e.target.classList.contains('service-card')) {
+                cursor.classList.add('hover');
+            }
+        });
+
+        document.addEventListener('mouseout', () => {
+            cursor.classList.remove('hover');
+        });
+
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            
+            // Animate hamburger
+            const spans = menuToggle.querySelectorAll('span');
+            if (menuToggle.classList.contains('active')) {
+                spans[0].style.transform = 'rotate(45deg) translate(8px, 8px)';
+                spans[1].style.opacity = '0';
+                spans[2].style.transform = 'rotate(-45deg) translate(8px, -8px)';
+            } else {
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            }
+        });
+
+        // Close mobile menu on link click
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+                
+                const spans = menuToggle.querySelectorAll('span');
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            });
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Back to Top Button
+        const backToTop = document.getElementById('backToTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        });
+
+        // Testimonials Slider
+        const track = document.getElementById('testimonialsTrack');
+        const dots = document.querySelectorAll('.slider-dot');
+        let currentSlide = 0;
+
+        function updateSlider(index) {
+            track.style.transform = `translateX(-${index * 100}%)`;
+            dots.forEach(dot => dot.classList.remove('active'));
+            dots[index].classList.add('active');
         }
-      });
 
-      renderGallery();
-    })();
-  </script>
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                currentSlide = index;
+                updateSlider(currentSlide);
+            });
+        });
 
-  <!-- petit script pour forcer mise à jour après retour depuis admin (via visibility) -->
-  <script>
-    document.addEventListener('visibilitychange', function() {
-      if (!document.hidden) {
-        // on ré-affiche au cas où on revient d'un autre onglet avec modif
-        // pour éviter de dupliquer, on recharge simplement la fonction
-        // mais on va juste rappeler le render via un customEvent simple
-        const event = new Event('storage'); // on simule storage
-        window.dispatchEvent(event);
-      }
-    });
-  </script>
+        // Auto slide
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % dots.length;
+            updateSlider(currentSlide);
+        }, 5000);
+
+        // Form Submission
+        const contactForm = document.getElementById('contactForm');
+
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Animation de soumission
+            const btn = contactForm.querySelector('.submit-btn');
+            btn.innerHTML = 'Envoi en cours...';
+            btn.style.opacity = '0.7';
+            
+            // Simuler l'envoi
+            setTimeout(() => {
+                btn.innerHTML = 'Message envoyé ✓';
+                btn.style.background = 'var(--success)';
+                
+                // Réinitialiser le formulaire
+                contactForm.reset();
+                
+                setTimeout(() => {
+                    btn.innerHTML = 'Envoyer le message';
+                    btn.style.background = '';
+                    btn.style.opacity = '1';
+                }, 3000);
+            }, 1500);
+        });
+
+        // Intersection Observer pour les animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.service-card, .product-card, .feature-item').forEach(el => {
+            el.style.animationPlayState = 'paused';
+            observer.observe(el);
+        });
+
+        // Compteur animé pour les stats
+        function animateValue(element, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                element.innerHTML = Math.floor(progress * (end - start) + start) + '+';
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        const statObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const numbers = document.querySelectorAll('.stat-number');
+                    numbers.forEach(num => {
+                        const value = parseInt(num.innerText);
+                        animateValue(num, 0, value, 2000);
+                    });
+                    statObserver.unobserve(entry.target);
+                }
+            });
+        });
+
+        statObserver.observe(document.querySelector('.hero-stats'));
+
+        // Parallax effect for hero
+        window.addEventListener('scroll', () => {
+            const hero = document.querySelector('.hero');
+            const scrolled = window.scrollY;
+            hero.style.backgroundPositionY = scrolled * 0.5 + 'px';
+        });
+
+        // Hover effect 3D for service cards
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const angleX = (y - centerY) / 20;
+                const angleY = (centerX - x) / 20;
+                
+                card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) translateY(-10px)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(-10px)';
+            });
+        });
+    </script>
 </body>
 </html>
